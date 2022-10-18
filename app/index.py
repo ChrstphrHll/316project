@@ -4,6 +4,7 @@ import datetime
 
 from .models.product import Product
 from .models.purchase import Purchase
+from .models.review import Review
 
 from flask import Blueprint
 bp = Blueprint('index', __name__)
@@ -23,3 +24,9 @@ def index():
     return render_template('index.html',
                            avail_products=products,
                            purchase_history=purchases)
+
+@bp.route('/reviews')
+def feedback():
+    if current_user.is_authenticated:
+        reviews = Review.get_top_5(current_user.id)
+    return render_template('reviews.html', review_history=reviews)
