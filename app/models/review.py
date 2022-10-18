@@ -12,7 +12,7 @@ class Review:
     @staticmethod
     def get(gid, uid):
         rows = app.db.execute('''
-SELECT gid, uid, rating, desc, time
+SELECT gid, uid, rating, description, time
 FROM ReviewOf
 WHERE gid = :gid
 AND uid = :uid
@@ -23,7 +23,7 @@ AND uid = :uid
     @staticmethod
     def get_top_5(uid):
         rows = app.db.execute('''
-SELECT gid, rating, desc, time
+SELECT gid, rating, description, time
 FROM ReviewOf
 WHERE uid = :uid
 ORDER BY time
