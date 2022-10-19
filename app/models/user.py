@@ -3,7 +3,7 @@ from flask import current_app as app
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .. import login
-from .models.game import Game
+from .game import Game
 
 class User(UserMixin):
     def __init__(self, uid, name, email, about, image_url):
