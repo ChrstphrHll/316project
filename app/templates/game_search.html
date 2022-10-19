@@ -4,19 +4,30 @@
 
 <br><br>
 <h2>Search Games:</h2>
-<table class='table table-hover table-bordered container'>
+<div class="d-flex p-2 border justify-content-between">
+  <p>Sort and Filter</p>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-primary">Left</button>
+    <button type="button" class="btn btn-primary">Middle</button>
+    <button type="button" class="btn btn-primary">Right</button>
+  </div>
+</div>
+<table class='table table-hover table-dark table-striped table-bordered container'>
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">gif</th>
-
+      <th scope="col">Complexity</th>
+      <th scope="col">Players</th>
+      <th scope="col">Length</th>
     </tr>
   </thead>
   <tbody>
     {% for game in games%}
       <tr>
         <th scope="row">{{game.name}}</th>
-        <td>{{game.gid}}</td>
+        <td>{{game.complexity}}</td>
+        <td>{{game.min_players}}-{{game.max_players}}</td>
+        <td>{{game.length}} minutes</td>
 
       </tr>
     {% endfor %}

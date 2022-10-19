@@ -10,3 +10,14 @@ class Game:
         self.length = length
         self.min_players = min_players
         self.max_players = max_players
+
+    @staticmethod
+    def get_all(available=True):
+        print("what")
+        rows = app.db.execute('''
+SELECT gid, name, description, image_url, complexity, length, min_players, max_players
+FROM Games
+''')
+        for row in rows:
+            print(row)
+        return [Game(*row) for row in rows]
