@@ -23,7 +23,7 @@ AND uid = :uid
     @staticmethod
     def get_top_5(uid):
         rows = app.db.execute('''
-SELECT gid, rating, description, time_posted
+SELECT uid, gid, rating, description, time_posted
 FROM ReviewOf
 WHERE uid = :uid
 ORDER BY time_posted
