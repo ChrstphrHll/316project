@@ -3,19 +3,23 @@ from flask import current_app as app
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .. import login
-
+from .game import Game
 
 class User(UserMixin):
-    def __init__(self, id, email, firstname, lastname):
-        self.id = id
+    def __init__(self, uid, name, email, about, image_url):
+        self.uid = uid
+        self.name = name
         self.email = email
-        self.firstname = firstname
-        self.lastname = lastname
+        self.about = about
+        self.image_url = image_url
+
+    def get_id(self):   # override mixin default of reading "id" field because we call it uid
+        return self.uid
 
     @staticmethod
     def get_by_auth(email, password):
         rows = app.db.execute("""
-SELECT password, id, email, firstname, lastname
+SELECT password, uid, name, email, about, image_url
 FROM Users
 WHERE email = :email
 """,
@@ -39,18 +43,18 @@ WHERE email = :email
         return len(rows) > 0
 
     @staticmethod
-    def register(email, password, firstname, lastname):
+    def register(name, email, password):
         try:
             rows = app.db.execute("""
-INSERT INTO Users(email, password, firstname, lastname)
-VALUES(:email, :password, :firstname, :lastname)
-RETURNING id
+INSERT INTO Users(name, email, password)
+VALUES(:name, :email, :password)
+RETURNING uid
 """,
+                                  name=name,
                                   email=email,
-                                  password=generate_password_hash(password),
-                                  firstname=firstname, lastname=lastname)
-            id = rows[0][0]
-            return User.get(id)
+                                  password=generate_password_hash(password))
+            uid = rows[0][0]
+            return User.get(uid)
         except Exception as e:
             # likely email already in use; better error checking and reporting needed;
             # the following simply prints the error to the console:
@@ -59,11 +63,20 @@ RETURNING id
 
     @staticmethod
     @login.user_loader
-    def get(id):
+    def get(uid):
         rows = app.db.execute("""
-SELECT id, email, firstname, lastname
+SELECT uid, name, email, about, image_url
 FROM Users
-WHERE id = :id
+WHERE uid = :uid
 """,
-                              id=id)
+                              uid=uid)
         return User(*(rows[0])) if rows else None
+    
+    @staticmethod
+    def get_liked_games(uid):
+        rows = app.db.execute("""
+SELECT *
+FROM Games, LikesGame
+WHERE uid = :uid AND LikesGame.gid = Games.gid
+""")
+        pass

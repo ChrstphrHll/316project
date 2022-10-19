@@ -7,7 +7,6 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from .models.user import User
 
-
 from flask import Blueprint
 bp = Blueprint('users', __name__)
 
@@ -39,8 +38,7 @@ def login():
 
 
 class RegistrationForm(FlaskForm):
-    firstname = StringField('First Name', validators=[DataRequired()])
-    lastname = StringField('Last Name', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
@@ -59,10 +57,9 @@ def register():
         return redirect(url_for('index.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        if User.register(form.email.data,
-                         form.password.data,
-                         form.firstname.data,
-                         form.lastname.data):
+        if User.register(form.name.data,
+                         form.email.data,
+                         form.password.data):
             flash('Congratulations, you are now a registered user!')
             return redirect(url_for('users.login'))
     return render_template('register.html', title='Register', form=form)
@@ -72,3 +69,9 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('index.index'))
+
+
+@bp.route('/likesgame')
+def likesgame():
+    # return all games this user likes
+    return render_template("likesgame.html")
