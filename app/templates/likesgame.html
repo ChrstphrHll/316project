@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br>
+
+<input type="text"></input>
+
+<br><br>
+
+<h2>Games Liked:</h2>
+<table class='table table-hover table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Game ID</th>
+      <th scope="col">Game Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in liked_games%}
+      <tr>
+        <th scope="row">{{game.gid}}</th>
+        <td>{{game.name}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
