@@ -98,6 +98,7 @@ CREATE TABLE LikesGame (
 CREATE TABLE CheckedOutBy (
     cpid INT NOT NULL REFERENCES Copies(cpid),
     uid INT NOT NULL REFERENCES Users(uid)
+
 );
 
 CREATE TABLE PlayCount (
