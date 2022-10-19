@@ -2,17 +2,17 @@ from flask import current_app as app
 
 
 class Review:
-    def __init__(self, gid, uid, rating, desc, time):
+    def __init__(self, gid, uid, rating, description, time_posted):
         self.gid = gid
         self.uid = uid
-        self.desc = desc
+        self.description = description
         self.rating = rating
-        self.time = time
+        self.time_posted = time_posted
 
     @staticmethod
     def get(gid, uid):
         rows = app.db.execute('''
-SELECT gid, uid, rating, description, time
+SELECT gid, uid, rating, description, time_posted
 FROM ReviewOf
 WHERE gid = :gid
 AND uid = :uid
@@ -23,10 +23,10 @@ AND uid = :uid
     @staticmethod
     def get_top_5(uid):
         rows = app.db.execute('''
-SELECT gid, rating, description, time
+SELECT gid, rating, description, time_posted
 FROM ReviewOf
 WHERE uid = :uid
-ORDER BY time
+ORDER BY time_posted
 LIMIT 5
 ''',
                               uid=uid)
