@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br>
+<h2>Search Games:</h2>
+<table class='table table-hover table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">gif</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in games%}
+      <tr>
+        <th scope="row">{{game.name}}</th>
+        <td>{{game.gid}}</td>
+
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
