@@ -2,7 +2,7 @@ from flask import current_app as app
 
 
 class Review:
-    def __init__(self, gid, uid, rating, description, time_posted):
+    def __init__(self, uid, gid, rating, description, time_posted):
         self.gid = gid
         self.uid = uid
         self.description = description
