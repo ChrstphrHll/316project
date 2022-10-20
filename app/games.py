@@ -23,3 +23,4 @@ FROM Games
     games = [Game(*game) for game in games_raw]
 
     return render_template("game_search.html", games = games)
+
