@@ -2,23 +2,28 @@
 
 {% block content %}
 
-<br><br>
 <h2>Search Games:</h2>
-<div class="d-flex p-2 border justify-content-between">
-  <p>Sort and Filter</p>
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-primary">Left</button>
-    <button type="button" class="btn btn-primary">Middle</button>
-    <button type="button" class="btn btn-primary">Right</button>
+<form>
+  <div class="d-flex p-2 border justify-content-end align-items-center">
+  
+    {{ form.search.label }} {{ form.search }}
+    <div class="btn-group mx-1" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary ">Left</button>
+      <button type="button" class="btn btn-primary">Middle</button>
+      <button type="button" class="btn btn-primary">Right</button>
+    </div>
+    <button type="submit" class="btn btn-primary mx-1">Submit</button>
   </div>
-</div>
-<table class='table table-hover table-dark table-striped table-bordered container'>
+</form>
+
+<table class='table table-hover table-primary table-striped table-bordered container'>
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Complexity</th>
       <th scope="col">Players</th>
       <th scope="col">Length</th>
+      <th scope="col">Link</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +33,7 @@
         <td>{{game.complexity}}</td>
         <td>{{game.min_players}}-{{game.max_players}}</td>
         <td>{{game.length}} minutes</td>
+        <td><a href="/games/{{game.gid}}" class="badge bg-primary text-light" role="button">GO</div></td>
 
       </tr>
     {% endfor %}
