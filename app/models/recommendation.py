@@ -9,7 +9,7 @@ WITH game1 AS (SELECT min_players as min1
 FROM Games WHERE gid = :gid)
 SELECT name, image_url, description
 FROM Games
-WHERE min_players = game1.min1 AND complexity = 
+WHERE min_players = game1.min1
 ''',
                               gid=gid)
         return [Games(*row) for row in rows]
