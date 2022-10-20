@@ -13,3 +13,5 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 
 
 \COPY LikesGame FROM 'LikesGame.csv' WITH DELIMITER ',' NULL '' CSV;
+
+\COPY Collections FROM 'Collections.csv' WITH DELIMITER ',' NULL '' CSV;
