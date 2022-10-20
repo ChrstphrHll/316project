@@ -2,4 +2,8 @@
 1,elephant,elephant@savanna.com,pbkdf2:sha256:260000$OBq9DWv7DoRFIqwl$0f3f428c8c9a499a4af6aa4eaf6c9f3c5e99dc9420277e36d8cbc45b147373e1,,
 2,panda,panda@bamboo.world,pbkdf2:sha256:260000$Sz9WBYl8OADM3vjc$42ffa06f9722d4edf60218972008af66eb8c1a5fa792928fab9a78c447553f6c,,
 3,penguin,penguin@frosty.land,pbkdf2:sha256:260000$eHg05zegOSgjyEAb$9ec623e0f4b979fc592c679ab4fc697b30d13f6afb8e31ceaea44b3ea81d9975,,
+<<<<<<< HEAD
 4,fish,fish@water.life,pbkdf2:sha256:260000$6XzGlptCjZx9x6mS$1e7fb9ef8d43989210180ccaef6aaaf09a4693a6ed8e946ecb89e3a0c8c8314d,,
+=======
+4,fish,fish@water.life,pbkdf2:sha256:260000$6XzGlptCjZx9x6mS$1e7fb9ef8d43989210180ccaef6aaaf09a4693a6ed8e946ecb89e3a0c8c8314d,,
+>>>>>>> origin/main
