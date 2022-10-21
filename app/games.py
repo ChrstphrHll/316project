@@ -18,15 +18,7 @@ class Search(FlaskForm):
 def games():
     form = Search()
     
-    query = '''
-SELECT gid, name, description, image_url, complexity, length, min_players, max_players
-FROM Games
-'''
-
-
-    games_raw = app.db.execute(query)
-
-    games = [Game(*game) for game in games_raw]
+    games = Game.get_all()
 
     if "search" in request.args:
         games = filter(lambda x: request.args.get("search").lower() in x.name.lower(), games)
