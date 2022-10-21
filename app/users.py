@@ -71,7 +71,7 @@ def logout():
     return redirect(url_for('index.index'))
 
 
-@bp.route('/users/<uid>/liked_games')
+@bp.route('/users/<uid>/liked')
 def likesgame(uid):
     # return all games this user likes
     liked_games = User.get_liked_games(uid)
