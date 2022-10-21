@@ -23,5 +23,8 @@ def create_app():
 
     from .reviews import bp as reviews_bp
     app.register_blueprint(reviews_bp)
+    
+    from .games import bp as game_bp
+    app.register_blueprint(game_bp)
 
     return app
