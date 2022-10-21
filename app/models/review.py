@@ -27,7 +27,7 @@ SELECT uid, gid, rating, description, time_posted
 FROM ReviewOf
 WHERE uid = :uid
 ORDER BY time_posted
-LIMIT 5
+DESC LIMIT 5
 ''',
                               uid=uid)
         return [Review(*row) for row in rows]
