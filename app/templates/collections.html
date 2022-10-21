@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% if current_user.is_authenticated %}
+<div>
+  <h2>Your collections</h2>
+  {% for collection in collections%}
+  <h1>{{collection.title}}</h1>
+  {%endfor%}
+</div>
+{% else %}
+<p><a href="{{ url_for('users.login') }}">Log in</a> to see your collections!</p>
+{% endif %}
+
+{% endblock %}
