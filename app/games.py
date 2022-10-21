@@ -27,13 +27,7 @@ def games():
 
 @bp.route('/<gid>')
 def game(gid):
-    query = '''
-SELECT *
-FROM Games
-WHERE Games.gid = :gid
-'''
-    game_raw = app.db.execute(query, gid=gid)
-    game = [Game(*game) for game in game_raw]
+    game = Game.get(gid)
 
     return render_template("game.html", game = [] if len(game) == 0 else game[0])
 

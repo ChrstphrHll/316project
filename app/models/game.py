@@ -20,3 +20,13 @@ FROM Games
         for row in rows:
             print(row)
         return [Game(*row) for row in rows]
+
+    @staticmethod
+    def get(gid):
+        query = '''
+SELECT *
+FROM Games
+WHERE Games.gid = :gid
+'''
+        game_raw = app.db.execute(query, gid=gid)
+        return [Game(*game) for game in game_raw]
