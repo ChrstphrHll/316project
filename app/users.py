@@ -75,14 +75,5 @@ def logout():
 @bp.route('/users/<uid>/liked')
 def likesgame(uid):
     # return all games this user likes
-<<<<<<< HEAD
-    return render_template("likesgame.html")
-
-@bp.route('/users/<uid>/recommended')
-def recommended():
-    recs = 
-    return render_template('recommended.html')
-=======
     liked_games = User.get_liked_games(uid)
     return render_template("likesgame.html", liked_games=liked_games)
->>>>>>> bd686d5e7d0844d4b0582d67da20d4f6e0c36ce8

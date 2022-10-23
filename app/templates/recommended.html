@@ -1,0 +1,16 @@
+{% extends ".html" %}
+
+
+{% block content %}
+
+</h1> Recommended </h1>
+
+{% if current_user.is_authenticated %}
+<h2>Yay user autheticated</h2>
+{% else %}
+<p><a href="{{ url_for('users.login') }}">Log in</a> to see your purchase history!</p>
+{% endif %}
+
+<img src="pic_trulli.jpg" alt="Italian Trulli">
+
+{% endblock %}
