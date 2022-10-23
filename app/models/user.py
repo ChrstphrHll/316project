@@ -75,8 +75,10 @@ WHERE uid = :uid
     @staticmethod
     def get_liked_games(uid):
         rows = app.db.execute("""
-SELECT *
+SELECT Games.*
 FROM Games, LikesGame
 WHERE uid = :uid AND LikesGame.gid = Games.gid
-""")
-        pass
+""",
+                            uid=uid)
+        return [Game(*row) for row in rows]
+
