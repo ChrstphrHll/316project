@@ -12,6 +12,15 @@ class Mechanic:
 
         return Product(*(rows[0])) if rows is not None else None
 
+    def get_from_game(gid):
+        rows = app.db.execute('''
+            SELECT mech_name, gid
+            FROM Implements
+            WHERE gid = :gid''', 
+            gid=gid)
+
+        return Product(*(rows[0])) if rows is not None else None
+
     def get_all(name):
         rows = app.db.execute('''
             SELECT mech_name, gid
