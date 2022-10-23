@@ -4,7 +4,9 @@
 
 <br>
 
-<input type="text"></input>
+<label for="uid_input">Enter user's uid:</label>
+<input id="uid_input" type="text"></input>
+<button id="uid_submit">Submit</button>
 
 <br><br>
 
@@ -25,5 +27,11 @@
     {% endfor %}
   </tbody>
 </table>
+
+<script>
+  document.getElementById("uid_submit").addEventListener("click", function(){
+    window.location = "/users/" + document.getElementById("uid_input").value + "/liked_games";
+  });
+</script>
 
 {% endblock %}
