@@ -1,15 +1,15 @@
 from flask import current_app as app
-from .game import Game
+from mechanic import Mechanic
 
 class Recommendation:
     @staticmethod
     def get(gid):
         rows = app.db.execute('''
-WITH game1 AS (SELECT min_players as min1
-FROM Games WHERE gid = :gid)
-SELECT name, image_url, description
-FROM Games
-WHERE min_players = game1.min1
+WITH all_mech AS (SELECT mech_name
+FROM Implements WHERE gid = :gid)
+SELECT g.name, g.image_url, g.description
+FROM Games g, all_mech M, Implements I
+WHERE I.mech_name=M.mech_name AND g.gid=I.gid
 ''',
                               gid=gid)
         return [Games(*row) for row in rows]

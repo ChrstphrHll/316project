@@ -31,7 +31,7 @@ class Mechanic:
             WHERE gid = :gid''', 
             gid=gid)
 
-        return Product(*row) for row in rows
+        return [Product(*row)] for row in rows
 
     @staticmethod
     def get_all(name):
@@ -41,4 +41,4 @@ class Mechanic:
             WHERE mech_name = :name''', 
             name=name)
 
-        return Product(*row) for row in rows
+        return [Product(*row)] for row in rows
