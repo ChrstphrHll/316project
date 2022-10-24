@@ -80,7 +80,10 @@ def likesgame(uid):
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
-    base = Recommendation.get_base(uid)
-    liked_gid = base.gid
-    recs = Recommendation.get(uid, liked_gid)
-    return render_template('recommended.html', recommended=recs, liked=base)
+    liked = Recommendation.get_base(uid)
+    recs = []
+    for like in liked:
+        liked_gid = like.gid
+        rec = Recommendation.get(uid, liked_gid)
+        recs.append(rec)
+    return render_template('recommended.html', recommended=recs, liked=liked)
