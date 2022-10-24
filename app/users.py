@@ -6,6 +6,7 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from .models.user import User
+from .models.recommendation import Recommendation
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
@@ -76,3 +77,8 @@ def likesgame(uid):
     # return all games this user likes
     liked_games = User.get_liked_games(uid)
     return render_template("likesgame.html", liked_games=liked_games)
+
+@bp.route('/users/<uid>/recommended')
+def recommended(uid):
+    recs = Recommendation.get(uid)
+    return render_template('recommended.html', recommded=recs)
