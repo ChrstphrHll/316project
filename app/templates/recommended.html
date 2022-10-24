@@ -3,14 +3,36 @@
 
 {% block content %}
 
-</h1> Recommended </h1>
+</h2> Recommended </h2>
 
-{% if current_user.is_authenticated %}
-<h2>Yay user autheticated</h2>
-{% else %}
-<p><a href="{{ url_for('users.login') }}">Log in</a> to see your purchase history!</p>
-{% endif %}
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Game ID</th>
+                <th>Game Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rec in recommended %}
+            <tr>
+                <td>{{rec.gid}}</td>
+                <td>{{rec.name}}</td>
+                <td>{{rec.description}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+
+        
+
+
+    
 
 <img src="pic_trulli.jpg" alt="Italian Trulli">
-
+        </table>
+    </body>
 {% endblock %}
