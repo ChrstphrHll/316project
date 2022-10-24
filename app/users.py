@@ -77,3 +77,8 @@ def likesgame(uid):
     # return all games this user likes
     liked_games = User.get_liked_games(uid)
     return render_template("likesgame.html", liked_games=liked_games)
+
+@bp.route('/users/<uid>/recommended')
+def recommended(uid):
+    recs = Recommendation.get(uid)
+    return render_template('recommended.html', recommded=recs)
