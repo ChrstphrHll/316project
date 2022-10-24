@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+</header> Mechanics</header>
+
+<br>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Mechanic</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>yes</tr>
+            {% for mech in mechanics %}
+            <tr>
+                <td>{{mech.mech_name}}</td>
+                <td>{{mech.description}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+{% endblock %}
