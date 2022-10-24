@@ -36,9 +36,6 @@ class Collection:
         uid=uid)
       return [Collection.get(cid) for cid in rows]
 
-    # NYI
-    # Params: cid of a collection
-    # Returns: all games in that collection
     @staticmethod
     def get_games(cid):
       rows = app.db.execute('''
@@ -48,8 +45,4 @@ class Collection:
         ''',
         cid=cid
         )
-      print('------------------------------------------')
-      ret = [Game.get(row[0]) for row in rows]
-      print(ret[0].name)
-      print('------------------------------------------')
       return [Game.get(row[0]) for row in rows]
