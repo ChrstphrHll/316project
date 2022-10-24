@@ -1,4 +1,5 @@
 from flask import current_app as app
+from sqlalchemy import null
 
 class Game:
     def __init__(self, gid, name, description, image_url, complexity, length, min_players, max_players):
@@ -29,4 +30,4 @@ FROM Games
 WHERE Games.gid = :gid
 '''
         game_raw = app.db.execute(query, gid=gid)
-        return [Game(*game) for game in game_raw]
+        return Game(*game_raw[0]) if game_raw else null

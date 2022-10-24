@@ -6,7 +6,7 @@
 <form>
   <div class="d-flex p-2 border justify-content-end align-items-center">
   
-    {{ form.search.label }} {{ form.search }}
+    {{ form.search }}
     <button type="submit" class="btn btn-primary mx-1">Search</button>
   </div>
 </form>
@@ -15,9 +15,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Complexity</th>
-      <th scope="col">Players</th>
-      <th scope="col">Length</th>
+      <th scope="col">Description</th>
       <th scope="col">Link</th>
     </tr>
   </thead>
@@ -26,7 +24,7 @@
       <tr>
         <th scope="row">{{collection.title}}</th>
         <td>{{collection.description}}</td>
-        <td><a href="/collections/{{collection.cid}}" class="badge bg-primary text-light" role="button">GO</div></td>
+        <td><a href="/collections/{{collection.cid}}" class="badge bg-primary text-light" role="button">GO</a></td>
 
       </tr>
     {% endfor %}
