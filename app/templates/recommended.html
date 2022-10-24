@@ -1,11 +1,14 @@
-{% extends ".html" %}
+{% extends "base.html" %}
 
 
 {% block content %}
 
-</h2> Recommended </h2>
+</header> Recommended </header>
+
+<br>
 
 <body>
+    Hi
     <table>
         <thead>
             <tr>
@@ -15,24 +18,16 @@
             </tr>
         </thead>
         <tbody>
+            <tr>yes</tr>
             {% for rec in recommended %}
             <tr>
                 <td>{{rec.gid}}</td>
-                <td>{{rec.name}}</td>
-                <td>{{rec.description}}</td>
+                <td>{{rec.gid}}</td>
+                <td>{{rec.mech_name}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </body>
 
-
-        
-
-
-    
-
-<img src="pic_trulli.jpg" alt="Italian Trulli">
-        </table>
-    </body>
 {% endblock %}
