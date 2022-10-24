@@ -9,9 +9,9 @@
 
 <body>
     {% for like in liked %}
-        You liked {{liked[loop.index0].name}}
+        Since you liked {{liked[loop.index0].name}},
         <br>
-        We recommend:
+        We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {% endfor %}
         <br>
                 
         <table>
