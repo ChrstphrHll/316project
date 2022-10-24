@@ -10,3 +10,23 @@ class Game:
         self.length = length
         self.min_players = min_players
         self.max_players = max_players
+
+    @staticmethod
+    def get_all():
+        rows = app.db.execute('''
+SELECT gid, name, description, image_url, complexity, length, min_players, max_players
+FROM Games
+''')
+        for row in rows:
+            print(row)
+        return [Game(*row) for row in rows]
+
+    @staticmethod
+    def get(gid):
+        query = '''
+SELECT *
+FROM Games
+WHERE Games.gid = :gid
+'''
+        game_raw = app.db.execute(query, gid=gid)
+        return [Game(*game) for game in game_raw]
