@@ -3,34 +3,37 @@
 
 {% block content %}
 
-</header> Your Recommended </header>
+<h1> Your Recommended </h1>
 
-<br>
-
-You liked {{liked.name}}
-<br>
-We recommend:
 <br>
 
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Game ID</th>
-                <th>Game Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for rec in recommended %}
-            <tr>
-                <td>{{rec.gid}}</td>
-                <td>{{rec.name}}</td>
-                <td>{{rec.description}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% for like in liked %}
+        You liked {{liked[loop.index0].name}}
+        <br>
+        We recommend:
+        <br>
+                
+        <table>
+            <thead>
+                <tr>
+                    <th>Game ID</th>
+                    <th>Game Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in recommended[loop.index0] %}
+                <tr>
+                    <td>{{rec.gid}}</td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.description}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+    {% endfor %}
 </body>
 
 {% endblock %}
