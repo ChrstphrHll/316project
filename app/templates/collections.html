@@ -1,17 +1,37 @@
 {% extends "base.html" %}
 
-
 {% block content %}
 
-{% if current_user.is_authenticated %}
-<div>
-  <h2>Your collections</h2>
-  {% for collection in collections%}
-  <h1>{{collection.title}}</h1>
-  {%endfor%}
-</div>
-{% else %}
-<p><a href="{{ url_for('users.login') }}">Log in</a> to see your collections!</p>
-{% endif %}
+<h2>Search Collections:</h2>
+<form>
+  <div class="d-flex p-2 border justify-content-end align-items-center">
+  
+    {{ form.search.label }} {{ form.search }}
+    <button type="submit" class="btn btn-primary mx-1">Search</button>
+  </div>
+</form>
+
+<table class='table table-hover table-primary table-striped table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Complexity</th>
+      <th scope="col">Players</th>
+      <th scope="col">Length</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for collection in collections%}
+      <tr>
+        <th scope="row">{{collection.title}}</th>
+        <td>{{collection.description}}</td>
+        <td><a href="/collections/{{collection.cid}}" class="badge bg-primary text-light" role="button">GO</div></td>
+
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 
 {% endblock %}

@@ -1,18 +1,32 @@
-import string
+from tokenize import String
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
-from flask_login import login_user, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms import StringField
+from wtforms.validators import DataRequired
 
 from .models.collection import Collection
+from flask import current_app as app
 
 from flask import Blueprint
 bp = Blueprint('collections', __name__, url_prefix='/collections')
 
-@bp.route('/', methods=['GET'])
+class Search(FlaskForm):
+    search = StringField('', validators=[DataRequired()])
+
+@bp.route('/')
 def collections():
-    collection_list = Collection.get_all()
-    print(str(current_user.uid))
-    return render_template('collections.html', collections=collection_list)
+    form = Search()
+
+    collections = Collection.get_all()
+    
+    if "search" in request.args:
+        collections = filter(lambda x : request.args.get("search").lower() in x.name.lower(), collections)
+
+    return render_template('collections.html', collections=collections, form=form)
+
+@bp.route('/<cid>')
+def collection(cid):
+    collection = Collection.get(cid)
+
+    return render_template("collection.html", collection=collection)
