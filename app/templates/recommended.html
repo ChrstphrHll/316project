@@ -1,4 +1,4 @@
-{% extends ".html" %}
+{% extends "base.html" %}
 
 
 {% block content %}
@@ -6,8 +6,8 @@
 </h2> Recommended </h2>
 
 <body>
-    <table>
-        <thead>
+    <table class='table table-hover table-bordered container'>
+        <thead class="thead-dark">
             <tr>
                 <th>Game ID</th>
                 <th>Game Name</th>
@@ -25,14 +25,4 @@
         </tbody>
     </table>
 </body>
-
-
-        
-
-
-    
-
-<img src="pic_trulli.jpg" alt="Italian Trulli">
-        </table>
-    </body>
 {% endblock %}
