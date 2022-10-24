@@ -28,5 +28,4 @@ def collections():
 def collection(cid):
     collection = Collection.get(cid)
     games = Collection.get_games(cid)
-    print(games)
     return render_template("collection.html", collection=collection, games=games)
