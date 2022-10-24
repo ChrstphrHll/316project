@@ -81,4 +81,4 @@ def likesgame(uid):
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
     recs = Recommendation.get(uid)
-    return render_template('recommended.html', recommded=recs)
+    return render_template('recommended.html', recommended=recs)
