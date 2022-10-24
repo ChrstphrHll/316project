@@ -11,7 +11,7 @@ FROM Games as g, LikesGame as L
 WHERE L.uid = :uid AND g.gid = L.gid
 ''',
                               uid=uid)
-        return Game(*(rows[0])) if rows is not None else None
+        return [Game(*row) for row in rows]
 
     @staticmethod
     def get(uid, gid):
