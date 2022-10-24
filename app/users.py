@@ -82,8 +82,11 @@ def likesgame(uid):
 def recommended(uid):
     liked = Recommendation.get_base(uid)
     recs = []
+    mechs = []
     for like in liked:
         liked_gid = like.gid
+        mech = Mechanic.get(liked_gid)
         rec = Recommendation.get(uid, liked_gid)
         recs.append(rec)
-    return render_template('recommended.html', recommended=recs, liked=liked)
+        mechs.append(mech)
+    return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
