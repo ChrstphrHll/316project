@@ -11,34 +11,14 @@ class Mechanic:
             WHERE mech_name = :name''', 
             name=name)
 
-        return Product(*(rows[0])) if rows is not None else None
+        return Mechanic(*(rows[0])) if rows is not None else None
     
     @staticmethod
-    def get_from_game(gid):
+    def get(name):
         rows = app.db.execute('''
-            SELECT mech_name, gid
-            FROM Implements
-            WHERE gid = :gid''', 
-            gid=gid)
-
-        return Product(*(rows[0])) if rows is not None else None
-
-    @staticmethod
-    def get_all_from_game(gid):
-        rows = app.db.execute('''
-            SELECT mech_name, gid
-            FROM Implements
-            WHERE gid = :gid''', 
-            gid=gid)
-
-        return [Product(*row) for row in rows]
-
-    @staticmethod
-    def get_all(name):
-        rows = app.db.execute('''
-            SELECT mech_name, gid
-            FROM Implements 
-            WHERE mech_name = :name''', 
+            SELECT g.gid, g.name, g.description, g.image_url, g.complexity, g.length, g.min_players, g.max_players
+            FROM Implements as I, Games as g
+            WHERE I.mech_name = :name and g.gid = I.gid''', 
             name=name)
 
-        return [Product(*row) for row in rows]
+        return [Mechanic(*row) for row in rows]
