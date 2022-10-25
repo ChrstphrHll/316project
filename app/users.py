@@ -7,6 +7,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from .models.user import User
 from .models.recommendation import Recommendation
+from .models.mechanic import Mechanic
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
