@@ -2,19 +2,10 @@
 
 {% block content %}
 
-<h2>Search Games:</h2>
-<form>
-  <div class="d-flex p-2 border justify-content-end align-items-center">
-  
-    {{ form.search.label }} {{ form.search }}
-    <div class="btn-group mx-1" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary ">Left</button>
-      <button type="button" class="btn btn-primary">Middle</button>
-      <button type="button" class="btn btn-primary">Right</button>
-    </div>
-    <button type="submit" class="btn btn-primary mx-1">Submit</button>
-  </div>
-</form>
+<br><br>
+<h1>{{collection.title}}</h1>
+<h2>{{collection.name}}</h2>
+<p>{{collection.description}}</p>
 
 <table class='table table-hover table-primary table-striped table-bordered container'>
   <thead class="thead-dark">
@@ -33,12 +24,12 @@
         <td>{{game.complexity}}</td>
         <td>{{game.min_players}}-{{game.max_players}}</td>
         <td>{{game.length}} minutes</td>
-        <td><a href="/games/{{game.gid}}" class="badge bg-primary text-light" role="button">GO</a></td>
+        <td><a href="/games/{{game.gid}}" class="badge bg-primary text-light" role="button">GO </a></td>
 
       </tr>
     {% endfor %}
   </tbody>
 </table>
 
-
+<a href="/collections" role="button" class="btn btn-danger">Back</a>
 {% endblock %}
