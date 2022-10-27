@@ -5,12 +5,11 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
-from app.models.library import Library
-
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
 from .models.collection import Collection
+from .models.library import Library
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
