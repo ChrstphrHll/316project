@@ -72,7 +72,7 @@ CREATE TABLE HasGame (
 
 CREATE TABLE HasCopy (
     lid INT NOT NULL REFERENCES Libraries(lid),
-    gid INT NOT NULL REFERENCES Games(gid)    
+    cpid INT NOT NULL REFERENCES Copies(cpid)    
 );
 
 CREATE TABLE CreatedBy (
@@ -81,8 +81,8 @@ CREATE TABLE CreatedBy (
 );
 
 CREATE TABLE Owns (
-    lid INT NOT NULL REFERENCES Libraries(lid),
-    uid INT NOT NULL REFERENCES Users(uid)    
+    uid INT NOT NULL REFERENCES Users(uid),
+    lid INT NOT NULL REFERENCES Libraries(lid)
 );
 
 CREATE TABLE LikesCollection (

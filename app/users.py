@@ -9,6 +9,7 @@ from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
 from .models.collection import Collection
+from .models.library import Library
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
@@ -106,3 +107,16 @@ def collections(uid):
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
     return render_template('collections.html', collections=collections, form=form)
+
+class LibrarySearch(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+
+@bp.route('/users/<uid>/libraries')
+def libraries(uid):
+    libraries = Library.get_user_libraries(uid)
+    form = CollectionSearch()
+
+    if "search" in request.args:
+        collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
+
+    return render_template('libraries.html', libraries=libraries, form=form)

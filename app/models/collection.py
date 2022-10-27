@@ -1,5 +1,4 @@
 from flask import current_app as app
-from app.models.game import Game
 
 class Collection:
     def __init__(self, cid, title, description):
