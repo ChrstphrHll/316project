@@ -39,10 +39,10 @@ class Collection:
     @staticmethod
     def get_games(cid):
       rows = app.db.execute('''
-        SELECT gid
-        FROM HasGame
-        WHERE cid=:cid
+        SELECT Games.*
+        FROM HasGame, Games
+        WHERE cid=:cid AND HasGame.gid=Games.gid
         ''',
         cid=cid
         )
-      return [Game.get(row[0]) for row in rows]
+      return [row for row in rows]
