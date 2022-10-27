@@ -13,42 +13,6 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/example.css') }}"
     />
-    <style>
-      body {
-        font-family: "Lato", sans-serif;
-      }
-
-      .main-head {
-        height: 150px;
-        background: #fff;
-      }
-
-      .sidenav {
-        height: 100%;
-        background-color: #000;
-        overflow-x: hidden;
-        padding-top: 20px;
-      }
-
-      .main {
-        padding: 0px 10px;
-      }
-
-      .login-main-text {
-        margin-top: 20%;
-        padding: 60px;
-        color: #fff;
-      }
-
-      .login-main-text h2 {
-        font-weight: 300;
-      }
-
-      .btn-black {
-        background-color: #000 !important;
-        color: #fff;
-      }
-    </style>
   </head>
 
   <body>
@@ -117,15 +81,15 @@
           <a
             href="{{ url_for('users.logout') }}"
             type="button"
-            class="btn btn-outline-success my-2 my-sm-0"
+            class="btn btn-outline-light my-2 my-sm-0"
             >Log out</a
           >
           {% else %}
           <a
             href="{{ url_for('users.login') }}"
             type="button"
-            class="btn btn-outline-success my-2 my-sm-0"
-            >Log in</a
+            class="btn btn-outline-light my-2 my-sm-0"
+            >Sign In</a
           >
           {% endif %}
         </form>
