@@ -21,6 +21,6 @@ def index():
     # else:
     #     purchases = None
     # # render the page by adding information to the index.html file
-    print(dir(current_user))
+
     return render_template('index.html')
 
