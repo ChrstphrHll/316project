@@ -8,6 +8,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
+from .models.collection import Collection
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
@@ -91,3 +92,17 @@ def recommended(uid):
         recs.append(rec)
         mechs.append(mech)
     return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
+
+
+class CollectionSearch(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+
+@bp.route('/users/<uid>/collections')
+def collections(uid):
+    collections = Collection.get_user_collections(uid)
+    form = CollectionSearch()
+
+    if "search" in request.args:
+        collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
+
+    return render_template('collections.html', collections=collections, form=form)

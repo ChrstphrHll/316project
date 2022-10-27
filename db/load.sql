@@ -16,6 +16,8 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 
 \COPY Collections FROM 'Collections.csv' WITH DELIMITER ',' NULL '' CSV;
 
+\COPY CreatedBy FROM 'CreatedBy.csv' WITH DELIMITER ',' NULL '' CSV;
+
 \COPY HasGame FROM 'HasGame.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY ReviewOf FROM 'Reviews.csv' WITH DELIMITER ',' NULL '' CSV;
@@ -23,4 +25,3 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 \COPY Mechanics FROM 'Mechanics.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY Implements FROM 'Implements.csv' WITH DELIMITER ',' NULL '' CSV;
-
