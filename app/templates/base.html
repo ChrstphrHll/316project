@@ -49,6 +49,11 @@
               Collections
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('library.libraries') }}">
+              Libraries
+            </a>
+          </li>
 
           {% if current_user.is_authenticated %}
           <li class="nav-item dropdown">
@@ -64,9 +69,10 @@
               User
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ url_for('users.collections', uid=current_user.get_id())}}"> Your Collections </a>
               <a class="dropdown-item" href="{{ url_for('users.likesgame', uid=current_user.get_id())}}"> Your Likes</a>
               <a class="dropdown-item" href="{{ url_for('users.recommended', uid=current_user.get_id())}}"> Your Recommended</a>
+              <a class="dropdown-item" href="{{ url_for('users.collections', uid=current_user.get_id())}}"> Your Collections </a>
+              <a class="dropdown-item" href="{{ url_for('users.libraries', uid=current_user.get_id())}}"> Your Libraries</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ url_for('users.logout') }}"> Log Out</a>
             </div>

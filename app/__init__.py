@@ -30,4 +30,7 @@ def create_app():
     from .games import bp as game_bp
     app.register_blueprint(game_bp)
 
+    from .libraries import bp as library_bp
+    app.register_blueprint(library_bp)
+    
     return app
