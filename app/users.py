@@ -102,7 +102,6 @@ def collections(uid):
     collections = Collection.get_user_collections(uid)
     form = CollectionSearch()
 
-    print(collections)
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
