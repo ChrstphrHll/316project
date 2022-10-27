@@ -95,7 +95,7 @@ def recommended(uid):
 
 
 class CollectionSearch(FlaskForm):
-    collection_search = StringField('Search', validators=[DataRequired()])
+    search = StringField('Search', validators=[DataRequired()])
 
 @bp.route('/users/<uid>/collections')
 def collections(uid):
