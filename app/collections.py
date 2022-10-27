@@ -8,7 +8,7 @@ from .models.collection import Collection
 from flask import current_app as app
 
 from flask import Blueprint
-bp = Blueprint('collections', __name__, url_prefix='/collections')
+bp = Blueprint('collection', __name__, url_prefix='/collections')
 
 class Search(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])

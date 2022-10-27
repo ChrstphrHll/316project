@@ -18,8 +18,6 @@ class Game:
 SELECT gid, name, description, image_url, complexity, length, min_players, max_players
 FROM Games
 ''')
-        for row in rows:
-            print(row)
         return [Game(*row) for row in rows]
 
     @staticmethod
