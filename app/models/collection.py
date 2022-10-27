@@ -28,13 +28,15 @@ class Collection:
 
     @staticmethod
     def get_user_collections(uid):
+      print("got here" + uid)
       rows = app.db.execute('''
-        SELECT cid
-        FROM CreatedBy
-        WHERE uid=:uid
+        SELECT Collections.*
+        FROM CreatedBy, Collections
+        WHERE uid=:uid AND CreatedBy.cid=Collections.cid
         ''',
         uid=uid)
-      return [Collection.get(cid) for cid in rows]
+      print(rows)
+      return [row for row in rows]
 
     @staticmethod
     def get_games(cid):
