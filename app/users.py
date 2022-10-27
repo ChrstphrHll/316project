@@ -73,6 +73,11 @@ def logout():
     logout_user()
     return redirect(url_for('index.index'))
 
+@bp.route('/users/<uid>')
+def profile(uid):
+    print(type(uid))
+    return render_template("user_profile.html", uid=uid)
+
 
 @bp.route('/users/<uid>/liked')
 def likesgame(uid):
@@ -91,7 +96,7 @@ def recommended(uid):
         rec = Recommendation.get(uid, liked_gid)
         recs.append(rec)
         mechs.append(mech)
-    return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
+    return render_template('recommended.html', uid=uid, recommended=recs, liked=liked, mechs=mechs)
 
 
 class CollectionSearch(FlaskForm):
@@ -105,4 +110,4 @@ def collections(uid):
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
-    return render_template('collections.html', collections=collections, form=form)
+    return render_template('collections.html', uid=uid, collections=collections, form=form)

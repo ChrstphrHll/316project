@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="col" style="max-width: 200px; background-color: lightblue;">
+        <div class="btn">Username<br>[Profile pic]</div>
+        <a class="btn btn-primary" href="{{ url_for('users.profile', uid=uid) }}">Profile Home</a>
+        <a class="btn btn-primary" href="{{ url_for('users.collections', uid=uid) }}">Collections</a>
+        <a class="btn btn-primary" href="">Libraries</a>
+
+        {% if current_user.is_authenticated and current_user.uid == uid|int %}
+        <a class="btn btn-primary" href="{{ url_for('users.recommended', uid=uid) }}">My Recommended</a>
+        <a class="btn btn-primary" href="">Checked Out Games</a>
+        <a class="btn btn-primary" href="">Feedback Left</a>
+        {% endif %}
+    </div>
+    <div class="col flex-grow-1" style="background-color:orange;">
+        {% block user_content %}{% endblock %}
+    </div>
+</div>
+
+{% endblock %}
