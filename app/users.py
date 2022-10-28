@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from app.models.copy import Copy
@@ -99,15 +99,28 @@ def recommended(uid):
 class CollectionSearch(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
 
-@bp.route('/users/<uid>/collections')
+class CollectionCreate(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Create')
+
+@bp.route('/users/<uid>/collections', methods=['GET', 'POST'])
 def collections(uid):
     collections = Collection.get_user_collections(uid)
-    form = CollectionSearch()
-
+    search_form = CollectionSearch()
+    
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
-    return render_template('collections.html', collections=collections, form=form)
+    create_form = CollectionCreate()
+    print("here")
+    if create_form.validate_on_submit():
+        print("got here")
+        collection = Collection.create(create_form.title.data, create_form.description.data, current_user.uid)
+        if collection:
+            return redirect(url_for('collection.collection', cid=collection.cid))
+
+    return render_template('collections.html', collections=collections, form=search_form, create=create_form)
 
 class LibrarySearch(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])

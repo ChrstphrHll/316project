@@ -15,6 +15,9 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 \COPY LikesGame FROM 'LikesGame.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY Collections FROM 'Collections.csv' WITH DELIMITER ',' NULL '' CSV;
+SELECT pg_catalog.setval('public.collections_cid_seq',
+                         (SELECT MAX(cid)+1 FROM Collections),
+                         false);
 
 \COPY CreatedBy FROM 'CreatedBy.csv' WITH DELIMITER ',' NULL '' CSV;
 
