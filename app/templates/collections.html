@@ -16,6 +16,7 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
+      <th scope="col">Creator</th>
       <th scope="col">Link</th>
     </tr>
   </thead>
@@ -24,7 +25,8 @@
       <tr>
         <th scope="row">{{collection.title}}</th>
         <td>{{collection.description}}</td>
-        <td><a href="/collections/{{collection.cid}}" class="badge bg-primary text-light" role="button">GO</a></td>
+        <td>{{collection.creator.name}}</td>
+        <td><a href="{{ url_for('collection.collection', cid=collection.cid) }}" class="badge bg-primary text-light" role="button">GO</a></td>
 
       </tr>
     {% endfor %}

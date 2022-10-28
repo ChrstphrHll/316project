@@ -6,7 +6,6 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from app.models.copy import Copy
-
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
