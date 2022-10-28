@@ -35,3 +35,5 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 \COPY Owns FROM 'Owns.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY HasCopy FROM 'HasCopy.csv' WITH DELIMITER ',' NULL '' CSV;
+
+\COPY CheckedOutBy FROM 'CheckedOutBy.csv' WITH DELIMITER ',' NULL '' CSV;
