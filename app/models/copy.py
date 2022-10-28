@@ -37,5 +37,4 @@ class Copy:
         WHERE cpid=:cpid AND CheckedOutBy.uid=Users.uid
         ''',
         cpid=cpid)
-      print(rows)
       return User(*(rows[0])) if rows else None
