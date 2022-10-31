@@ -34,6 +34,9 @@ SELECT pg_catalog.setval('public.collections_cid_seq',
 \COPY CopyOf FROM 'CopyOf.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY Libraries FROM 'Libraries.csv' WITH DELIMITER ',' NULL '' CSV;
+SELECT pg_catalog.setval('public.libraries_lid_seq',
+                         (SELECT MAX(lid)+1 FROM Libraries),
+                         false);
 
 \COPY Owns FROM 'Owns.csv' WITH DELIMITER ',' NULL '' CSV;
 

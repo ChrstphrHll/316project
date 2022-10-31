@@ -112,7 +112,7 @@ def collections(uid):
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
-    create_form = CollectionCreate()
+    create_form = CollectionCreate() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
     if create_form and create_form.validate_on_submit():
         collection = Collection.create(create_form.title.data, create_form.description.data, current_user.uid)
@@ -124,7 +124,12 @@ def collections(uid):
 class LibrarySearch(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
 
-@bp.route('/users/<uid>/libraries')
+class LibraryCreate(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Create')
+
+@bp.route('/users/<uid>/libraries', methods=['GET', 'POST'])
 def libraries(uid):
     libraries = Library.get_user_libraries(uid)
     form = CollectionSearch()
@@ -132,7 +137,15 @@ def libraries(uid):
     if "search" in request.args:
         libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
 
-    return render_template('libraries.html', libraries=libraries, form=form)
+    create_form = LibraryCreate() if current_user.is_authenticated and current_user.uid == int(uid) else None
+
+    if create_form and create_form.validate_on_submit():
+        print("here")
+        library = Library.create(create_form.title.data, create_form.description.data, current_user.uid)
+        if library:
+            return redirect(url_for('library.library', lid=library.lid))
+
+    return render_template('libraries.html', libraries=libraries, form=form, create=create_form)
 
 
 class BorrowedSearch(FlaskForm):
