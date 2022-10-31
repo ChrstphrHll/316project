@@ -1,11 +1,12 @@
 from flask import current_app as app
 from sqlalchemy import null
+import html
 
 class Game:
     def __init__(self, gid, name, description, image_url, thumbnail_url, complexity, length, min_players, max_players):
         self.gid = gid
         self.name = name
-        self.description = description
+        self.description = html.unescape(description)
         self.image_url = image_url
         self.thumbnail_url = thumbnail_url
         self.complexity = complexity
