@@ -95,11 +95,10 @@ def recommended(uid):
         mechs.append(mech)
     return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
 
-
-class CollectionSearch(FlaskForm):
+class Search(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
 
-class CollectionCreate(FlaskForm):
+class Create(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Create')
@@ -107,12 +106,12 @@ class CollectionCreate(FlaskForm):
 @bp.route('/users/<uid>/collections', methods=['GET', 'POST'])
 def collections(uid):
     collections = Collection.get_user_collections(uid)
-    search_form = CollectionSearch()
+    search_form = Search()
     
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
-    create_form = CollectionCreate() if current_user.is_authenticated and current_user.uid == int(uid) else None
+    create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
     if create_form and create_form.validate_on_submit():
         collection = Collection.create(create_form.title.data, create_form.description.data, current_user.uid)
@@ -121,23 +120,15 @@ def collections(uid):
 
     return render_template('collections.html', collections=collections, form=search_form, create=create_form)
 
-class LibrarySearch(FlaskForm):
-    search = StringField('Search', validators=[DataRequired()])
-
-class LibraryCreate(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description', validators=[DataRequired()])
-    submit = SubmitField('Create')
-
 @bp.route('/users/<uid>/libraries', methods=['GET', 'POST'])
 def libraries(uid):
     libraries = Library.get_user_libraries(uid)
-    form = CollectionSearch()
+    form = Search()
 
     if "search" in request.args:
         libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
 
-    create_form = LibraryCreate() if current_user.is_authenticated and current_user.uid == int(uid) else None
+    create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
     if create_form and create_form.validate_on_submit():
         print("here")
@@ -147,14 +138,10 @@ def libraries(uid):
 
     return render_template('libraries.html', libraries=libraries, form=form, create=create_form)
 
-
-class BorrowedSearch(FlaskForm):
-    search = StringField('Search', validators=[DataRequired()])
-
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):
     borrowed_copies = Copy.user_borrowed_copies(uid)
-    form = BorrowedSearch()
+    form = Search()
 
     if "search" in request.args:
         borrowed_copies = filter(lambda x : request.args.get("search").lower() in x.title.lower(), borrowed_copies)
