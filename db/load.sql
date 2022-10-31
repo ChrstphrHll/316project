@@ -30,6 +30,9 @@ SELECT pg_catalog.setval('public.collections_cid_seq',
 \COPY Implements FROM 'Implements.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY Copies FROM 'Copies.csv' WITH DELIMITER ',' NULL '' CSV;
+SELECT pg_catalog.setval('public.copies_cpid_seq',
+                         (SELECT MAX(cpid)+1 FROM Copies),
+                         false);
 
 \COPY CopyOf FROM 'CopyOf.csv' WITH DELIMITER ',' NULL '' CSV;
 
