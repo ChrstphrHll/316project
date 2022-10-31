@@ -113,9 +113,8 @@ def collections(uid):
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
     create_form = CollectionCreate()
-    print("here")
-    if create_form.validate_on_submit():
-        print("got here")
+
+    if create_form and create_form.validate_on_submit():
         collection = Collection.create(create_form.title.data, create_form.description.data, current_user.uid)
         if collection:
             return redirect(url_for('collection.collection', cid=collection.cid))
