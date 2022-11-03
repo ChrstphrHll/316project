@@ -28,6 +28,5 @@ def games():
 @bp.route('/<gid>')
 def game(gid):
     game = Game.get(gid)
-
-    return render_template("game.html", game = [] if len(game) == 0 else game[0])
+    return render_template("game.html", game=game)
 

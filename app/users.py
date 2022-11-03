@@ -5,9 +5,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
+from app.models.copy import Copy
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
+
+from .models.collection import Collection
+from .models.library import Library
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
@@ -91,3 +95,43 @@ def recommended(uid):
         recs.append(rec)
         mechs.append(mech)
     return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
+
+class CollectionSearch(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+
+@bp.route('/users/<uid>/collections')
+def collections(uid):
+    collections = Collection.get_user_collections(uid)
+    form = CollectionSearch()
+
+    if "search" in request.args:
+        collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
+
+    return render_template('collections.html', collections=collections, form=form)
+
+class LibrarySearch(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+
+@bp.route('/users/<uid>/libraries')
+def libraries(uid):
+    libraries = Library.get_user_libraries(uid)
+    form = CollectionSearch()
+
+    if "search" in request.args:
+        libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
+
+    return render_template('libraries.html', libraries=libraries, form=form)
+
+
+class BorrowedSearch(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
+
+@bp.route('/users/<uid>/borrowed')
+def borrowed(uid):
+    borrowed_copies = Copy.user_borrowed_copies(uid)
+    form = BorrowedSearch()
+
+    if "search" in request.args:
+        borrowed_copies = filter(lambda x : request.args.get("search").lower() in x.title.lower(), borrowed_copies)
+
+    return render_template('borrowed.html', copies=borrowed_copies, form=form)

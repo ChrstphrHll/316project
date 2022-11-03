@@ -1,11 +1,14 @@
 from flask import current_app as app
+from sqlalchemy import null
+import html
 
 class Game:
-    def __init__(self, gid, name, description, image_url, complexity, length, min_players, max_players):
+    def __init__(self, gid, name, description, image_url, thumbnail_url, complexity, length, min_players, max_players):
         self.gid = gid
         self.name = name
-        self.description = description
+        self.description = html.unescape(description)
         self.image_url = image_url
+        self.thumbnail_url = thumbnail_url
         self.complexity = complexity
         self.length = length
         self.min_players = min_players
@@ -14,11 +17,9 @@ class Game:
     @staticmethod
     def get_all():
         rows = app.db.execute('''
-SELECT gid, name, description, image_url, complexity, length, min_players, max_players
+SELECT *
 FROM Games
 ''')
-        for row in rows:
-            print(row)
         return [Game(*row) for row in rows]
 
     @staticmethod
@@ -29,4 +30,4 @@ FROM Games
 WHERE Games.gid = :gid
 '''
         game_raw = app.db.execute(query, gid=gid)
-        return [Game(*game) for game in game_raw]
+        return Game(*game_raw[0]) if game_raw else null
