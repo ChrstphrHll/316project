@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "user_pages/base_user.html" %}
 
-{% block content %}
+{% block user_content %}
 
-<h2>Search Collections:</h2>
+<h2>Search Libraries:</h2>
 <form>
   <div class="d-flex p-2 border justify-content-end align-items-center">
   
@@ -16,17 +16,17 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
-      <th scope="col">Creator</th>
+      <th scope="col">Owner</th>
       <th scope="col">Link</th>
     </tr>
   </thead>
   <tbody>
-    {% for collection in collections%}
+    {% for library in libraries%}
       <tr>
-        <th scope="row">{{collection.title}}</th>
-        <td>{{collection.description}}</td>
-        <td>{{collection.creator.name}}</td>
-        <td><a href="{{ url_for('collection.collection', cid=collection.cid) }}" class="badge bg-primary text-light" role="button">GO</a></td>
+        <th scope="row">{{library.title}}</th>
+        <td>{{library.description}}</td>
+        <td>{{library.owner.name}}</td>
+        <td><a href="/libraries/{{library.lid}}" class="badge bg-primary text-light" role="button">GO</a></td>
 
       </tr>
     {% endfor %}
