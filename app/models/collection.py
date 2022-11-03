@@ -1,11 +1,13 @@
 from flask import current_app as app
 from app.models.game import Game
+from app.models.user import User
 
 class Collection:
     def __init__(self, cid, title, description):
         self.cid = cid
         self.title = title
         self.description = description
+        self.creator = Collection.get_creator(cid)
 
     @staticmethod
     def get(cid):
@@ -15,7 +17,7 @@ class Collection:
         WHERE cid = :cid
         ''',
         cid=cid)
-      return Collection(*(rows[0])) if rows is not None else None
+      return Collection(*(rows[0])) if rows else None
 
     @staticmethod
     def get_all():
@@ -34,7 +36,17 @@ class Collection:
         WHERE uid=:uid AND CreatedBy.cid=Collections.cid
         ''',
         uid=uid)
-      return [row for row in rows]
+      return [Collection(*row) for row in rows]
+
+    @staticmethod
+    def get_creator(cid):
+      rows = app.db.execute('''
+        SELECT Users.uid, name, email, about, image_url
+        FROM Users, CreatedBy
+        WHERE cid=:cid AND CreatedBy.uid=Users.uid
+        ''',
+        cid=cid)
+      return User(*(rows[0])) if rows else None
 
     @staticmethod
     def get_games(cid):
@@ -45,4 +57,4 @@ class Collection:
         ''',
         cid=cid
         )
-      return [row for row in rows]
+      return [Game(*row) for row in rows]
