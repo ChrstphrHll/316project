@@ -3,11 +3,35 @@
 
 {% block user_content %}
 
+
 <h1> Your Recommended </h1>
 
 <br>
 
 <body>
+
+    Hi
+    <table>
+        <thead>
+            <tr>
+                <th>Game ID</th>
+                <th>Game Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>yes</tr>
+            {% for rec in recommended %}
+            <tr>
+                <td>{{rec.gid}}</td>
+                <td>{{rec.gid}}</td>
+                <td>{{rec.mech_name}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
     {% for like in liked %}
         Since you liked {{liked[loop.index0].name}},
         <br>

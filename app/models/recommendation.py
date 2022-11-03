@@ -43,5 +43,3 @@ WHERE L.uid = :uid AND g.gid = L.gid
                                 uid=uid)
         return [Game(*row) for row in rows]
     """
-
-    

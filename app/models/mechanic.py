@@ -17,6 +17,17 @@ class Mechanic:
         return [Mechanic(*row) for row in rows]
 
     @staticmethod
+    def get_all():
+        rows = app.db.execute('''
+            SELECT *
+            FROM Mechanics as M
+            ORDER BY M.mech_name
+            ''', )
+
+    #forms are part of html
+        return [Mechanic(*row) for row in rows]
+
+    @staticmethod
     def get_desc(name):
         rows = app.db.execute('''
             SELECT mech_name, description
