@@ -27,4 +27,7 @@ def create_app():
     from .games import bp as game_bp
     app.register_blueprint(game_bp)
 
+    from .mechanics import bp as mech_bp
+    app.register_blueprint(mech_bp)
+
     return app
