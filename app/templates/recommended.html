@@ -3,11 +3,13 @@
 
 {% block content %}
 
-</header> Recommended </header>
+
+<h1> Your Recommended </h1>
 
 <br>
 
 <body>
+
     Hi
     <table>
         <thead>
@@ -28,6 +30,34 @@
             {% endfor %}
         </tbody>
     </table>
+</body>
+
+    {% for like in liked %}
+        Since you liked {{liked[loop.index0].name}},
+        <br>
+        We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {% endfor %}
+        <br>
+                
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead>
+                <tr>
+                    <th>Game ID</th>
+                    <th>Game Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in recommended[loop.index0] %}
+                <tr>
+                    <td>{{rec.gid}}</td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.description}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+    {% endfor %}
 </body>
 
 {% endblock %}

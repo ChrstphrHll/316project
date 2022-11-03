@@ -25,7 +25,6 @@ class Mechanic:
             ''', )
 
     #forms are part of html
-
         return [Mechanic(*row) for row in rows]
 
     @staticmethod
