@@ -5,6 +5,7 @@ CREATE TABLE Games (
     name VARCHAR NOT NULL,
     description TEXT NOT NULL,
     image_url VARCHAR NOT NULL,
+    thumbnail_url VARCHAR NOT NULL,
     complexity FLOAT NOT NULL,
     length INT NOT NULL,
     min_players INT NOT NULL,
@@ -53,8 +54,8 @@ CREATE TABLE DesignedBy (
 );
 
 CREATE TABLE Implements (
-    mech_name VARCHAR NOT NULL REFERENCES Mechanics(mech_name),
-    gid INT NOT NULL REFERENCES Games(gid)    
+    gid INT NOT NULL REFERENCES Games(gid),
+    mech_name VARCHAR NOT NULL REFERENCES Mechanics(mech_name)   
 );
 
 CREATE TABLE ReviewOf (
