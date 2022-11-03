@@ -1,13 +1,2684 @@
-Resource Management, 0
-Open Resources, 0
-Card Based, 0
-Competitive, 0
-Additional Equipment, 0
-Collaborative, 1
-Social Deduction, 1
-Secret Roles, 1
-Supernatural, 1
-Competitive, 2
-Territory Expansion, 2
-Additional Equipment, 2
-Supernatural, 2
+0@Action Queue
+0@Action Retrieval
+0@Campaign / Battle Card Driven
+0@Card Play Conflict Resolution
+0@Communication Limits
+0@Cooperative Game
+0@Critical Hits and Failures
+0@Deck Construction
+0@Grid Movement
+0@Hand Management
+0@Hexagon Grid
+0@Legacy Game
+0@Line of Sight
+0@Modular Board
+0@Once-Per-Game Abilities
+0@Role Playing
+0@Scenario / Mission / Campaign Game
+0@Simultaneous Action Selection
+0@Solo / Solitaire Game
+0@Storytelling
+0@Variable Player Powers
+1@Deck, Bag, and Pool Building
+1@Delayed Purchase
+1@Income
+1@Market
+1@Modular Board
+1@Open Drafting
+1@Simultaneous Action Selection
+1@Victory Points as a Resource
+2@Auction/Bidding
+2@Auction: Turn Order Until Pass
+2@Catch the Leader
+2@Income
+2@Market
+2@Network and Route Building
+2@Turn Order: Stat-Based
+3@Dice Rolling
+3@Hexagon Grid
+3@Income
+3@Modular Board
+3@Network and Route Building
+3@Race
+3@Random Production
+3@Trading
+3@Variable Set-up
+4@Contracts
+4@End Game Bonuses
+4@Income
+4@Network and Route Building
+4@Ownership
+4@Solo / Solitaire Game
+4@Turn Order: Stat-Based
+4@Variable Player Powers
+4@Variable Set-up
+4@Worker Placement
+5@Action Points
+5@Cooperative Game
+5@Events
+5@Hand Management
+5@Push Your Luck
+5@Scenario / Mission / Campaign Game
+5@Solo / Solitaire Game
+5@Storytelling
+6@Alliances
+6@Card Play Conflict Resolution
+6@Hand Management
+6@Interrupts
+6@Negotiation
+6@Prisoner's Dilemma
+6@Race
+6@Simultaneous Action Selection
+6@Take That
+6@Trading
+6@Variable Player Powers
+7@Automatic Resource Growth
+7@Closed Drafting
+7@Enclosure
+7@Hand Management
+7@Increase Value of Unchosen Resources
+7@Solo / Solitaire Game
+7@Turn Order: Claim Action
+7@Variable Player Powers
+7@Worker Placement
+8@Communication Limits
+8@Cooperative Game
+8@Hand Management
+8@Scenario / Mission / Campaign Game
+8@Trick-taking
+9@Action Points
+9@Area Majority / Influence
+9@Area Movement
+9@Dice Rolling
+9@Hand Management
+9@Negotiation
+9@Scenario / Mission / Campaign Game
+9@Storytelling
+9@Variable Set-up
+10@Area Majority / Influence
+10@Modular Board
+10@Take That
+10@Variable Player Powers
+10@Worker Placement
+10@Worker Placement, Different Worker Types
+11@Action Queue
+11@Bias
+11@Cooperative Game
+11@Dice Rolling
+11@Modular Board
+11@Open Drafting
+11@Programmed Movement
+11@Role Playing
+11@Slide/Push
+11@Variable Player Powers
+12@Enclosure
+12@Income
+12@Investment
+12@Negotiation
+12@Set Collection
+12@Tile Placement
+12@Trading
+12@Victory Points as a Resource
+13@Communication Limits
+13@Cooperative Game
+14@Cooperative Game
+14@Dice Rolling
+14@Events
+14@Grid Movement
+14@Hand Management
+14@Hexagon Grid
+14@Scenario / Mission / Campaign Game
+14@Solo / Solitaire Game
+14@Variable Player Powers
+14@Variable Set-up
+15@Deck, Bag, and Pool Building
+15@Delayed Purchase
+15@Hand Management
+15@Open Drafting
+15@Variable Set-up
+16@Area Movement
+16@Dice Rolling
+16@Hand Management
+16@Hidden Roles
+16@Once-Per-Game Abilities
+16@Role Playing
+16@Team-Based Game
+16@Traitor Game
+16@Variable Player Powers
+16@Variable Set-up
+16@Voting
+17@Connections
+17@Crayon Rail System
+17@Hexagon Grid
+17@Movement Points
+17@Network and Route Building
+17@Pick-up and Deliver
+18@Cooperative Game
+18@Critical Hits and Failures
+18@Dice Rolling
+18@Grid Movement
+18@Role Playing
+18@Solo / Solitaire Game
+18@Storytelling
+19@Communication Limits
+19@Targeted Clues
+19@Team-Based Game
+20@Enclosure
+20@End Game Bonuses
+20@Once-Per-Game Abilities
+20@Open Drafting
+20@Rondel
+20@Set Collection
+20@Simultaneous Action Selection
+20@Solo / Solitaire Game
+20@Tile Placement
+20@Turn Order: Progressive
+20@Variable Phase Order
+20@Variable Set-up
+21@Deck, Bag, and Pool Building
+21@End Game Bonuses
+21@Hand Management
+21@Market
+21@Move Through Deck
+21@Solo / Solitaire Game
+21@Variable Player Powers
+21@Variable Set-up
+22@Automatic Resource Growth
+22@Highest-Lowest Scoring
+22@Income
+22@Set Collection
+22@Solo / Solitaire Game
+22@Turn Order: Claim Action
+22@Turn Order: Progressive
+22@Worker Placement
+23@Commodity Speculation
+23@Hexagon Grid
+23@Network and Route Building
+23@Stock Holding
+24@Automatic Resource Growth
+24@End Game Bonuses
+24@Increase Value of Unchosen Resources
+24@Loans
+24@Ownership
+24@Solo / Solitaire Game
+24@Worker Placement
+25@Action Drafting
+25@Follow
+25@Hand Management
+25@Set Collection
+25@Simultaneous Action Selection
+25@Turn Order: Role Order
+25@Variable Phase Order
+25@Variable Player Powers
+26@Advantage Token
+26@Automatic Resource Growth
+26@Contracts
+26@End Game Bonuses
+26@Hand Management
+26@Income
+26@Increase Value of Unchosen Resources
+26@Market
+26@Modular Board
+26@Solo / Solitaire Game
+26@Turn Order: Claim Action
+26@Worker Placement
+27@Communication Limits
+27@Memory
+27@Push Your Luck
+27@Team-Based Game
+28@Area Majority / Influence
+28@Automatic Resource Growth
+28@Contracts
+28@Dice Rolling
+28@Hand Management
+28@Hidden Victory Points
+28@Income
+28@Multi-Use Cards
+28@Open Drafting
+28@Simultaneous Action Selection
+28@Solo / Solitaire Game
+28@Variable Player Powers
+28@Victory Points as a Resource
+29@Contracts
+29@Dice Rolling
+29@End Game Bonuses
+29@Set Collection
+29@Turn Order: Progressive
+29@Worker Placement
+30@Deck, Bag, and Pool Building
+30@Open Drafting
+30@Solo / Solitaire Game
+30@Worker Placement
+31@Auction/Bidding
+31@Catch the Leader
+31@Connections
+31@Dice Rolling
+31@Loans
+31@Network and Route Building
+31@Pick-up and Deliver
+31@Player Elimination
+31@Scenario / Mission / Campaign Game
+31@Selection Order Bid
+31@Tile Placement
+31@Turn Order: Auction
+31@Victory Points as a Resource
+32@Hand Management
+32@Open Drafting
+32@Race
+32@Score-and-Reset Game
+32@Take That
+32@Turn Order: Pass Order
+32@Variable Player Powers
+33@Hidden Roles
+33@Memory
+33@Roles with Asymmetric Information
+33@Simultaneous Action Selection
+33@Team-Based Game
+33@Traitor Game
+33@Voting
+34@End Game Bonuses
+34@Open Drafting
+34@Pattern Building
+34@Tile Placement
+34@Turn Order: Claim Action
+35@Deck, Bag, and Pool Building
+35@Delayed Purchase
+35@Hand Management
+35@Open Drafting
+35@Take That
+36@Closed Drafting
+36@Grid Coverage
+36@Hidden Victory Points
+36@Income
+36@Open Drafting
+36@Pattern Building
+36@Set Collection
+36@Solo / Solitaire Game
+36@Square Grid
+36@Tile Placement
+36@Turn Order: Stat-Based
+37@Commodity Speculation
+37@Investment
+37@Set Collection
+37@Solo / Solitaire Game
+37@Victory Points as a Resource
+37@Worker Placement
+38@Auction/Bidding
+38@Auction: Turn Order Until Pass
+38@Closed Drafting
+38@Commodity Speculation
+38@Hand Management
+38@Set Collection
+39@Auction/Bidding
+39@Constrained Bidding
+39@End Game Bonuses
+39@Hidden Victory Points
+39@Mancala
+39@Modular Board
+39@Set Collection
+39@Square Grid
+39@Take That
+39@Turn Order: Auction
+39@Variable Player Powers
+39@Variable Set-up
+39@Victory Points as a Resource
+40@Dice Rolling
+40@Open Drafting
+40@Random Production
+41@Action Queue
+41@Bias
+41@Open Drafting
+41@Simultaneous Action Selection
+41@Solo / Solitaire Game
+42@Hand Management
+42@Push Your Luck
+42@Score-and-Reset Game
+42@Set Collection
+43@Auction/Bidding
+43@Auction: Fixed Placement
+43@Constrained Bidding
+43@End Game Bonuses
+43@Hexagon Grid
+43@Modular Board
+43@Multiple-Lot Auction
+43@Network and Route Building
+43@Ownership
+43@Set Collection
+43@Tile Placement
+43@Turn Order: Auction
+43@Variable Set-up
+43@Worker Placement
+43@Worker Placement, Different Worker Types
+44@End Game Bonuses
+44@Hand Management
+44@Hexagon Grid
+44@Income
+44@Open Drafting
+44@Set Collection
+44@Solo / Solitaire Game
+44@Tags
+44@Tile Placement
+44@Variable Player Powers
+44@Variable Set-up
+45@Communication Limits
+45@Cooperative Game
+45@Deduction
+46@Area Majority / Influence
+46@Hand Management
+46@Open Drafting
+46@Solo / Solitaire Game
+46@Tile Placement
+47@Hand Management
+47@Hidden Victory Points
+47@Open Drafting
+47@Take That
+47@Victory Points as a Resource
+48@Action Drafting
+48@End Game Bonuses
+48@Follow
+48@Hidden Victory Points
+48@Increase Value of Unchosen Resources
+48@Turn Order: Progressive
+48@Variable Phase Order
+49@Cooperative Game
+49@Deck, Bag, and Pool Building
+49@Dice Rolling
+49@Die Icon Resolution
+49@Hand Management
+49@Resource to Move
+49@Role Playing
+49@Scenario / Mission / Campaign Game
+49@Solo / Solitaire Game
+49@Stat Check Resolution
+49@Tech Trees / Tech Tracks
+49@Turn Order: Role Order
+49@Variable Player Powers
+50@Advantage Token
+50@Hand Management
+50@Layering
+50@Melding and Splaying
+50@Take That
+50@Tech Trees / Tech Tracks
+50@Variable Phase Order
+51@Action Drafting
+51@Area Majority / Influence
+51@Area Movement
+51@Auction/Bidding
+51@Hand Management
+51@Memory
+51@Open Drafting
+51@Selection Order Bid
+51@Simultaneous Action Selection
+51@Turn Order: Progressive
+51@Turn Order: Stat-Based
+52@Action Points
+52@Area Movement
+52@Dice Rolling
+52@Hand Management
+52@Narrative Choice / Paragraph
+52@Push Your Luck
+52@Semi-Cooperative Game
+52@Storytelling
+52@Trading
+52@Traitor Game
+52@Variable Player Powers
+52@Voting
+53@Betting and Bluffing
+53@Deduction
+53@Hidden Roles
+53@Negotiation
+53@Player Elimination
+53@Prisoner's Dilemma
+53@Rock-Paper-Scissors
+53@Roles with Asymmetric Information
+53@Team-Based Game
+53@Variable Player Powers
+53@Voting
+54@Enclosure
+54@End Game Bonuses
+54@Hexagon Grid
+54@Open Drafting
+54@Pattern Building
+54@Scenario / Mission / Campaign Game
+54@Set Collection
+54@Solo / Solitaire Game
+54@Tile Placement
+55@Cooperative Game
+55@Pick-up and Deliver
+55@Point to Point Movement
+55@Push Your Luck
+55@Solo / Solitaire Game
+55@Variable Player Powers
+56@Dice Rolling
+56@Push Your Luck
+56@Race
+57@Cooperative Game
+57@Solo / Solitaire Game
+57@Storytelling
+58@Events
+58@Open Drafting
+58@Turn Order: Pass Order
+58@Variable Player Powers
+59@Acting
+59@Communication Limits
+59@Memory
+59@Team-Based Game
+60@Deck, Bag, and Pool Building
+60@Events
+60@Semi-Cooperative Game
+60@Solo / Solitaire Game
+60@Variable Set-up
+61@Auction/Bidding
+61@Betting and Bluffing
+61@Set Collection
+61@Worker Placement
+62@Contracts
+62@End Game Bonuses
+62@Events
+62@Hand Management
+62@Income
+62@Movement Points
+62@Narrative Choice / Paragraph
+62@Point to Point Movement
+62@Scenario / Mission / Campaign Game
+62@Set Collection
+62@Solo / Solitaire Game
+62@Stock Holding
+62@Sudden Death Ending
+62@Tech Trees / Tech Tracks
+62@Track Movement
+62@Variable Set-up
+63@Area Majority / Influence
+63@Area Movement
+63@Dice Rolling
+63@Simulation
+64@Cooperative Game
+64@Hand Management
+64@Solo / Solitaire Game
+64@Variable Player Powers
+65@Catch the Leader
+65@Deck, Bag, and Pool Building
+65@Delayed Purchase
+65@Dice Rolling
+65@Events
+65@Market
+65@Push Your Luck
+65@Variable Set-up
+66@Hand Management
+66@Melding and Splaying
+66@Negotiation
+66@Set Collection
+66@Trading
+67@Flicking
+67@Team-Based Game
+68@Advantage Token
+68@Area Movement
+68@Area-Impulse
+68@Dice Rolling
+68@Simulation
+69@Action Queue
+69@Area Movement
+69@Cooperative Game
+69@Dice Rolling
+69@Die Icon Resolution
+69@Events
+69@Hexagon Grid
+69@Map Addition
+69@Movement Points
+69@Narrative Choice / Paragraph
+69@Scenario / Mission / Campaign Game
+69@Solo / Solitaire Game
+69@Tile Placement
+69@Turn Order: Progressive
+69@Variable Player Powers
+69@Worker Placement
+70@Betting and Bluffing
+70@Closed Drafting
+70@Deck Construction
+70@Hand Management
+70@Interrupts
+70@Player Elimination
+70@Take That
+71@Action Points
+71@Cooperative Game
+71@Dice Rolling
+71@Point to Point Movement
+71@Role Playing
+71@Solo / Solitaire Game
+71@Stat Check Resolution
+71@Variable Player Powers
+72@Hidden Roles
+72@Player Elimination
+72@Team-Based Game
+72@Traitor Game
+72@Voting
+73@Contracts
+73@Dice Rolling
+73@Income
+73@Point to Point Movement
+73@Resource to Move
+73@Turn Order: Claim Action
+73@Variable Player Powers
+73@Variable Set-up
+73@Worker Placement with Dice Workers
+74@Area Movement
+74@Cooperative Game
+74@Hand Management
+74@Map Addition
+74@Modular Board
+74@Scenario / Mission / Campaign Game
+74@Solo / Solitaire Game
+74@Storytelling
+74@Variable Player Powers
+75@Contracts
+75@Delayed Purchase
+75@Market
+75@Network and Route Building
+75@Point to Point Movement
+75@Turn Order: Stat-Based
+75@Victory Points as a Resource
+76@Area Majority / Influence
+76@Dice Rolling
+76@Events
+76@Hand Management
+76@Hidden Roles
+76@Interrupts
+76@Roles with Asymmetric Information
+76@Take That
+77@Open Drafting
+77@Solo / Solitaire Game
+77@Variable Player Powers
+77@Worker Placement
+78@Auction/Bidding
+78@Income
+78@Loans
+78@Lose a Turn
+78@Ownership
+78@Player Elimination
+78@Roll / Spin and Move
+78@Set Collection
+78@Stock Holding
+78@Track Movement
+78@Trading
+79@Grid Coverage
+79@Highest-Lowest Scoring
+79@Once-Per-Game Abilities
+79@Rondel
+79@Tile Placement
+79@Track Movement
+79@Turn Order: Claim Action
+79@Turn Order: Pass Order
+80@Action Points
+80@Area Majority / Influence
+80@Area Movement
+80@Hand Management
+80@Increase Value of Unchosen Resources
+80@Open Drafting
+80@Score-and-Reset Game
+80@Simulation
+80@Solo / Solitaire Game
+81@Deck Construction
+81@Dice Rolling
+81@Grid Movement
+81@Line of Sight
+81@Simultaneous Action Selection
+81@Turn Order: Progressive
+81@Variable Player Powers
+82@Action Points
+82@Area Majority / Influence
+82@End Game Bonuses
+82@Network and Route Building
+82@Ownership
+82@Tech Trees / Tech Tracks
+83@Action Retrieval
+83@Area Majority / Influence
+83@Deck, Bag, and Pool Building
+83@Delayed Purchase
+83@Hand Management
+83@Open Drafting
+83@Set Collection
+83@Turn Order: Claim Action
+84@End Game Bonuses
+84@Hexagon Grid
+84@Open Drafting
+84@Pattern Building
+84@Solo / Solitaire Game
+84@Tile Placement
+84@Variable Set-up
+85@Roll / Spin and Move
+85@Take That
+86@Hand Management
+86@Memory
+86@Open Drafting
+86@Set Collection
+86@Tile Placement
+87@Commodity Speculation
+87@Grid Movement
+87@Market
+87@Set Collection
+87@Tile Placement
+87@Time Track
+88@Area Majority / Influence
+88@Chaining
+88@Hand Management
+88@Network and Route Building
+88@Tile Placement
+89@Contracts
+89@End Game Bonuses
+89@Modular Board
+89@Solo / Solitaire Game
+89@Track Movement
+89@Turn Order: Claim Action
+89@Worker Placement
+90@Dice Rolling
+90@Solo / Solitaire Game
+90@Turn Order: Claim Action
+90@Variable Player Powers
+90@Worker Placement
+90@Worker Placement, Different Worker Types
+91@End Game Bonuses
+91@Hand Management
+91@Open Drafting
+91@Set Collection
+92@Auction: Dutch
+92@End Game Bonuses
+92@Hidden Victory Points
+92@I Cut, You Choose
+92@Pattern Building
+92@Set Collection
+92@Tile Placement
+92@Turn Order: Progressive
+93@Deck, Bag, and Pool Building
+93@Dice Rolling
+93@Push Your Luck
+93@Race
+93@Variable Set-up
+94@Bingo
+94@Dice Rolling
+94@Paper-and-Pencil
+94@Roll / Spin and Move
+94@Solo / Solitaire Game
+95@End Game Bonuses
+95@Tech Trees / Tech Tracks
+95@Turn Order: Claim Action
+95@Worker Placement
+96@Auction/Bidding
+96@Betting and Bluffing
+96@Hand Management
+96@Moving Multiple Units
+96@Predictive Bid
+96@Race
+96@Track Movement
+96@Variable Player Powers
+97@Deck, Bag, and Pool Building
+97@Delayed Purchase
+97@Hand Management
+98@Contracts
+98@Hidden Roles
+98@Increase Value of Unchosen Resources
+98@Ownership
+98@Set Collection
+98@Take That
+98@Turn Order: Claim Action
+98@Worker Placement
+99@Action Queue
+99@Area Majority / Influence
+99@Hand Management
+99@Simultaneous Action Selection
+100@Cooperative Game
+100@Deck Construction
+100@Hand Management
+100@Scenario / Mission / Campaign Game
+100@Solo / Solitaire Game
+100@Variable Player Powers
+100@Variable Set-up
+101@Alliances
+101@Area Majority / Influence
+101@Area Movement
+101@Auction/Bidding
+101@Bribery
+101@Force Commitment
+101@Map Deformation
+101@Predictive Bid
+101@Take That
+101@Variable Player Powers
+102@Auction/Bidding
+102@Auction: Once Around
+102@Income
+102@Push Your Luck
+102@Set Collection
+102@Victory Points as a Resource
+103@Area Majority / Influence
+103@Auction/Bidding
+103@Auction: Once Around
+103@Closed Economy Auction
+103@Take That
+104@Action Queue
+104@Ownership
+104@Turn Order: Claim Action
+104@Turn Order: Pass Order
+104@Variable Set-up
+104@Worker Placement
+105@Cooperative Game
+105@Deck Construction
+105@Events
+105@Hand Management
+105@Scenario / Mission / Campaign Game
+105@Solo / Solitaire Game
+105@Variable Set-up
+106@Cooperative Game
+106@Hand Management
+106@Modular Board
+106@Solo / Solitaire Game
+106@Variable Player Powers
+107@Deck, Bag, and Pool Building
+107@Dice Rolling
+107@Open Drafting
+107@Random Production
+108@Auction/Bidding
+108@Auction: Once Around
+108@Closed Economy Auction
+108@Constrained Bidding
+108@Push Your Luck
+108@Set Collection
+109@Auction/Bidding
+109@Dice Rolling
+109@Grid Movement
+109@Hexagon Grid
+109@Income
+109@Movement Points
+109@Paper-and-Pencil
+109@Secret Unit Deployment
+109@Simulation
+109@Tech Trees / Tech Tracks
+110@Area Majority / Influence
+110@Betting and Bluffing
+110@Hidden Victory Points
+110@Take That
+110@Worker Placement
+111@Action Queue
+111@Betting and Bluffing
+111@Hand Management
+111@Take That
+111@Turn Order: Progressive
+112@Action Drafting
+112@Area Majority / Influence
+112@Contracts
+112@Events
+112@Point to Point Movement
+112@Tech Trees / Tech Tracks
+112@Worker Placement
+113@Open Drafting
+113@Push Your Luck
+113@Set Collection
+114@Action Points
+114@Area Movement
+114@Card Play Conflict Resolution
+114@Hand Management
+114@Line of Sight
+114@Point to Point Movement
+114@Take That
+114@Team-Based Game
+114@Variable Player Powers
+115@Commodity Speculation
+115@Deck, Bag, and Pool Building
+115@Hand Management
+115@Open Drafting
+115@Real-Time
+115@Set Collection
+115@Simulation
+115@Trading
+116@Action Queue
+116@Area Movement
+116@Cooperative Game
+116@Elapsed Real Time Ending
+116@Hand Management
+116@Real-Time
+116@Simultaneous Action Selection
+116@Solo / Solitaire Game
+117@Area Majority / Influence
+117@Campaign / Battle Card Driven
+117@Events
+117@Open Drafting
+117@Point to Point Movement
+117@Secret Unit Deployment
+117@Simulation
+118@Hand Management
+118@Increase Value of Unchosen Resources
+118@Layering
+118@Open Drafting
+118@Set Collection
+118@Solo / Solitaire Game
+119@Auction/Bidding
+119@Hand Management
+119@Player Elimination
+120@Dice Rolling
+120@Die Icon Resolution
+120@King of the Hill
+120@Open Drafting
+120@Player Elimination
+120@Push Your Luck
+120@Re-rolling and Locking
+121@Auction/Bidding
+121@Auction: Sealed Bid
+121@Auction: Turn Order Until Pass
+121@Hand Management
+121@Selection Order Bid
+122@Dice Rolling
+122@Hand Management
+122@Modular Board
+122@Solo / Solitaire Game
+122@Variable Player Powers
+122@Worker Placement
+122@Worker Placement, Different Worker Types
+123@Action Points
+123@Network and Route Building
+123@Pick-up and Deliver
+123@Tile Placement
+124@Campaign / Battle Card Driven
+124@Cooperative Game
+124@Dice Rolling
+124@Narrative Choice / Paragraph
+124@Paper-and-Pencil
+124@Storytelling
+125@Action Points
+125@Area Movement
+125@Betting and Bluffing
+125@Card Play Conflict Resolution
+125@Dice Rolling
+125@End Game Bonuses
+125@Hand Management
+125@Pick-up and Deliver
+125@Take That
+125@Variable Player Powers
+126@Action Retrieval
+126@Contracts
+126@Deck, Bag, and Pool Building
+126@Dice Rolling
+126@Follow
+126@Simultaneous Action Selection
+126@Variable Phase Order
+126@Variable Player Powers
+126@Worker Placement with Dice Workers
+127@Catch the Leader
+127@Hand Management
+127@Modular Board
+127@Programmed Movement
+127@Race
+127@Simulation
+127@Simultaneous Action Selection
+127@Track Movement
+128@Closed Drafting
+128@End Game Bonuses
+128@Hand Management
+128@Set Collection
+128@Simultaneous Action Selection
+128@Variable Set-up
+129@Communication Limits
+129@Cooperative Game
+130@Cooperative Game
+130@Race
+130@Targeted Clues
+130@Team-Based Game
+131@Auction/Bidding
+131@Closed Economy Auction
+131@Increase Value of Unchosen Resources
+131@Push Your Luck
+131@Set Collection
+132@Betting and Bluffing
+132@Dice Rolling
+132@Player Elimination
+133@Events
+133@Hand Management
+133@Open Drafting
+133@Turn Order: Claim Action
+133@Worker Placement
+134@Advantage Token
+134@Campaign / Battle Card Driven
+134@Grid Movement
+134@Hexagon Grid
+134@Simulation
+134@Variable Phase Order
+135@Communication Limits
+135@Cooperative Game
+135@Hand Management
+135@Move Through Deck
+135@Push Your Luck
+135@Variable Player Powers
+136@Bingo
+136@Grid Coverage
+136@Line Drawing
+136@Paper-and-Pencil
+136@Solo / Solitaire Game
+136@Square Grid
+137@Action Points
+137@Area Movement
+137@Dice Rolling
+137@Hand Management
+137@Modular Board
+137@Role Playing
+137@Storytelling
+137@Variable Player Powers
+138@Cooperative Game
+138@Dice Rolling
+138@Events
+138@Finale Ending
+138@Hand Management
+138@Lose a Turn
+138@Point to Point Movement
+138@Role Playing
+138@Solo / Solitaire Game
+138@Stat Check Resolution
+138@Variable Player Powers
+139@Deck, Bag, and Pool Building
+140@Area Majority / Influence
+140@Multiple-Lot Auction
+140@Secret Unit Deployment
+140@Set Collection
+141@Area Majority / Influence
+141@Deck, Bag, and Pool Building
+141@Delayed Purchase
+141@Grid Movement
+141@Hand Management
+141@Hexagon Grid
+141@Scenario / Mission / Campaign Game
+141@Take That
+141@Team-Based Game
+141@Turn Order: Claim Action
+141@Variable Player Powers
+142@Action Points
+142@Increase Value of Unchosen Resources
+142@Market
+142@Open Drafting
+142@Simulation
+143@Action Points
+143@Dice Rolling
+143@Income
+143@Set Collection
+143@Tile Placement
+143@Worker Placement
+144@Area Majority / Influence
+144@Set Collection
+144@Turn Order: Claim Action
+144@Worker Placement
+144@Worker Placement, Different Worker Types
+145@Dice Rolling
+145@Die Icon Resolution
+145@Grid Movement
+145@Line of Sight
+145@Modular Board
+145@Role Playing
+145@Scenario / Mission / Campaign Game
+145@Square Grid
+145@Team-Based Game
+145@Variable Player Powers
+146@Dice Rolling
+146@Events
+146@Real-Time
+146@Relative Movement
+146@Team-Based Game
+146@Tile Placement
+146@Track Movement
+147@Hand Management
+147@Push Your Luck
+148@Deduction
+148@Grid Movement
+148@Hidden Movement
+148@Paper-and-Pencil
+148@Point to Point Movement
+148@Team-Based Game
+148@Variable Player Powers
+149@Bias
+149@End Game Bonuses
+149@Turn Order: Claim Action
+149@Worker Placement
+150@Action Points
+150@Area Majority / Influence
+150@Area Movement
+150@Card Play Conflict Resolution
+150@Closed Drafting
+150@Hand Management
+150@Map Reduction
+150@Memory
+150@Open Drafting
+150@Simultaneous Action Selection
+151@Area Majority / Influence
+151@Grid Movement
+151@Modular Board
+151@Open Drafting
+151@Tile Placement
+151@Variable Phase Order
+151@Variable Player Powers
+151@Worker Placement
+152@Hand Management
+152@Investment
+152@Market
+152@Square Grid
+152@Stock Holding
+152@Tile Placement
+152@Victory Points as a Resource
+153@Worker Placement
+154@Contracts
+154@Dice Rolling
+154@Grid Movement
+154@Modular Board
+154@Network and Route Building
+154@Pick-up and Deliver
+154@Race
+154@Variable Set-up
+154@Worker Placement
+155@Set Collection
+155@Solo / Solitaire Game
+155@Turn Order: Stat-Based
+156@Events
+156@Grid Coverage
+156@Line Drawing
+156@Open Drafting
+156@Paper-and-Pencil
+156@Pattern Building
+156@Solo / Solitaire Game
+157@Cooperative Game
+157@Deck, Bag, and Pool Building
+157@Scenario / Mission / Campaign Game
+157@Variable Player Powers
+158@Hand Management
+158@Take That
+158@Variable Player Powers
+159@Action Queue
+159@Area Majority / Influence
+159@End Game Bonuses
+159@Grid Movement
+159@Hexagon Grid
+159@Map Addition
+159@Open Drafting
+159@Take That
+159@Tile Placement
+159@Turn Order: Claim Action
+159@Variable Player Powers
+159@Worker Placement
+160@Dice Rolling
+160@Open Drafting
+160@Role Playing
+160@Set Collection
+160@Variable Player Powers
+161@Commodity Speculation
+161@Contracts
+161@Dice Rolling
+161@Market
+161@Modular Board
+161@Network and Route Building
+161@Solo / Solitaire Game
+161@Turn Order: Pass Order
+161@Variable Player Powers
+161@Variable Set-up
+162@Deck, Bag, and Pool Building
+162@Dice Rolling
+162@Hand Management
+162@Hexagon Grid
+162@Modular Board
+162@Open Drafting
+162@Simulation
+163@Action Drafting
+163@Alliances
+163@Area Majority / Influence
+163@Area Movement
+163@Auction: Sealed Bid
+163@Betting and Bluffing
+163@Closed Drafting
+163@End Game Bonuses
+163@Follow
+163@Force Commitment
+163@Negotiation
+163@Set Collection
+163@Simultaneous Action Selection
+163@Take That
+163@Variable Phase Order
+163@Variable Player Powers
+163@Variable Set-up
+164@Closed Drafting
+164@Deck Construction
+164@Dice Rolling
+164@Die Icon Resolution
+164@Hand Management
+164@Interrupts
+164@Variable Player Powers
+165@Area Majority / Influence
+165@Deck, Bag, and Pool Building
+165@End Game Bonuses
+165@Hand Management
+165@Modular Board
+165@Rondel
+165@Set Collection
+165@Solo / Solitaire Game
+165@Variable Player Powers
+166@Income
+166@Open Drafting
+166@Set Collection
+167@Deck, Bag, and Pool Building
+167@Hand Management
+167@Open Drafting
+168@Action Drafting
+168@Constrained Bidding
+168@Deduction
+168@End Game Bonuses
+168@Events
+168@Hand Management
+168@Open Drafting
+168@Turn Order: Progressive
+169@Constrained Bidding
+169@Open Drafting
+169@Selection Order Bid
+169@Set Collection
+169@Simultaneous Action Selection
+169@Turn Order: Auction
+169@Victory Points as a Resource
+170@Area Majority / Influence
+170@Enclosure
+170@End Game Bonuses
+170@Hexagon Grid
+170@Income
+170@Three Dimensional Movement
+170@Tile Placement
+170@Track Movement
+170@Variable Set-up
+171@Dice Rolling
+171@Move Through Deck
+171@Player Judge
+171@Roll / Spin and Move
+171@Team-Based Game
+171@Turn Order: Pass Order
+172@Follow
+172@Hand Management
+172@Income
+172@Simultaneous Action Selection
+172@Solo / Solitaire Game
+172@Variable Phase Order
+172@Variable Player Powers
+173@Bribery
+173@Card Play Conflict Resolution
+173@Take That
+173@Voting
+174@Area Majority / Influence
+174@Area Movement
+174@Dice Rolling
+174@Solo / Solitaire Game
+174@Variable Player Powers
+175@Action Points
+175@Area Movement
+175@Deck, Bag, and Pool Building
+175@Dice Rolling
+175@Die Icon Resolution
+175@Hexagon Grid
+175@Role Playing
+175@Roll / Spin and Move
+175@Stat Check Resolution
+175@Variable Player Powers
+175@Variable Set-up
+176@Action Points
+176@Action/Event
+176@Area Majority / Influence
+176@Campaign / Battle Card Driven
+176@Catch the Leader
+176@Take That
+176@Variable Player Powers
+176@Victory Points as a Resource
+177@Action Points
+177@Area Majority / Influence
+177@End Game Bonuses
+177@Modular Board
+177@Open Drafting
+177@Square Grid
+177@Tile Placement
+178@Auction/Bidding
+178@Negotiation
+178@Real-Time
+178@Trading
+178@Variable Player Powers
+179@Hand Management
+179@Income
+179@Loans
+179@Open Drafting
+179@Set Collection
+179@Take That
+179@Turn Order: Progressive
+180@Market
+180@Open Drafting
+180@Solo / Solitaire Game
+180@Worker Placement
+180@Worker Placement, Different Worker Types
+181@Dice Rolling
+181@Die Icon Resolution
+181@End Game Bonuses
+181@Events
+181@Variable Player Powers
+181@Worker Placement
+181@Worker Placement, Different Worker Types
+182@Betting and Bluffing
+182@Dice Rolling
+182@Roll / Spin and Move
+182@Track Movement
+183@Closed Drafting
+183@Cooperative Game
+183@Layering
+183@Solo / Solitaire Game
+183@Tile Placement
+184@Action Points
+184@Cooperative Game
+184@Dice Rolling
+184@Scenario / Mission / Campaign Game
+184@Solo / Solitaire Game
+184@Variable Player Powers
+185@Communication Limits
+185@Cooperative Game
+185@Deduction
+185@Finale Ending
+185@Hand Management
+185@Pattern Recognition
+185@Storytelling
+185@Voting
+186@Contracts
+186@Hand Management
+186@Point to Point Movement
+186@Solo / Solitaire Game
+187@Action Points
+187@Area Majority / Influence
+187@Area Movement
+187@Cooperative Game
+187@Dice Rolling
+187@Push Your Luck
+187@Simulation
+187@Solo / Solitaire Game
+187@Stat Check Resolution
+188@Action Points
+188@Dice Rolling
+188@Grid Movement
+188@Map Addition
+188@Modular Board
+188@Pick-up and Deliver
+188@Roll / Spin and Move
+188@Tile Placement
+188@Variable Player Powers
+189@Deck, Bag, and Pool Building
+189@Dice Rolling
+189@Open Drafting
+190@Area Majority / Influence
+190@Open Drafting
+190@Point to Point Movement
+190@Set Collection
+190@Tech Trees / Tech Tracks
+191@Hidden Roles
+191@Role Playing
+191@Roles with Asymmetric Information
+191@Traitor Game
+191@Variable Player Powers
+191@Voting
+192@Area Movement
+192@Hand Management
+192@Modular Board
+192@Open Drafting
+192@Tile Placement
+192@Worker Placement
+193@Hand Management
+193@Secret Unit Deployment
+194@Action Points
+194@Area Movement
+194@Card Play Conflict Resolution
+194@Hidden Movement
+194@Map Reduction
+194@Modular Board
+194@Player Elimination
+194@Secret Unit Deployment
+194@Team-Based Game
+194@Variable Player Powers
+195@Area Movement
+195@Campaign / Battle Card Driven
+195@Command Cards
+195@Dice Rolling
+195@Hand Management
+195@Line of Sight
+195@Open Drafting
+195@Player Elimination
+195@Scenario / Mission / Campaign Game
+195@Simulation
+195@Team-Based Game
+195@Variable Player Powers
+196@Area Majority / Influence
+196@Campaign / Battle Card Driven
+196@Card Play Conflict Resolution
+196@Dice Rolling
+196@Events
+196@Point to Point Movement
+196@Simulation
+197@Deck, Bag, and Pool Building
+197@Hand Management
+197@Network and Route Building
+198@Action Points
+198@Action Retrieval
+198@Grid Movement
+198@Hand Management
+198@Modular Board
+198@Simultaneous Action Selection
+198@Take That
+198@Variable Player Powers
+199@Chit-Pull System
+199@Cooperative Game
+199@Deck, Bag, and Pool Building
+199@Delayed Purchase
+199@Hand Management
+199@Open Drafting
+199@Solo / Solitaire Game
+199@Variable Phase Order
+199@Variable Player Powers
+199@Variable Set-up
+200@Contracts
+200@End Game Bonuses
+200@Grid Movement
+200@Modular Board
+200@Network and Route Building
+200@Set Collection
+200@Variable Set-up
+200@Worker Placement
+200@Worker Placement, Different Worker Types
+201@Communication Limits
+201@Cooperative Game
+202@Closed Drafting
+202@Hand Management
+202@Set Collection
+202@Simultaneous Action Selection
+202@Variable Player Powers
+203@Worker Placement
+204@End Game Bonuses
+204@Modular Board
+204@Open Drafting
+204@Set Collection
+204@Square Grid
+204@Turn Order: Progressive
+204@Worker Placement
+205@Commodity Speculation
+205@Investment
+205@Simulation
+205@Stock Holding
+205@Variable Phase Order
+205@Worker Placement
+206@Area Majority / Influence
+206@Dice Rolling
+206@Moving Multiple Units
+206@Pick-up and Deliver
+206@Point to Point Movement
+206@Slide/Push
+206@Stock Holding
+206@Worker Placement
+207@Action Points
+207@Cooperative Game
+207@Dice Rolling
+207@Events
+207@Grid Movement
+207@Narrative Choice / Paragraph
+207@Push Your Luck
+207@Role Playing
+207@Scenario / Mission / Campaign Game
+207@Simulation
+207@Solo / Solitaire Game
+207@Storytelling
+207@Variable Player Powers
+207@Worker Placement
+208@Hand Management
+208@Paper-and-Pencil
+208@Solo / Solitaire Game
+208@Tech Trees / Tech Tracks
+209@Simultaneous Action Selection
+209@Variable Player Powers
+210@Action Points
+210@Cooperative Game
+210@Dice Rolling
+210@Grid Movement
+210@Hand Management
+210@Modular Board
+210@Role Playing
+210@Scenario / Mission / Campaign Game
+210@Solo / Solitaire Game
+210@Storytelling
+210@Variable Player Powers
+211@Action Retrieval
+211@Hand Management
+211@Layering
+211@Open Drafting
+211@Set Collection
+211@Solo / Solitaire Game
+211@Worker Placement, Different Worker Types
+212@Area Majority / Influence
+212@Area Movement
+212@Auction: Dutch Priority
+212@Dice Rolling
+212@Hidden Victory Points
+212@Increase Value of Unchosen Resources
+212@Variable Player Powers
+212@Variable Set-up
+212@Victory Points as a Resource
+213@Area Majority / Influence
+213@Dice Rolling
+214@Dice Rolling
+214@Hand Management
+214@Pick-up and Deliver
+214@Solo / Solitaire Game
+214@Variable Player Powers
+215@Grid Movement
+215@Pattern Movement
+215@Square Grid
+215@Static Capture
+216@Action Points
+216@Deck Construction
+216@Hand Management
+216@Race
+216@Secret Unit Deployment
+216@Take That
+216@Variable Player Powers
+217@Action Points
+217@Cooperative Game
+217@Dice Rolling
+217@Grid Movement
+217@Pick-up and Deliver
+217@Simulation
+217@Solo / Solitaire Game
+217@Square Grid
+217@Variable Player Powers
+218@Bias
+218@Bribery
+218@End Game Bonuses
+218@Legacy Game
+218@Storytelling
+218@Traitor Game
+218@Voting
+219@Finale Ending
+219@Hidden Roles
+219@Roles with Asymmetric Information
+219@Simultaneous Action Selection
+219@Team-Based Game
+219@Traitor Game
+219@Variable Player Powers
+219@Voting
+220@Cooperative Game
+220@Dice Rolling
+220@Hand Management
+220@Team-Based Game
+220@Traitor Game
+220@Variable Player Powers
+220@Voting
+221@Communication Limits
+221@Cooperative Game
+221@Hand Management
+221@Memory
+221@Set Collection
+222@Action Queue
+222@Cooperative Game
+222@Grid Movement
+222@Modular Board
+222@Pick-up and Deliver
+222@Race
+222@Scenario / Mission / Campaign Game
+222@Solo / Solitaire Game
+222@Variable Player Powers
+223@Cooperative Game
+223@Deck, Bag, and Pool Building
+223@Dice Rolling
+223@Grid Movement
+223@Modular Board
+223@Role Playing
+223@Solo / Solitaire Game
+223@Storytelling
+223@Variable Player Powers
+224@Area Majority / Influence
+224@Area Movement
+224@Negotiation
+224@Player Elimination
+224@Prisoner's Dilemma
+224@Simultaneous Action Selection
+225@Player Elimination
+225@Real-Time
+226@Auction/Bidding
+226@Auction: Turn Order Until Pass
+226@Hand Management
+226@Network and Route Building
+226@Open Drafting
+226@Set Collection
+227@Action Points
+227@Cooperative Game
+227@Dice Rolling
+227@Die Icon Resolution
+227@Hand Management
+227@Pick-up and Deliver
+227@Point to Point Movement
+227@Push Your Luck
+227@Set Collection
+227@Solo / Solitaire Game
+227@Tech Trees / Tech Tracks
+227@Variable Player Powers
+228@Action Retrieval
+228@Alliances
+228@Area Majority / Influence
+228@Auction: Sealed Bid
+228@Card Play Conflict Resolution
+228@Grid Movement
+228@Hexagon Grid
+228@Kill Steal
+228@Player Elimination
+228@Race
+228@Tech Trees / Tech Tracks
+228@Variable Player Powers
+229@Dice Rolling
+229@Take That
+229@Team-Based Game
+229@Variable Player Powers
+230@Area Movement
+230@Card Play Conflict Resolution
+230@Hand Management
+230@Secret Unit Deployment
+230@Simultaneous Action Selection
+230@Variable Player Powers
+231@Card Play Conflict Resolution
+231@Hand Management
+231@Melding and Splaying
+231@Set Collection
+232@Action Points
+232@Area Movement
+232@Set Collection
+233@Action Points
+233@Campaign / Battle Card Driven
+233@Cooperative Game
+233@Dice Rolling
+233@Move Through Deck
+233@Point to Point Movement
+233@Ratio / Combat Results Table
+233@Solo / Solitaire Game
+234@Auction/Bidding
+234@Pick-up and Deliver
+234@Tech Trees / Tech Tracks
+235@Area Majority / Influence
+235@Area Movement
+235@Hidden Victory Points
+235@Highest-Lowest Scoring
+235@Set Collection
+235@Variable Player Powers
+235@Worker Placement
+236@Dice Rolling
+236@Die Icon Resolution
+236@Modular Board
+236@Pick-up and Deliver
+236@Trading
+236@Variable Player Powers
+237@Hand Management
+237@Kill Steal
+237@Score-and-Reset Game
+237@Simultaneous Action Selection
+238@Action Drafting
+238@Contracts
+238@Dice Rolling
+238@End Game Bonuses
+238@Hand Management
+238@Once-Per-Game Abilities
+238@Set Collection
+238@Variable Set-up
+239@Dice Rolling
+239@Open Drafting
+239@Point to Point Movement
+239@Variable Player Powers
+239@Worker Placement with Dice Workers
+240@Grid Movement
+240@Hand Management
+240@Pattern Movement
+240@Square Grid
+240@Static Capture
+241@Cooperative Game
+241@Deck, Bag, and Pool Building
+241@Delayed Purchase
+241@Open Drafting
+241@Push Your Luck
+241@Race
+242@Cooperative Game
+242@Deck, Bag, and Pool Building
+242@Dice Rolling
+243@Auction/Bidding
+243@Auction: Turn Order Until Pass
+243@Betting and Bluffing
+243@Commodity Speculation
+243@Dice Rolling
+243@Loans
+243@Worker Placement
+244@Deck, Bag, and Pool Building
+244@Dice Rolling
+244@Variable Player Powers
+245@Action Drafting
+245@Area Majority / Influence
+245@Area Movement
+245@Campaign / Battle Card Driven
+245@Closed Drafting
+245@Hand Management
+245@King of the Hill
+245@Map Addition
+245@Modular Board
+245@Variable Phase Order
+245@Variable Set-up
+246@Action Points
+246@Dice Rolling
+246@Narrative Choice / Paragraph
+246@Set Collection
+246@Storytelling
+246@Trading
+246@Turn Order: Progressive
+247@Closed Drafting
+247@Simultaneous Action Selection
+247@Tile Placement
+247@Variable Phase Order
+248@Bingo
+248@Contracts
+248@Paper-and-Pencil
+248@Pattern Building
+248@Solo / Solitaire Game
+249@Action Points
+249@Action Queue
+249@Hand Management
+249@Take That
+249@Variable Player Powers
+250@Action Queue
+250@Dice Rolling
+250@Grid Movement
+250@Hand Management
+250@Simultaneous Action Selection
+251@Auction/Bidding
+251@Catch the Leader
+251@Set Collection
+251@Tile Placement
+251@Turn Order: Progressive
+252@Dice Rolling
+252@Events
+252@Hand Management
+252@Set Collection
+252@Solo / Solitaire Game
+252@Tile Placement
+252@Turn Order: Stat-Based
+252@Worker Placement
+253@Action Retrieval
+253@Contracts
+253@Deck, Bag, and Pool Building
+253@Hand Management
+253@Increase Value of Unchosen Resources
+253@Open Drafting
+253@Set Collection
+254@Area Majority / Influence
+254@Hand Management
+254@Open Drafting
+254@Ownership
+254@Worker Placement
+254@Worker Placement, Different Worker Types
+255@Hand Management
+255@Take That
+255@Variable Player Powers
+256@Area Majority / Influence
+256@Connections
+256@Hand Management
+256@Highest-Lowest Scoring
+256@Income
+256@Set Collection
+256@Square Grid
+256@Tile Placement
+257@Contracts
+257@Dice Rolling
+257@End Game Bonuses
+257@Follow
+257@Hidden Victory Points
+257@Highest-Lowest Scoring
+257@Market
+257@Pick-up and Deliver
+257@Rondel
+257@Set Collection
+257@Worker Placement with Dice Workers
+258@Dice Rolling
+258@Hand Management
+258@Open Drafting
+258@Set Collection
+258@Simultaneous Action Selection
+258@Solo / Solitaire Game
+258@Worker Placement with Dice Workers
+259@Contracts
+259@Income
+259@Loans
+259@Market
+259@Open Drafting
+259@Set Collection
+259@Solo / Solitaire Game
+259@Turn Order: Progressive
+260@Grid Movement
+260@Line Drawing
+260@Modular Board
+260@Network and Route Building
+260@Pick-up and Deliver
+261@Contracts
+261@Dice Rolling
+261@Hand Management
+261@Worker Placement
+261@Worker Placement, Different Worker Types
+262@Area Majority / Influence
+262@Dice Rolling
+262@End Game Bonuses
+262@Hidden Victory Points
+262@Income
+262@Ownership
+262@Set Collection
+262@Solo / Solitaire Game
+262@Turn Order: Progressive
+262@Variable Set-up
+262@Worker Placement with Dice Workers
+262@Worker Placement, Different Worker Types
+263@Action Points
+263@Cooperative Game
+263@Grid Movement
+263@Trading
+263@Variable Player Powers
+264@Area Movement
+264@Hand Management
+264@Mancala
+264@Open Drafting
+264@Set Collection
+265@Dice Rolling
+265@Highest-Lowest Scoring
+265@Paper-and-Pencil
+265@Re-rolling and Locking
+265@Solo / Solitaire Game
+266@Dice Rolling
+266@Worker Placement with Dice Workers
+267@Open Drafting
+267@Tile Placement
+267@Turn Order: Stat-Based
+268@Dice Rolling
+268@End Game Bonuses
+268@Grid Coverage
+268@Set Collection
+268@Solo / Solitaire Game
+268@Team-Based Game
+268@Tile Placement
+268@Worker Placement with Dice Workers
+269@Connections
+269@Race
+269@Score-and-Reset Game
+270@Area Movement
+270@Cooperative Game
+270@Dice Rolling
+270@Hand Management
+270@Map Addition
+270@Modular Board
+270@Role Playing
+270@Scenario / Mission / Campaign Game
+270@Solo / Solitaire Game
+270@Stat Check Resolution
+270@Team-Based Game
+270@Traitor Game
+270@Variable Player Powers
+271@Action Retrieval
+271@Contracts
+271@Deck, Bag, and Pool Building
+271@Follow
+271@Hand Management
+271@Increase Value of Unchosen Resources
+271@Open Drafting
+271@Rondel
+271@Solo / Solitaire Game
+272@Action/Event
+272@Campaign / Battle Card Driven
+272@Connections
+272@Hand Management
+272@Once-Per-Game Abilities
+272@Take That
+272@Tug of War
+273@Action Drafting
+273@Hexagon Grid
+273@Open Drafting
+273@Set Collection
+273@Tile Placement
+274@Connections
+274@Dice Rolling
+274@Network and Route Building
+274@Race
+274@Tile Placement
+274@Worker Placement
+274@Worker Placement with Dice Workers
+275@Area Majority / Influence
+275@Campaign / Battle Card Driven
+275@Communication Limits
+275@Hand Management
+275@Map Reduction
+275@Team-Based Game
+275@Turn Order: Pass Order
+275@Variable Set-up
+276@Open Drafting
+276@Pattern Building
+276@Point to Point Movement
+276@Rondel
+276@Set Collection
+277@Action Points
+277@Campaign / Battle Card Driven
+277@Deck Construction
+277@Hand Management
+277@Relative Movement
+277@Take That
+277@Variable Player Powers
+278@Closed Drafting
+278@Contracts
+278@Delayed Purchase
+278@End Game Bonuses
+278@Hand Management
+278@Hexagon Grid
+278@Income
+278@Movement Points
+278@Moving Multiple Units
+278@Set Collection
+278@Solo / Solitaire Game
+278@Tech Trees / Tech Tracks
+278@Tile Placement
+278@Variable Phase Order
+278@Worker Placement
+279@End Game Bonuses
+279@Layering
+279@Tile Placement
+280@Action Points
+280@Bias
+280@Cooperative Game
+280@Grid Movement
+280@Hand Management
+280@Map Reduction
+280@Modular Board
+280@Pick-up and Deliver
+280@Set Collection
+280@Solo / Solitaire Game
+280@Square Grid
+280@Variable Player Powers
+281@Campaign / Battle Card Driven
+281@Cooperative Game
+281@Deck, Bag, and Pool Building
+281@Modular Board
+281@Role Playing
+281@Scenario / Mission / Campaign Game
+281@Solo / Solitaire Game
+281@Stat Check Resolution
+281@Variable Player Powers
+282@Action Points
+282@Area Majority / Influence
+282@Area Movement
+282@Dice Rolling
+282@Variable Player Powers
+283@Auction/Bidding
+283@Auction: Dutch
+283@Auction: Fixed Placement
+283@Network and Route Building
+283@Tile Placement
+284@Dice Rolling
+284@Hand Management
+285@Area Majority / Influence
+285@Hand Management
+285@Modular Board
+285@Voting
+286@Action Points
+286@Deduction
+286@End Game Bonuses
+286@Solo / Solitaire Game
+286@Time Track
+287@Contracts
+287@Open Drafting
+288@Area Movement
+288@Cooperative Game
+288@Dice Rolling
+288@Scenario / Mission / Campaign Game
+288@Variable Player Powers
+289@Bingo
+289@Contracts
+289@Modular Board
+289@Set Collection
+289@Simultaneous Action Selection
+289@Tile Placement
+289@Turn Order: Progressive
+290@Area Majority / Influence
+290@Contracts
+290@Dice Rolling
+290@Events
+290@Grid Coverage
+290@Hand Management
+290@Hexagon Grid
+290@Income
+290@Map Addition
+290@Once-Per-Game Abilities
+290@Open Drafting
+290@Push Your Luck
+290@Solo / Solitaire Game
+290@Square Grid
+290@Take That
+290@Tech Trees / Tech Tracks
+290@Tile Placement
+290@Variable Player Powers
+290@Variable Set-up
+291@Cooperative Game
+291@Dice Rolling
+291@Grid Movement
+291@Modular Board
+291@Movement Points
+291@Role Playing
+291@Scenario / Mission / Campaign Game
+291@Solo / Solitaire Game
+291@Variable Player Powers
+292@Automatic Resource Growth
+292@Increase Value of Unchosen Resources
+292@Solo / Solitaire Game
+292@Tile Placement
+292@Turn Order: Claim Action
+292@Worker Placement
+293@Action Points
+293@Cooperative Game
+293@Grid Movement
+293@Hand Management
+293@Map Reduction
+293@Modular Board
+293@Set Collection
+293@Solo / Solitaire Game
+293@Variable Player Powers
+294@Action Points
+294@Action Queue
+294@Network and Route Building
+294@Pick-up and Deliver
+294@Turn Order: Claim Action
+294@Turn Order: Progressive
+294@Worker Placement
+295@Action Queue
+295@Auction/Bidding
+295@Hand Management
+295@Set Collection
+295@Solo / Solitaire Game
+295@Worker Placement
+296@Area Majority / Influence
+296@Area Movement
+296@Card Play Conflict Resolution
+296@Hand Management
+296@Open Drafting
+296@Solo / Solitaire Game
+296@Variable Player Powers
+296@Worker Placement
+297@Action Points
+297@Dice Rolling
+297@Grid Movement
+297@Hand Management
+297@Modular Board
+297@Trading
+297@Variable Player Powers
+298@Area Majority / Influence
+298@Command Cards
+298@Cooperative Game
+298@Income
+298@Investment
+298@Secret Unit Deployment
+298@Solo / Solitaire Game
+298@Turn Order: Claim Action
+298@Worker Placement
+298@Worker Placement, Different Worker Types
+299@Cooperative Game
+299@Dice Rolling
+299@Modular Board
+299@Variable Set-up
+299@Worker Placement
+300@Closed Drafting
+300@End Game Bonuses
+300@Hand Management
+300@Set Collection
+300@Simultaneous Action Selection
+300@Solo / Solitaire Game
+300@Variable Player Powers
+301@End Game Bonuses
+301@Hand Management
+301@Income
+301@Network and Route Building
+301@Solo / Solitaire Game
+301@Turn Order: Stat-Based
+301@Worker Placement
+302@Hand Management
+302@Hidden Victory Points
+302@Market
+302@Open Drafting
+302@Score-and-Reset Game
+302@Set Collection
+303@Action Points
+303@Commodity Speculation
+303@Variable Phase Order
+303@Worker Placement
+304@Dice Rolling
+304@Paper-and-Pencil
+304@Player Elimination
+304@Variable Player Powers
+305@Automatic Resource Growth
+305@Grid Coverage
+305@Modular Board
+305@Race
+305@Rondel
+305@Tile Placement
+306@Area Movement
+306@Campaign / Battle Card Driven
+306@Cooperative Game
+306@Deck, Bag, and Pool Building
+306@Dice Rolling
+306@Hand Management
+306@Map Addition
+306@Modular Board
+306@Narrative Choice / Paragraph
+306@Role Playing
+306@Solo / Solitaire Game
+306@Storytelling
+306@Variable Player Powers
+307@Area Majority / Influence
+307@End Game Bonuses
+307@Grid Movement
+307@Hand Management
+307@Hexagon Grid
+307@Modular Board
+307@Network and Route Building
+307@Victory Points as a Resource
+308@Deduction
+308@Grid Movement
+308@Hand Management
+308@Hexagon Grid
+308@Modular Board
+308@Push Your Luck
+309@Hand Management
+309@Trick-taking
+310@Dice Rolling
+310@Grid Coverage
+310@Paper-and-Pencil
+311@Open Drafting
+311@Pattern Building
+311@Set Collection
+312@Bingo
+312@Dice Rolling
+312@Paper-and-Pencil
+312@Simultaneous Action Selection
+312@Solo / Solitaire Game
+313@Cooperative Game
+313@Deck, Bag, and Pool Building
+313@Dice Rolling
+313@Melding and Splaying
+313@Move Through Deck
+313@Solo / Solitaire Game
+313@Stat Check Resolution
+313@Variable Player Powers
+314@Cooperative Game
+314@Dice Rolling
+314@Hand Management
+314@Point to Point Movement
+314@Push Your Luck
+314@Re-rolling and Locking
+314@Set Collection
+314@Solo / Solitaire Game
+314@Variable Player Powers
+315@Area Movement
+315@Hand Management
+315@Hexagon Grid
+315@Simulation
+315@Solo / Solitaire Game
+316@Action Points
+316@Action Queue
+316@Catch the Leader
+316@Dice Rolling
+316@Simultaneous Action Selection
+316@Tile Placement
+316@Turn Order: Stat-Based
+316@Worker Placement
+316@Worker Placement, Different Worker Types
+317@Action Queue
+317@Area Majority / Influence
+317@Area Movement
+317@Auction/Bidding
+317@Cube Tower
+317@Simultaneous Action Selection
+317@Variable Phase Order
+318@Deck, Bag, and Pool Building
+318@Delayed Purchase
+318@Hand Management
+318@Take That
+319@Deduction
+319@Hexagon Grid
+319@Modular Board
+319@Pattern Recognition
+320@Auction/Bidding
+320@Stacking and Balancing
+321@Deck, Bag, and Pool Building
+321@Dice Rolling
+321@Open Drafting
+321@Set Collection
+321@Simulation
+321@Tug of War
+322@Area Majority / Influence
+322@Auction/Bidding
+322@Auction: Once Around
+322@Trick-taking
+323@Area Majority / Influence
+323@Contracts
+323@Set Collection
+323@Turn Order: Claim Action
+323@Worker Placement
+323@Worker Placement, Different Worker Types
+324@Cooperative Game
+324@Dice Rolling
+324@Modular Board
+324@Scenario / Mission / Campaign Game
+324@Turn Order: Progressive
+324@Variable Player Powers
+325@Dice Rolling
+325@Push Your Luck
+325@Race
+325@Roll / Spin and Move
+325@Track Movement
+326@Communication Limits
+326@Deduction
+326@Team-Based Game
+327@Area Majority / Influence
+327@Area Movement
+327@Auction/Bidding
+327@Auction: Fixed Placement
+327@Dice Rolling
+327@Open Drafting
+327@Set Collection
+327@Variable Phase Order
+328@Area Majority / Influence
+328@Hand Management
+328@Tug of War
+328@Variable Player Powers
+328@Worker Placement
+329@Bias
+329@End Game Bonuses
+329@Open Drafting
+329@Worker Placement
+330@Action/Event
+330@Cooperative Game
+330@Memory
+330@Scenario / Mission / Campaign Game
+330@Simultaneous Action Selection
+330@Variable Set-up
+331@Grid Movement
+331@Map Addition
+331@Open Drafting
+331@Pattern Building
+331@Square Grid
+331@Tile Placement
+332@Cooperative Game
+332@Dice Rolling
+332@Line of Sight
+332@Modular Board
+332@Square Grid
+332@Variable Player Powers
+333@Open Drafting
+333@Set Collection
+333@Take That
+333@Turn Order: Claim Action
+333@Variable Set-up
+334@Area Majority / Influence
+334@Area Movement
+334@Deck, Bag, and Pool Building
+334@Delayed Purchase
+334@Hand Management
+334@Open Drafting
+334@Point to Point Movement
+335@Dice Rolling
+335@Narrative Choice / Paragraph
+335@Network and Route Building
+335@Open Drafting
+335@Scenario / Mission / Campaign Game
+335@Set Collection
+335@Storytelling
+335@Variable Player Powers
+335@Worker Placement
+336@Area Majority / Influence
+336@Closed Drafting
+336@Hand Management
+337@Action/Event
+337@Advantage Token
+337@Area Majority / Influence
+337@Campaign / Battle Card Driven
+337@End Game Bonuses
+337@Hand Management
+337@Take That
+337@Tug of War
+338@Hand Management
+338@Race
+338@Worker Placement
+339@Hand Management
+339@Pattern Building
+339@Set Collection
+339@Tile Placement
+340@Area Majority / Influence
+340@Closed Drafting
+340@End Game Bonuses
+340@Grid Coverage
+340@Square Grid
+341@Action Points
+341@Connections
+341@Hand Management
+341@Network and Route Building
+341@Take That
+341@Variable Player Powers
+342@Dice Rolling
+342@Hand Management
+342@Take That
+343@Pattern Recognition
+343@Speed Matching
+344@End Game Bonuses
+344@Hand Management
+344@Race
+344@Tech Trees / Tech Tracks
+344@Variable Set-up
+345@Auction/Bidding
+345@Auction: Sealed Bid
+345@Commodity Speculation
+345@Pick-up and Deliver
+345@Set Collection
+346@Action Queue
+346@Hand Management
+346@Loans
+346@Open Drafting
+346@Take That
+347@Action Queue
+347@Area Majority / Influence
+347@Layering
+347@Network and Route Building
+347@Simultaneous Action Selection
+347@Solo / Solitaire Game
+347@Variable Set-up
+348@Hand Management
+348@Player Elimination
+348@Score-and-Reset Game
+349@Cooperative Game
+349@Deck, Bag, and Pool Building
+349@Hand Management
+349@Solo / Solitaire Game
+350@Action Points
+350@Hand Management
+350@Push Your Luck
+350@Secret Unit Deployment
+350@Simulation
+350@Simultaneous Action Selection
+350@Take That
+351@Cooperative Game
+351@Deck, Bag, and Pool Building
+352@Grid Coverage
+352@Network and Route Building
+352@Pick-up and Deliver
+352@Team-Based Game
+352@Tile Placement
+353@Area Majority / Influence
+353@Open Drafting
+353@Point to Point Movement
+354@Action Drafting
+354@Income
+354@Open Drafting
+354@Pattern Building
+354@Turn Order: Stat-Based
+354@Variable Set-up
+355@Betting and Bluffing
+355@Dice Rolling
+355@Worker Placement
+356@Action Points
+356@Area Movement
+356@Cooperative Game
+356@Team-Based Game
+356@Traitor Game
+357@Cooperative Game
+357@Scenario / Mission / Campaign Game
+357@Solo / Solitaire Game
+357@Storytelling
+358@Dice Rolling
+358@Minimap Resolution
+358@Player Elimination
+358@Roll / Spin and Move
+358@Secret Unit Deployment
+358@Set Collection
+359@End Game Bonuses
+359@Follow
+359@Hand Management
+359@Set Collection
+359@Sudden Death Ending
+359@Variable Phase Order
+360@Hand Management
+360@Open Drafting
+360@Variable Phase Order
+360@Variable Player Powers
+360@Worker Placement
+361@Action Retrieval
+361@Deck, Bag, and Pool Building
+361@Delayed Purchase
+361@Hand Management
+361@Open Drafting
+361@Race
+361@Resource to Move
+361@Solo / Solitaire Game
+361@Track Movement
+361@Worker Placement
+362@Hand Management
+362@Network and Route Building
+362@Point to Point Movement
+363@Area Majority / Influence
+363@Hand Management
+363@Hexagon Grid
+363@Once-Per-Game Abilities
+363@Set Collection
+363@Tile Placement
+364@End Game Bonuses
+364@Follow
+364@Grid Coverage
+364@Pattern Building
+364@Player Elimination
+364@Solo / Solitaire Game
+364@Turn Order: Progressive
+364@Variable Phase Order
+364@Variable Player Powers
+364@Variable Set-up
+365@Area Majority / Influence
+365@Grid Coverage
+365@Square Grid
+365@Tile Placement
+366@Hand Management
+367@Area Movement
+367@Contracts
+367@End Game Bonuses
+367@Open Drafting
+367@Tile Placement
+367@Turn Order: Progressive
+367@Variable Set-up
+368@Network and Route Building
+369@Action Points
+369@Connections
+369@End Game Bonuses
+369@Hexagon Grid
+369@Income
+369@Loans
+369@Network and Route Building
+369@Open Drafting
+369@Ownership
+369@Pick-up and Deliver
+369@Tile Placement
+369@Turn Order: Auction
+370@Dice Rolling
+370@Set Collection
+370@Tile Placement
+371@Action Points
+371@Card Play Conflict Resolution
+371@Force Commitment
+371@Hand Management
+371@Point to Point Movement
+371@Secret Unit Deployment
+371@Turn Order: Auction
+371@Variable Set-up
+372@Action Drafting
+372@Commodity Speculation
+372@Contracts
+372@End Game Bonuses
+372@Market
+372@Network and Route Building
+372@Tile Placement
+372@Turn Order: Claim Action
+373@Area Majority / Influence
+373@Hand Management
+373@Set Collection
+374@Auction/Bidding
+374@End Game Bonuses
+374@Grid Coverage
+374@Tile Placement
+374@Victory Points as a Resource
+375@Cooperative Game
+375@Deck, Bag, and Pool Building
+375@Hand Management
+375@Memory
+375@Move Through Deck
+375@Simultaneous Action Selection
+375@Solo / Solitaire Game
+376@Campaign / Battle Card Driven
+376@Cooperative Game
+376@Dice Rolling
+376@Grid Movement
+376@Role Playing
+376@Scenario / Mission / Campaign Game
+376@Solo / Solitaire Game
+377@Communication Limits
+377@Deduction
+377@Grid Movement
+377@Hand Management
+377@Memory
+377@Team-Based Game
+378@Commodity Speculation
+378@Ownership
+378@Stock Holding
+378@Tile Placement
+378@Variable Player Powers
+378@Worker Placement
+379@Dice Rolling
+379@Income
+379@Movement Points
+379@Tile Placement
+379@Worker Placement
+380@Contracts
+380@Dice Rolling
+380@Push Your Luck
+380@Re-rolling and Locking
+380@Set Collection
+381@Dice Rolling
+381@Grid Movement
+381@Hexagon Grid
+381@Movement Points
+381@Paper-and-Pencil
+381@Ratio / Combat Results Table
+381@Scenario / Mission / Campaign Game
+381@Simulation
+381@Variable Player Powers
+381@Variable Set-up
+382@Action Points
+382@Pick-up and Deliver
+382@Set Collection
+383@Action Points
+383@Dice Rolling
+383@Hand Management
+383@Network and Route Building
+383@Open Drafting
+383@Pick-up and Deliver
+383@Set Collection
+384@Area Majority / Influence
+384@Campaign / Battle Card Driven
+384@Command Cards
+384@Dice Rolling
+384@Die Icon Resolution
+384@Grid Movement
+384@Hand Management
+384@Hexagon Grid
+384@Line of Sight
+384@Modular Board
+384@Movement Points
+384@Scenario / Mission / Campaign Game
+384@Simulation
+384@Team-Based Game
+384@Variable Set-up
+385@Closed Drafting
+385@End Game Bonuses
+385@Hand Management
+385@Tile Placement
+385@Worker Placement
+386@Area Majority / Influence
+386@Dice Rolling
+386@Hexagon Grid
+386@Map Addition
+386@Modular Board
+386@Variable Phase Order
+387@Action Points
+387@Cooperative Game
+387@Hand Management
+387@Network and Route Building
+387@Point to Point Movement
+387@Set Collection
+387@Solo / Solitaire Game
+387@Trading
+387@Variable Player Powers
+388@Communication Limits
+388@Cooperative Game
+388@Elapsed Real Time Ending
+388@Grid Movement
+388@Map Addition
+388@Modular Board
+388@Real-Time
+388@Solo / Solitaire Game
+388@Variable Player Powers
+389@Area Majority / Influence
+389@Connections
+389@Deck, Bag, and Pool Building
+389@Delayed Purchase
+389@Variable Set-up
+389@Zone of Control
+390@Paper-and-Pencil
+391@Contracts
+391@Layering
+391@Open Drafting
+391@Set Collection
+391@Tile Placement
+392@Area Movement
+392@Dice Rolling
+392@Simulation
+392@Stat Check Resolution
+392@Voting
+393@Dice Rolling
+393@Events
+393@Push Your Luck
+393@Re-rolling and Locking
+393@Turn Order: Stat-Based
+393@Variable Set-up
+395@Closed Drafting
+395@Dice Rolling
+395@Modular Board
+395@Race
+395@Resource to Move
+395@Simultaneous Action Selection
+395@Track Movement
+395@Variable Player Powers
+395@Worker Placement with Dice Workers
+396@Area Movement
+396@Cooperative Game
+396@Dice Rolling
+396@Multiple Maps
+396@Role Playing
+396@Scenario / Mission / Campaign Game
+396@Storytelling
+396@Variable Player Powers
+397@Dice Rolling
+397@Open Drafting
+397@Set Collection
+398@Deduction
+398@Hand Management
+398@Player Elimination
+398@Score-and-Reset Game
+398@Take That
+399@Race
+399@Simultaneous Action Selection
+399@Storytelling
+399@Targeted Clues
+399@Voting
+400@Deck, Bag, and Pool Building
+400@Hand Management
+400@Push Your Luck
+400@Solo / Solitaire Game
+401@Layering
+401@Open Drafting
+401@Set Collection
+401@Sudden Death Ending
+401@Tug of War
+401@Variable Player Powers
+402@Contracts
+402@Dice Rolling
+402@End Game Bonuses
+402@Hand Management
+402@Once-Per-Game Abilities
+402@Open Drafting
+402@Set Collection
+402@Solo / Solitaire Game
+402@Turn Order: Progressive
+403@Action Points
+403@Cooperative Game
+403@Hand Management
+403@Point to Point Movement
+403@Set Collection
+403@Trading
+403@Variable Player Powers
+404@Communication Limits
+404@Cooperative Game
+404@Dice Rolling
+404@Hand Management
+404@Player Elimination
+404@Semi-Cooperative Game
+404@Set Collection
+404@Team-Based Game
+404@Traitor Game
+404@Variable Player Powers
+405@Closed Drafting
+405@Contracts
+405@Enclosure
+405@End Game Bonuses
+405@Hand Management
+405@Hexagon Grid
+405@Income
+405@Set Collection
+405@Solo / Solitaire Game
+405@Tags
+405@Take That
+405@Tech Trees / Tech Tracks
+405@Tile Placement
+405@Turn Order: Progressive
+405@Variable Player Powers
+405@Variable Set-up
+405@Victory Points as a Resource
+406@Action Points
+406@Cooperative Game
+406@Hand Management
+406@Legacy Game
+406@Point to Point Movement
+406@Set Collection
+406@Trading
+406@Variable Player Powers
+407@Action/Event
+407@Advantage Token
+407@Area Majority / Influence
+407@Campaign / Battle Card Driven
+407@Dice Rolling
+407@Events
+407@Hand Management
+407@Simulation
+407@Simultaneous Action Selection
+407@Sudden Death Ending
+407@Tug of War
+408@Alliances
+408@Area Majority / Influence
+408@Area Movement
+408@Auction/Bidding
+408@Auction: Sealed Bid
+408@Card Play Conflict Resolution
+408@Hand Management
+408@Negotiation
+408@Order Counters
+408@Player Elimination
+408@Prisoner's Dilemma
+408@Simultaneous Action Selection
+408@Variable Player Powers
+409@Action Points
+409@Auction/Bidding
+409@Auction: Dutch
+409@Events
+409@Income
+409@Open Drafting
+409@Take That
+410@Contracts
+410@End Game Bonuses
+410@Hexagon Grid
+410@Income
+410@Modular Board
+410@Network and Route Building
+410@Solo / Solitaire Game
+410@Tech Trees / Tech Tracks
+410@Turn Order: Pass Order
+410@Variable Player Powers
+410@Variable Set-up
+410@Victory Points as a Resource

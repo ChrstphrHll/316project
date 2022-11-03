@@ -6,7 +6,7 @@ SELECT pg_catalog.setval('public.users_uid_seq',
                          false);
 
 
-\COPY Games FROM 'Games.csv' WITH DELIMITER ',' NULL '' CSV;
+\COPY Games FROM 'Games.csv' WITH DELIMITER '@' NULL '' CSV;
 SELECT pg_catalog.setval('public.games_gid_seq',
                          (SELECT MAX(gid)+1 FROM Games),
                          false);
@@ -25,9 +25,9 @@ SELECT pg_catalog.setval('public.collections_cid_seq',
 
 \COPY ReviewOf FROM 'Reviews.csv' WITH DELIMITER ',' NULL '' CSV;
 
-\COPY Mechanics FROM 'Mechanics.csv' WITH DELIMITER ',' NULL '' CSV;
+\COPY Mechanics FROM 'Mechanics.csv' WITH DELIMITER '@' NULL '' CSV;
 
-\COPY Implements FROM 'Implements.csv' WITH DELIMITER ',' NULL '' CSV;
+\COPY Implements FROM 'Implements.csv' WITH DELIMITER '@' NULL '' CSV;
 
 \COPY Copies FROM 'Copies.csv' WITH DELIMITER ',' NULL '' CSV;
 SELECT pg_catalog.setval('public.copies_cpid_seq',
