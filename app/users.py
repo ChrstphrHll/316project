@@ -7,6 +7,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from .models.user import User
 from .models.recommendation import Recommendation
+from .models.mechanic import Mechanic
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
@@ -80,5 +81,13 @@ def likesgame(uid):
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
-    recs = Recommendation.get(uid)
-    return render_template('recommended.html', recommended=recs)
+    liked = Recommendation.get_base(uid)
+    recs = []
+    mechs = []
+    for like in liked:
+        liked_gid = like.gid
+        mech = Mechanic.get(liked_gid)
+        rec = Recommendation.get(uid, liked_gid)
+        recs.append(rec)
+        mechs.append(mech)
+    return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)

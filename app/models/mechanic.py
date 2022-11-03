@@ -1,15 +1,32 @@
+from flask import current_app as app
+
 class Mechanic:
     def __init__(self, name, description):
         self.name = name
         self.description = description
 
     @staticmethod
-    def get():
+    def get(gid):
+        rows = app.db.execute('''
+            SELECT M.mech_name, M.description
+            FROM Mechanics as M, Implements as I
+            WHERE M.mech_name = I.mech_name AND I.gid =:gid
+            ''', 
+            gid=gid)
+
+        return [Mechanic(*row) for row in rows]
+
+    @staticmethod
+    def get_all():
         rows = app.db.execute('''
             SELECT *
-            FROM Mechanics''',)
+            FROM Mechanics as M
+            ORDER BY M.mech_name
+            ''', )
 
-        return Mechanic(*(rows[0])) if rows is not None else None
+    #forms are part of html
+
+        return [Mechanic(*row) for row in rows]
 
     @staticmethod
     def get_desc(name):
