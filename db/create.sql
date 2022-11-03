@@ -53,7 +53,7 @@ CREATE TABLE DesignedBy (
 );
 
 CREATE TABLE Implements (
-    mech_name INT NOT NULL REFERENCES Mechanics(mech_name),
+    mech_name VARCHAR NOT NULL REFERENCES Mechanics(mech_name),
     gid INT NOT NULL REFERENCES Games(gid)    
 );
 
