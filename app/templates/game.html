@@ -3,9 +3,32 @@
 {% block content %}
 
 <br><br>
-<h2>{{game.name}}</h2>
-<img src="{{game.image_url}}" />
-<a href="/games" role="button" class="btn btn-danger">Back</a>
+<div class="container">
+  <div class="row bg-light">
+    <div class="col-9">
+      <h1>{{game.name}}</h1>
+      <p>{{game.description}}</p>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <img class="card-img-top" src="{{game.image_url}}" alt="Cover Art for {{game.name}}"/>
+        <div class="card-body">
+          <p>Players: {{game.min_players}}-{{game.max_players}}</p>
+          <p>Length: {{game.length}} minutes</p>
+          <p>Complexity: {{game.complexity}}/5</p>
+          <div class="btn-group mx-auto" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary">Left</button>
+            <button type="button" class="btn btn-primary">Middle</button>
+            <button type="button" class="btn btn-primary">Right</button>
+          </div>
+          <a href="/games" role="button" class="btn btn-danger">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 
