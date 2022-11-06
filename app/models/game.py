@@ -31,3 +31,12 @@ WHERE Games.gid = :gid
 '''
         game_raw = app.db.execute(query, gid=gid)
         return Game(*game_raw[0]) if game_raw else null
+
+    @staticmethod
+    def get_random():
+        game_raw = app.db.execute('''
+SELECT * FROM Games
+ORDER BY RANDOM()
+LIMIT 1
+''')
+        return Game(*game_raw[0]) if game_raw else null
