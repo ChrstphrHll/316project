@@ -28,5 +28,7 @@ def games():
 @bp.route('/<gid>')
 def game(gid):
     game = Game.get(gid)
-    return render_template("game.html", game=game)
+    mechanics = Game.get_mechanics(gid)
+    print(mechanics)
+    return render_template("game.html", game=game, mechanics=mechanics)
 
