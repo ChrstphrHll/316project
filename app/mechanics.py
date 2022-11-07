@@ -1,23 +1,24 @@
-from flask import render_template, redirect, url_for, flash, request
-from werkzeug.urls import url_parse
-
+from flask import render_template, redirect, url_for, flash, request, Blueprint
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-
 from .models.mechanic import Mechanic
-from flask import current_app as app
+bp = Blueprint('mechanic', __name__, url_prefix="/mechanics")
 
-mech = Blueprint('mechanics', __name__, url_prefix='/mechanics')
-app.register(mech)
+class SearchForm(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])
 
 @bp.route('/')
 def mechanics():
-    mechs = Mechanic.get()
-    return render_template('mechanics.html', mechanics=mechs)
+    form = SearchForm()
+    mechs = Mechanic.get_all()
+    if form.validate_on_submit:
+        return redirect(url_for('mechanics.mech_search', mech=mechs))
 
-@bp.route('/<name>/')
-def games_with(name):
-    mech_games = Mechanic.get_games(name)
-    return render_template('game_with_mech.html', games=mech_games)
-
+@bp.route('/<mech>')
+def mech_search():
+    form = SearchForm()
+    mechs = Mechanic.get_all()
+    if form.validate_on_submit:
+        return redirect(url_for('login'))
+    return render_template('mechanics.html', mechs=mechs)

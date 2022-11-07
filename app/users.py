@@ -9,6 +9,7 @@ from app.models.copy import Copy
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
+
 from .models.collection import Collection
 from .models.library import Library
 
