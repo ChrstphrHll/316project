@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from app.models.copy import Copy
@@ -96,40 +96,53 @@ def recommended(uid):
         mechs.append(mech)
     return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
 
-class CollectionSearch(FlaskForm):
+class Search(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
 
-@bp.route('/users/<uid>/collections')
+class Create(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Create')
+
+@bp.route('/users/<uid>/collections', methods=['GET', 'POST'])
 def collections(uid):
     collections = Collection.get_user_collections(uid)
-    form = CollectionSearch()
-
+    search_form = Search()
+    
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
 
-    return render_template('collections.html', collections=collections, form=form)
+    create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
-class LibrarySearch(FlaskForm):
-    search = StringField('Search', validators=[DataRequired()])
+    if create_form and create_form.validate_on_submit():
+        collection = Collection.create(create_form.title.data, create_form.description.data, current_user.uid)
+        if collection:
+            return redirect(url_for('collection.collection', cid=collection.cid))
 
-@bp.route('/users/<uid>/libraries')
+    return render_template('collections.html', collections=collections, form=search_form, create=create_form)
+
+@bp.route('/users/<uid>/libraries', methods=['GET', 'POST'])
 def libraries(uid):
     libraries = Library.get_user_libraries(uid)
-    form = CollectionSearch()
+    form = Search()
 
     if "search" in request.args:
         libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
 
-    return render_template('libraries.html', libraries=libraries, form=form)
+    create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
+    if create_form and create_form.validate_on_submit():
+        print("here")
+        library = Library.create(create_form.title.data, create_form.description.data, current_user.uid)
+        if library:
+            return redirect(url_for('library.library', lid=library.lid))
 
-class BorrowedSearch(FlaskForm):
-    search = StringField('Search', validators=[DataRequired()])
+    return render_template('libraries.html', libraries=libraries, form=form, create=create_form)
 
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):
     borrowed_copies = Copy.user_borrowed_copies(uid)
-    form = BorrowedSearch()
+    form = Search()
 
     if "search" in request.args:
         borrowed_copies = filter(lambda x : request.args.get("search").lower() in x.title.lower(), borrowed_copies)
