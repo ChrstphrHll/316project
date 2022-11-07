@@ -8,8 +8,9 @@
             <div class="mb-2" style="text-align: center;">
                 <b class="mb-2" style="font-size: 20px;">{{ user.name }}</b>
             </div>
+            {% if user.image_url %}
             <img class="mb-2" src="{{ user.image_url }}" style="object-fit: contain; width: 100%;"></img>
-
+            {% endif %}
             
             <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.profile', uid=user.uid) }}">Profile Home</a>
             <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.liked', uid=user.uid) }}">Liked</a>
