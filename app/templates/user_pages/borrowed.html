@@ -1,25 +1,42 @@
-{% extends "user_pages/base_user.html" %}
-
-{% block user_content %}
-
-<table class='table table-hover table-primary table-striped table-bordered container'>
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Game</th>
-      <th scope="col">Comment</th>
-      <th scope="col">Link</th>
-      <th scope="col">Return</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for copy in copies%}
+{% extends "user_pages/base_user.html" %} {% block user_content %}
+<h2>Search Your Copies</h2>
+<div class="d-flex p-2 border justify-content-end align-items-center">
+  <form>
+    {{ form.search }}
+    <button type="submit" class="btn btn-primary mx-1">Search</button>
+  </form>
+</div>
+  <table
+    class="table table-hover table-primary table-striped table-bordered container"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Game</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Link</th>
+        <th scope="col">Return</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for copy in copies%}
       <tr>
         <th scope="row">{{ copy.game.name }}</th>
-        <td> {{copy.comment}}</td>
-        <td><a href="{{ url_for('game.game', gid=copy.game.gid) }}" class="badge bg-primary text-light" role="button">GO</a></td>
-        <td><a href="#" class="badge bg-primary text-light" role="button">RETURN</a></td>
+        <td>{{copy.comment}}</td>
+        <td>
+          <a
+            href="{{ url_for('game.game', gid=copy.game.gid) }}"
+            class="badge bg-primary text-light"
+            role="button"
+            >GO</a
+          >
+        </td>
+        <td>
+          <a href="#" class="badge bg-primary text-light" role="button"
+            >RETURN</a
+          >
+        </td>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
