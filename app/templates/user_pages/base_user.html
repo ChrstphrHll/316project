@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col" style="max-width: 200px;">
+        <div class="p-2" style="background-color: lightblue; width: 180px; border-radius: 5px;">
+            <div class="mb-2" style="text-align: center;">
+                <b class="mb-2" style="font-size: 20px;">{{ user.name }}</b>
+            </div>
+            {% if user.image_url %}
+            <img class="mb-2" src="{{ user.image_url }}" style="object-fit: contain; width: 100%;"></img>
+            {% endif %}
+            
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.profile', uid=user.uid) }}">Profile Home</a>
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.liked', uid=user.uid) }}">Liked</a>
+
+            {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.recommended', uid=user.uid) }}">My Recommended</a>
+            {% endif %}
+
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.collections', uid=user.uid) }}">Collections</a>
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.libraries', uid=user.uid) }}">Libraries</a>
+
+            {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.borrowed', uid=user.uid) }}">Borrowed Games</a>
+            <a class="btn btn-primary mb-2 btn-block" href="{{ url_for('users.reviews', uid=user.uid) }}">Reviews Left</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col flex-grow-1">
+        {% block user_content %}{% endblock %}
+    </div>
+</div>
+
+{% endblock %}

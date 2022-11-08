@@ -1,8 +1,7 @@
-{% extends "base.html" %}
+{% extends "user_pages/base_user.html" %}
 
-{% block content %}
+{% block user_content %}
 
-<br><br>
 <h2>Your recent reviews:</h2>
 <table class='table table-hover table-bordered container'>
   <thead class="thead-dark">
@@ -26,6 +25,5 @@
     {% endfor %}
   </tbody>
 </table>
-<p><a href="{{ url_for('users.login') }}">Log in</a> to see your review history!</p>
 
 {% endblock %}

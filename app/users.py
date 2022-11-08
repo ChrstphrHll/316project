@@ -12,6 +12,8 @@ from .models.mechanic import Mechanic
 
 from .models.collection import Collection
 from .models.library import Library
+from .models.review import Review
+
 
 from flask import Blueprint
 bp = Blueprint('users', __name__)
@@ -76,12 +78,17 @@ def logout():
     logout_user()
     return redirect(url_for('index.index'))
 
+@bp.route('/users/<uid>')
+def profile(uid):
+    print(type(uid))
+    return render_template("user_pages/user_profile.html", user=User.get(uid))
+
 
 @bp.route('/users/<uid>/liked')
-def likesgame(uid):
+def liked(uid):
     # return all games this user likes
     liked_games = User.get_liked_games(uid)
-    return render_template("likesgame.html", liked_games=liked_games)
+    return render_template("user_pages/liked.html", user=User.get(uid), liked_games=liked_games)
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
@@ -94,7 +101,7 @@ def recommended(uid):
         rec = Recommendation.get(uid, liked_gid)
         recs.append(rec)
         mechs.append(mech)
-    return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
+    return render_template('user_pages/recommended.html', user=User.get(uid), recommended=recs, liked=liked, mechs=mechs)
 
 class Search(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
@@ -119,7 +126,7 @@ def collections(uid):
         if collection:
             return redirect(url_for('collection.collection', cid=collection.cid))
 
-    return render_template('collections.html', collections=collections, form=search_form, create=create_form)
+    return render_template('user_pages/collections.html', user=User.get(uid), collections=collections, form=search_form, create=create_form)
 
 @bp.route('/users/<uid>/libraries', methods=['GET', 'POST'])
 def libraries(uid):
@@ -137,7 +144,7 @@ def libraries(uid):
         if library:
             return redirect(url_for('library.library', lid=library.lid))
 
-    return render_template('libraries.html', libraries=libraries, form=form, create=create_form)
+    return render_template('user_pages/libraries.html', user=User.get(uid), libraries=libraries, form=form, create=create_form)
 
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):
@@ -147,4 +154,9 @@ def borrowed(uid):
     if "search" in request.args:
         borrowed_copies = filter(lambda x : request.args.get("search").lower() in x.title.lower(), borrowed_copies)
 
-    return render_template('borrowed.html', copies=borrowed_copies, form=form)
+    return render_template('user_pages/borrowed.html', user=User.get(uid), copies=borrowed_copies, form=form)
+
+@bp.route('/users/<uid>/reviews', methods=['GET', 'POST'])
+def reviews(uid):
+    reviews = Review.get_top_5(int(uid))
+    return render_template('user_pages/reviews.html', user=User.get(uid), review_history=reviews)

@@ -1,0 +1,9 @@
+{% extends "user_pages/base_user.html" %}
+
+{% block user_content %}
+
+<p>{{ user.about }}</p>
+<p>Current uid: {{current_user.uid}}</p>
+<p>Page's uid: {{user.uid}}</p>
+
+{% endblock %}
