@@ -20,7 +20,8 @@ WHERE L.uid = :uid AND g.gid = L.gid
         SELECT M.*
         FROM LikesGame as L, Implements as I, Mechanics as M
         WHERE L.uid =:uid AND L.gid = I.gid AND I.mech_name = M.mech_name
-        
+        GROUP BY M.mech_name, M.description
+        ORDER BY COUNT(*) DESC
         ''', uid = uid)
         return [Mechanic(*row) for row in rows]
 
@@ -29,7 +30,7 @@ WHERE L.uid = :uid AND g.gid = L.gid
         rows = app.db.execute('''
         SELECT G.*
         FROM Implements as I, Games as G
-        WHERE I.mech_name =:mech_name AND I.gid = G.gid
+        WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity <= 2
         
         ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows]
