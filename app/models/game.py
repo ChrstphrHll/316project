@@ -10,7 +10,7 @@ class Game:
         self.description = html.unescape(description)
         self.image_url = image_url
         self.thumbnail_url = thumbnail_url
-        self.complexity = complexity
+        self.complexity = round(complexity,2)
         self.length = length
         self.min_players = min_players
         self.max_players = max_players
