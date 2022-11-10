@@ -2,7 +2,10 @@
 
 {% block user_content %}
 
+{% if user.about %}
 <p>{{ user.about }}</p>
+{% endif %}
+
 <p>Current uid: {{current_user.uid}}</p>
 <p>Page's uid: {{user.uid}}</p>
 

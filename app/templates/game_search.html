@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h2>Search Games:</h2>
 <form>
@@ -11,7 +9,9 @@
   </div>
 </form>
 
-<table class='table table-hover table-primary table-striped table-bordered container'>
+<table
+  class="table table-hover table-primary table-striped table-bordered container"
+>
   <thead class="thead-dark">
     <tr>
       <th scope="col">Thumbnail</th>
@@ -24,18 +24,29 @@
   </thead>
   <tbody>
     {% for game in games%}
-      <tr>
-        <td><img src="{{game.thumbnail_url}}" alt="Cover art for {{game.name}}"/></td>
-        <th scope="row">{{game.name}}</th>
-        <td>{{game.complexity}}</td>
-        <td>{{game.min_players}}-{{game.max_players}}</td>
-        <td>{{game.length}} minutes</td>
-        <td><a href="/games/{{game.gid}}" class="badge bg-primary text-light" role="button">GO</a></td>
-
-      </tr>
+    <tr>
+      <td>
+        <img
+          src="{{game.thumbnail_url}}"
+          style="max-width: 100px"
+          alt="Cover art for {{game.name}}"
+        />
+      </td>
+      <th scope="row">{{game.name}}</th>
+      <td>{{game.complexity}}</td>
+      <td>{{game.min_players}}-{{game.max_players}}</td>
+      <td>{{game.length}} minutes</td>
+      <td>
+        <a
+          href="{{ url_for('game.game', gid=game.gid) }}"
+          class="badge bg-primary text-light"
+          role="button"
+          >GO</a
+        >
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
-
 
 {% endblock %}
