@@ -9,15 +9,18 @@
 
 <body>
 
+        <h2>Your current favorite mechanic is: {{pop_name}}</h2>
+        
         <br>
-        Your current favorite mechanic is: {{pop_name}}
-        <br>
-        Here are some new low-level games to ease you into the mechanic:
+
+        <h3> Here are some new low-level games to ease you into the mechanic:</h3>
+
         <br>
                 
         <table class='table table-hover table-primary table-striped table-bordered container'>
             <thead>
                 <tr>
+                    <th></th>
                     <th>Game Name</th>
                     <th>Complexity</th>
                     <th>Players</th>
@@ -27,6 +30,36 @@
             <tbody>
                 {% for rec in easy_recs %}
                 <tr>
+                    <td><img src={{rec.image_url}} alt={{rec.name}} style="width:75px;height:90px;"></td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.complexity}}</td>
+                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                    <td>{{rec.length}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        
+        <h3>Looking for a challenge? Here's some more games with your favorite mechanic:</h3>
+
+        <br>
+                
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Game Name</th>
+                    <th>Complexity</th>
+                    <th>Players</th>
+                    <th>Length</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in hard_recs %}
+                <tr>
+                    <td><img src={{rec.image_url}} alt={{rec.name}} style="width:75px;height:90px;"></td>
                     <td>{{rec.name}}</td>
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>

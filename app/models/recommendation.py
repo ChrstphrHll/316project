@@ -28,10 +28,26 @@ WHERE L.uid = :uid AND g.gid = L.gid
     @staticmethod
     def get_easy_mech(uid, mech_name):
         rows = app.db.execute('''
-        SELECT G.*
+        (SELECT G.*
         FROM Implements as I, Games as G
-        WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity <= 2
-        
+        WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity <= 2)
+        EXCEPT
+        (SELECT G.*
+        FROM LikesGame as L, Games as G
+        WHERE L.uid =:uid AND L.gid=G.gid)        
+        ''', uid = uid, mech_name=mech_name)
+        return [Game(*row) for row in rows]
+
+    @staticmethod
+    def get_hard_mech(uid, mech_name):
+        rows = app.db.execute('''
+        (SELECT G.*
+        FROM Implements as I, Games as G
+        WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity >= 4)
+        EXCEPT
+        (SELECT G.*
+        FROM LikesGame as L, Games as G
+        WHERE L.uid =:uid AND L.gid=G.gid)        
         ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows]
 
