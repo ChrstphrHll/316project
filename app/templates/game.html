@@ -16,25 +16,25 @@
           <p>Players: {{game.min_players}}-{{game.max_players}}</p>
           <p>Length: {{game.length}} minutes</p>
           <p>Complexity: {{game.complexity}}/5</p>
-          <div class="btn-group mx-auto" role="group" aria-label="Basic example">
+          <!-- <div class="btn-group mx-auto" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-primary">Left</button>
             <button type="button" class="btn btn-primary">Middle</button>
             <button type="button" class="btn btn-primary">Right</button>
-          </div>
+          </div> -->
           <a href="/games" role="button" class="btn btn-danger">Back</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row d-flex mt-2 p-2 bg-primary rounded">
+  <div class="row d-flex mt-2 p-2 bg-light rounded">
     <div class="col-2 d-flex">
-      <h2 class="bagde rounded-pill bg-light text-primary align-self-center p-2">Mechanics</h2>
+      <h3 class="bagde rounded-pill bg-primary text-light align-self-center p-2">Mechanics</h3>
     </div>
 
     <div class="col-10 d-flex flex-wrap">
       {% for mechanic in mechanics%}
-        <h3><span class="badge rounded-pill bg-light m-1">{{mechanic.name}}</span></h2>
+        <h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.name}}</span></h4>
       {% endfor %}
     </div>
   </div>

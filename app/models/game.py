@@ -7,7 +7,7 @@ class Game:
     def __init__(self, gid, name, description, image_url, thumbnail_url, complexity, length, min_players, max_players):
         self.gid = gid
         self.name = name
-        self.description = description.replace("&#10;", "\n")
+        self.description = html.unescape(description)
         self.image_url = image_url
         self.thumbnail_url = thumbnail_url
         self.complexity = complexity
