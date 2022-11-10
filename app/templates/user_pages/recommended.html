@@ -1,34 +1,39 @@
-{% extends "user_pages/base_user.html" %} {% block user_content %}
+{% extends "user_pages/base_user.html" %}
 
-<h1>Your Recommended</h1>
 
-{% for like in liked %} 
+{% block user_content %}
 
-Since you liked {{liked[loop.index0].name}},
-<br />
-We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {%
-endfor %}
-<br />
+<h1> Your Recommended {{pop_name}}</h1>
 
-<table
-  class="table table-hover table-primary table-striped table-bordered container"
->
-  <thead>
-    <tr>
-      <th>Game ID</th>
-      <th>Game Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for rec in recommended[loop.index0] %}
-    <tr>
-      <td>{{rec.gid}}</td>
-      <td>{{rec.name}}</td>
-      <td>{{rec.description}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-<br />
-{% endfor %} {% endblock %}
+<br>
+
+<body>
+
+        <br>
+        Your current favorite mechanic is: {{pop_name}}
+        <br>
+        Here are some new games to ease you into the mechanic:
+        <br>
+                
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead>
+                <tr>
+                    <th>Game ID</th>
+                    <th>Game Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in easy_recs %}
+                <tr>
+                    <td>{{rec.gid}}</td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.description}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+</body>
+
+{% endblock %}
