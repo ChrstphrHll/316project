@@ -15,6 +15,9 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 \COPY LikesGame FROM 'LikesGame.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY Collections FROM 'Collections.csv' WITH DELIMITER ',' NULL '' CSV;
+SELECT pg_catalog.setval('public.collections_cid_seq',
+                         (SELECT MAX(cid)+1 FROM Collections),
+                         false);
 
 \COPY CreatedBy FROM 'CreatedBy.csv' WITH DELIMITER ',' NULL '' CSV;
 
@@ -27,10 +30,16 @@ SELECT pg_catalog.setval('public.games_gid_seq',
 \COPY Implements FROM 'Implements.csv' WITH DELIMITER '@' NULL '' CSV;
 
 \COPY Copies FROM 'Copies.csv' WITH DELIMITER ',' NULL '' CSV;
+SELECT pg_catalog.setval('public.copies_cpid_seq',
+                         (SELECT MAX(cpid)+1 FROM Copies),
+                         false);
 
 \COPY CopyOf FROM 'CopyOf.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY Libraries FROM 'Libraries.csv' WITH DELIMITER ',' NULL '' CSV;
+SELECT pg_catalog.setval('public.libraries_lid_seq',
+                         (SELECT MAX(lid)+1 FROM Libraries),
+                         false);
 
 \COPY Owns FROM 'Owns.csv' WITH DELIMITER ',' NULL '' CSV;
 

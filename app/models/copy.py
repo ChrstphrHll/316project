@@ -10,6 +10,60 @@ class Copy:
         self.borrower = Copy.checked_out_by(cpid)
 
     @staticmethod
+    def create(gid, comment, lid, borrower_id):
+      try:
+        rows = app.db.execute("""
+          INSERT INTO Copies(comment)
+          VALUES(:comment)
+          RETURNING cpid
+          """,
+          comment=comment,
+        )
+        
+        cpid = rows[0][0]
+        
+        app.db.execute("""
+          INSERT INTO CopyOf(cpid, gid)
+          VALUES(:cpid, :gid)
+          """,
+          cpid=cpid,
+          gid=gid,
+        )
+
+        app.db.execute("""
+          INSERT INTO HasCopy(lid, cpid)
+          VALUES(:lid, :cpid)
+          """,
+          lid=lid,
+          cpid=cpid,
+        )
+
+        print(borrower_id)
+        if borrower_id:
+          app.db.execute("""
+            INSERT INTO CheckedOutBy(cpid, uid)
+            VALUES(:cpid, :uid)
+            """,
+            cpid=cpid,
+            uid=borrower_id,
+          )
+
+        return Copy.get(cpid)
+      except Exception as e:
+        print(str(e))
+        return None
+
+    @staticmethod
+    def get(cpid):
+      rows = app.db.execute('''
+        SELECT *
+        FROM Copies
+        WHERE cpid = :cpid
+        ''',
+        cpid=cpid)
+      return Copy(*(rows[0])) if rows else None
+
+    @staticmethod
     def copy_of(cpid):
       rows = app.db.execute('''
         SELECT Games.*
@@ -18,6 +72,34 @@ class Copy:
         ''',
         cpid=cpid)
       return Game(*(rows[0])) if rows else None
+
+    @staticmethod
+    def checkout_copy(cpid, uid):
+      try:
+        app.db.execute("""
+            INSERT INTO CheckedOutBy(cpid, uid)
+            VALUES(:cpid, :uid)
+            """,
+            cpid=cpid,
+            uid=uid
+          )
+        return True
+      except Exception as e:
+        print(str(e))
+        return None
+
+    def return_copy(cpid, uid):
+      try:
+        app.db.execute('''
+          DELETE FROM CheckedOutBy,
+          WHERE cpid=:cpid AND uid=:uid
+          ''',
+          cpid=cpid,
+          uid=uid)
+        return True
+      except Exception as e:
+        print(str(e))
+        return None
 
     @staticmethod
     def user_borrowed_copies(uid):

@@ -15,8 +15,8 @@
     />
   </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <body style="padding-top: 100px;"> <!--padding because of the fixed navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="/">
         <img
           src="https://aux.iconspalace.com/uploads/board-games-icon-256.png"
@@ -69,11 +69,13 @@
               User
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{ url_for('users.likesgame', uid=current_user.get_id())}}"> Your Likes</a>
+              <a class="dropdown-item" href="{{ url_for('users.profile', uid=current_user.get_id())}}"> Your Profile</a>
+              <a class="dropdown-item" href="{{ url_for('users.liked', uid=current_user.get_id())}}"> Your Likes</a>
               <a class="dropdown-item" href="{{ url_for('users.recommended', uid=current_user.get_id())}}"> Your Recommended</a>
               <a class="dropdown-item" href="{{ url_for('users.collections', uid=current_user.get_id())}}"> Your Collections </a>
               <a class="dropdown-item" href="{{ url_for('users.libraries', uid=current_user.get_id())}}"> Your Libraries</a>
-              <a class="dropdown-item" href="{{ url_for('users.borrowed', uid=current_user.get_id())}}"> Your Copies</a>
+              <a class="dropdown-item" href="{{ url_for('users.borrowed', uid=current_user.get_id())}}"> Your Borrowed Games</a>
+              <a class="dropdown-item" href="{{ url_for('users.reviews', uid=current_user.get_id())}}"> Your Reviews</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ url_for('users.logout') }}"> Log Out</a>
             </div>
@@ -102,7 +104,7 @@
         </form>
       </div>
     </nav>
-    <div class="main container pt-3">{% block content %}{% endblock %}</div>
+    <div class="main container">{% block content %}{% endblock %}</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

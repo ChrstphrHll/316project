@@ -10,6 +10,33 @@ class Collection:
         self.creator = Collection.get_creator(cid)
 
     @staticmethod
+    def create(title, description, uid):
+      try:
+        rows = app.db.execute("""
+          INSERT INTO Collections(title, description)
+          VALUES(:title, :description)
+          RETURNING cid
+          """,
+          title=title,
+          description=description
+        )
+        
+        cid = rows[0][0]
+        
+        app.db.execute("""
+          INSERT INTO CreatedBy(cid, uid)
+          VALUES(:cid, :uid)
+          """,
+          cid=cid,
+          uid=uid
+        )
+        
+        return Collection.get(cid)
+      except Exception as e:
+        print(str(e))
+        return None
+
+    @staticmethod
     def get(cid):
       rows = app.db.execute('''
         SELECT *

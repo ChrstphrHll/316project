@@ -11,6 +11,33 @@ class Library:
         self.owner = Library.get_owner(lid)
 
     @staticmethod
+    def create(title, description, uid):
+      try:
+        rows = app.db.execute("""
+          INSERT INTO Libraries(title, description)
+          VALUES(:title, :description)
+          RETURNING lid
+          """,
+          title=title,
+          description=description
+        )
+        
+        lid = rows[0][0]
+        
+        app.db.execute("""
+          INSERT INTO Owns(lid, uid)
+          VALUES(:lid, :uid)
+          """,
+          lid=lid,
+          uid=uid
+        )
+        
+        return Library.get(lid)
+      except Exception as e:
+        print(str(e))
+        return None
+
+    @staticmethod
     def get(lid):
       rows = app.db.execute('''
         SELECT *

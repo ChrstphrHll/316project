@@ -19,6 +19,7 @@
 <table class='table table-hover table-primary table-striped table-bordered container'>
   <thead class="thead-dark">
     <tr>
+      <th scope="col">Thumbnail</th>
       <th scope="col">Name</th>
       <th scope="col">Complexity</th>
       <th scope="col">Players</th>
@@ -29,6 +30,7 @@
   <tbody>
     {% for game in games%}
       <tr>
+        <td><img src="{{game.thumbnail_url}}" alt="Cover art for {{game.name}}"/></td>
         <th scope="row">{{game.name}}</th>
         <td>{{game.complexity}}</td>
         <td>{{game.min_players}}-{{game.max_players}}</td>
