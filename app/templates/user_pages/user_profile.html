@@ -4,6 +4,9 @@
 
 <p style="font-size: 24px;">
     Username: {{ user.name }}
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a href="">edit</a>)
+    {% endif %}
 </p>
 <p>
     <b>Email</b>
