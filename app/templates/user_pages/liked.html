@@ -1,17 +1,9 @@
-{% extends "base.html" %} {% block content %}
+{% extends "user_pages/base_user.html" %}
 
-<h2>Search Games:</h2>
-<form>
-  <div class="d-flex p-2 border justify-content-end align-items-center">
-    {{form.search}}
-    <div class="btn-group mx-1" role="group" aria-label="Basic example"></div>
-    <button type="submit" class="btn btn-primary mx-1">Search</button>
-  </div>
-</form>
+{% block user_content %}
 
-<table
-  class="table table-hover table-primary table-striped table-bordered container"
->
+<h2>Games Liked:</h2>
+<table class="table table-hover table-primary table-striped table-bordered container">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Thumbnail</th>
@@ -23,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for game in games%}
+    {% for game in liked_games%}
     <tr>
       <td>
         <img
