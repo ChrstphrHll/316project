@@ -3,6 +3,7 @@ from .mechanic import Mechanic
 from .game import Game
 
 class Recommendation:
+    #returns games that user uid likes
     @staticmethod
     def get_base(uid):
         rows = app.db.execute('''
@@ -11,6 +12,26 @@ FROM Games as g, LikesGame as L
 WHERE L.uid = :uid AND g.gid = L.gid
 ''',
                               uid=uid)
+        return [Game(*row) for row in rows]
+
+    @staticmethod
+    def get_pop_mech(uid):
+        rows = app.db.execute('''
+        SELECT M.*
+        FROM LikesGame as L, Implements as I, Mechanics as M
+        WHERE L.uid =:uid AND L.gid = I.gid AND I.mech_name = M.mech_name
+        
+        ''', uid = uid)
+        return [Mechanic(*row) for row in rows]
+
+    @staticmethod
+    def get_easy_mech(uid, mech_name):
+        rows = app.db.execute('''
+        SELECT G.*
+        FROM Implements as I, Games as G
+        WHERE I.mech_name =:mech_name AND I.gid = G.gid
+        
+        ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows]
 
     @staticmethod

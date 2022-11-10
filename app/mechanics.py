@@ -3,6 +3,7 @@ from wtforms import Form, StringField, validators
 from .models.mechanic import Mechanic
 bp = Blueprint('mechanic', __name__, url_prefix="/mechanics")
 
+'''
 class SearchForm(FlaskForm):
     search = StringField('Search', validators=DataRequired())
 
@@ -20,3 +21,4 @@ def mech_search():
     if form.validate_on_submit:
         return redirect(url_for('login'))
     return render_template('mechanics.html', mechs=mechs)
+'''

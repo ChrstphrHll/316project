@@ -83,18 +83,22 @@ def likesgame(uid):
     liked_games = User.get_liked_games(uid)
     return render_template("likesgame.html", liked_games=liked_games)
 
+    #find the most liked mechanics
+    #find games that share that mechanic
+    #minus the games you've already liked
+
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
-    liked = Recommendation.get_base(uid)
-    recs = []
-    mechs = []
-    for like in liked:
-        liked_gid = like.gid
-        mech = Mechanic.get(liked_gid)
-        rec = Recommendation.get(uid, liked_gid)
-        recs.append(rec)
-        mechs.append(mech)
-    return render_template('recommended.html', recommended=recs, liked=liked, mechs=mechs)
+    pop_mech = Recommendation.get_pop_mech(uid)
+    pop_name = pop_mech[0].mech_name
+
+    easy_recs = Recommendation.get_easy_mech(uid, pop_name)
+
+    #easy: 0 - 1
+    #medium: 2 - 3
+    #hard: 4 - 5
+ 
+    return render_template('recommended.html', pop_name=pop_name, easy_recs=easy_recs)
 
 class CollectionSearch(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])

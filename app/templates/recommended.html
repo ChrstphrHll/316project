@@ -3,44 +3,16 @@
 
 {% block content %}
 
-<h1> Your Recommended </h1>
+<h1> Your Recommended {{pop_name}}</h1>
 
 <br>
 
 <body>
 
-    {% for like in liked %}
-        Since you liked {{liked[loop.index0].name}},
         <br>
-        We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {% endfor %}
+        Your current favorite mechanic is: {{pop_name}}
         <br>
-                
-        <table>
-            <thead>
-                <tr>
-                    <th>Game ID</th>
-                    <th>Game Name</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in recommended[loop.index0] %}
-                <tr>
-                    <td>{{rec.gid}}</td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.description}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <br>
-    {% endfor %}
-</body>
-
-    {% for like in liked %}
-        Since you liked {{liked[loop.index0].name}},
-        <br>
-        We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {% endfor %}
+        Here are some new games to ease you into the mechanic:
         <br>
                 
         <table class='table table-hover table-primary table-striped table-bordered container'>
@@ -52,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for rec in recommended[loop.index0] %}
+                {% for rec in easy_recs %}
                 <tr>
                     <td>{{rec.gid}}</td>
                     <td>{{rec.name}}</td>
@@ -62,7 +34,6 @@
             </tbody>
         </table>
         <br>
-    {% endfor %}
 </body>
 
 {% endblock %}

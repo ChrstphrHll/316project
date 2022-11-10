@@ -1,8 +1,8 @@
 from flask import current_app as app
 
 class Mechanic:
-    def __init__(self, name, description):
-        self.name = name
+    def __init__(self, mech_name, description):
+        self.mech_name = mech_name
         self.description = description
 
     @staticmethod
