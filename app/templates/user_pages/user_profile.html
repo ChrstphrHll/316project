@@ -2,11 +2,27 @@
 
 {% block user_content %}
 
-{% if user.about %}
-<p>{{ user.about }}</p>
-{% endif %}
+<p style="font-size: 24px;">
+    Username: {{ user.name }}
+</p>
+<p>
+    <b>Email</b>
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a href="">edit</a>)
+    {% endif %}
+    <br>
+    {{ user.email }}
+</p>
 
-<p>Current uid: {{current_user.uid}}</p>
-<p>Page's uid: {{user.uid}}</p>
+{% if user.about %}
+<p>
+    <b>About</b>
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a href="">edit</a>)
+    {% endif %}
+    <br>
+    {{ user.about }}
+</p>
+{% endif %}
 
 {% endblock %}
