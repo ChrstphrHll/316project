@@ -2,9 +2,15 @@
 
 {% block content %}
 
+<style>
+    #sidebar .btn-block {
+        font-size: 0.9rem;
+        padding: 0.25rem;
+    }
+</style>
 <div class="row">
     <div class="col" style="max-width: 200px;">
-        <div class="p-2" style="background-color: lightblue; width: 180px; border-radius: 5px;">
+        <div id="sidebar" class="p-2" style="background-color: lightblue; width: 180px; border-radius: 5px;">
             <div class="mb-2" style="text-align: center;">
                 <b class="mb-2" style="font-size: 20px;">{{ user.name }}</b>
             </div>
