@@ -99,15 +99,21 @@ def recommended(uid):
 
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech[0].mech_name
+    pop_designer = Recommendation.get_pop_designer(uid)
+    designer = pop_designer.name
+    did = pop_designer.uid
 
     easy_recs = Recommendation.get_w_easy_mech(uid, pop_name)
     hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)
+    design_recs = Recommendation.get_w_designer(uid, did)
     if len(easy_recs) > 5:
         easy_recs = easy_recs[:5]
     if len(hard_recs) > 5:
         hard_recs = hard_recs[:5]
+    if len(design_recs) > 5:
+        design_recs = design_recs[:5]
  
-    return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, pop_name=pop_name)
+    return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, pop_name=pop_name, designer=designer, design_recs=design_recs)
 
 class Search(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])

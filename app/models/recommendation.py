@@ -2,6 +2,7 @@ from flask import current_app as app
 from .mechanic import Mechanic
 from .game import Game
 from .collection import Collection
+from .user import User
 
 class Recommendation:
   
@@ -54,15 +55,32 @@ class Recommendation:
         return [Game(*row) for row in rows]
 
     @staticmethod
-    def get_pop_creator(uid):
+    def get_pop_designer(uid):
         rows = app.db.execute('''
-        SELECT M.*
-        FROM LikesGame as L, Implements as I, Mechanics as M
-        WHERE L.uid =:uid AND L.gid = I.gid AND I.mech_name = M.mech_name
-        GROUP BY M.mech_name, M.description
-        ORDER BY COUNT(*) DESC
+        (SELECT U.uid, U.name, U.email, U.about, U.image_url
+        FROM LikesGame as L, DesignedBy as D, Users as U
+        WHERE L.uid =:uid AND L.gid = D.gid AND U.uid = D.uid
+        GROUP BY U.uid, U.name, U.email, U.about, U.image_url
+        ORDER BY COUNT(*) DESC)
+        EXCEPT
+        (SELECT U.uid, U.name, U.email, U.about, U.image_url
+        FROM Users as U
+        WHERE U.uid =:uid)
         ''', uid = uid)
-        return [Mechanic(*row) for row in rows]
+        return User(*(rows[0])) if rows else []
+
+    @staticmethod
+    def get_w_designer(uid, did):
+        rows = app.db.execute('''
+        (SELECT G.*
+        FROM DesignedBy as D, Games as G
+        WHERE D.uid =:did AND D.gid = G.gid)
+        EXCEPT
+        (SELECT G.*
+        FROM LikesGame as L, Games as G
+        WHERE L.uid =:uid AND L.gid=G.gid)        
+        ''', uid = uid, did=did)
+        return [Game(*row) for row in rows]
 
     @staticmethod
     def get(uid, gid):
