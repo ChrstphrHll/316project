@@ -54,6 +54,17 @@ class Recommendation:
         return [Game(*row) for row in rows]
 
     @staticmethod
+    def get_pop_creator(uid):
+        rows = app.db.execute('''
+        SELECT M.*
+        FROM LikesGame as L, Implements as I, Mechanics as M
+        WHERE L.uid =:uid AND L.gid = I.gid AND I.mech_name = M.mech_name
+        GROUP BY M.mech_name, M.description
+        ORDER BY COUNT(*) DESC
+        ''', uid = uid)
+        return [Mechanic(*row) for row in rows]
+
+    @staticmethod
     def get(uid, gid):
         rows = app.db.execute('''
     WITH liked_mech AS (SELECT I.mech_name FROM LikesGame as L, Implements as I
