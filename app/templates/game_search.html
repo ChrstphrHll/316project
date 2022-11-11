@@ -3,9 +3,9 @@
 <h2>Search Games:</h2>
 <form>
   <div class="d-flex p-2 border justify-content-end align-items-center">
-    {{form.search}}
-    <div class="btn-group mx-1" role="group" aria-label="Basic example"></div>
-    <button type="submit" class="btn btn-primary mx-1">Search</button>
+  
+    {{ form.search.label }} {{ form.search }}
+    <button type="submit" class="btn btn-primary mx-1">Submit</button>
   </div>
 </form>
 
