@@ -8,7 +8,7 @@ class Mechanic:
     @staticmethod
     def get(gid):
         rows = app.db.execute('''
-            SELECT M.mech_name, M.description
+            SELECT M.*
             FROM Mechanics as M, Implements as I
             WHERE M.mech_name = I.mech_name AND I.gid =:gid
             ''', 
@@ -40,7 +40,7 @@ class Mechanic:
     @staticmethod
     def get_games(name):
         rows = app.db.execute('''
-            SELECT g.gid, g.name, g.description, g.image_url, g.complexity, g.length, g.min_players, g.max_players
+            SELECT g.*
             FROM Implements as I, Games as g
             WHERE I.mech_name = :name and g.gid = I.gid''', 
             name=name)

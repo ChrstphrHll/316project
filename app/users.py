@@ -100,16 +100,12 @@ def recommended(uid):
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech[0].mech_name
 
-    easy_recs = Recommendation.get_easy_mech(uid, pop_name)
-    hard_recs = Recommendation.get_hard_mech(uid, pop_name)
+    easy_recs = Recommendation.get_w_easy_mech(uid, pop_name)
+    hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)
     if len(easy_recs) > 5:
         easy_recs = easy_recs[:5]
     if len(hard_recs) > 5:
         hard_recs = hard_recs[:5]
-
-    #easy: 0 - 1
-    #medium: 2 - 3
-    #hard: 4 - 5
  
     return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, pop_name=pop_name)
 

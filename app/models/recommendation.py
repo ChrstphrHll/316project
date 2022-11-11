@@ -1,19 +1,10 @@
 from flask import current_app as app
 from .mechanic import Mechanic
 from .game import Game
+from .collection import Collection
 
 class Recommendation:
-    #returns games that user uid likes
-    @staticmethod
-    def get_base(uid):
-        rows = app.db.execute('''
-SELECT g.*
-FROM Games as g, LikesGame as L
-WHERE L.uid = :uid AND g.gid = L.gid
-''',
-                              uid=uid)
-        return [Game(*row) for row in rows]
-
+  
     @staticmethod
     def get_pop_mech(uid):
         rows = app.db.execute('''
@@ -26,7 +17,7 @@ WHERE L.uid = :uid AND g.gid = L.gid
         return [Mechanic(*row) for row in rows]
 
     @staticmethod
-    def get_easy_mech(uid, mech_name):
+    def get_w_easy_mech(uid, mech_name):
         rows = app.db.execute('''
         (SELECT G.*
         FROM Implements as I, Games as G
@@ -39,7 +30,7 @@ WHERE L.uid = :uid AND g.gid = L.gid
         return [Game(*row) for row in rows]
 
     @staticmethod
-    def get_hard_mech(uid, mech_name):
+    def get_w_hard_mech(uid, mech_name):
         rows = app.db.execute('''
         (SELECT G.*
         FROM Implements as I, Games as G
@@ -49,6 +40,17 @@ WHERE L.uid = :uid AND g.gid = L.gid
         FROM LikesGame as L, Games as G
         WHERE L.uid =:uid AND L.gid=G.gid)        
         ''', uid = uid, mech_name=mech_name)
+        return [Game(*row) for row in rows]
+
+    @staticmethod
+    def get_similar_mech(cid):
+        rows = app.db.execute('''
+        SELECT M.*
+        FROM HasGame as H, Implements as I, Mechanics as M
+        WHERE H.cid =:cid AND H.gid = I.gid AND I.mech_name = M.mech_name
+        GROUP BY M.mech_name, M.description
+        ORDER BY COUNT(*) DESC     
+        ''', cid = cid)
         return [Game(*row) for row in rows]
 
     @staticmethod
