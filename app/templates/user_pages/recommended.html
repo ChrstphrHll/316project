@@ -1,105 +1,34 @@
-{% extends "user_pages/base_user.html" %}
+{% extends "user_pages/base_user.html" %} {% block user_content %}
 
+<h1>Your Recommended</h1>
 
-{% block user_content %}
+{% for like in liked %} 
 
-<h1> Your Recommended</h1>
+Since you liked {{liked[loop.index0].name}},
+<br />
+We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {%
+endfor %}
+<br />
 
-<br>
-
-<body>
-
-        <h2>Your favorite mechanic seems to be: {{pop_name}}</h2>
-        
-        <br>
-
-        <h3> Here are some low-complexity games to check out:</h3>
-
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in easy_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <br>
-        
-        <h3>Looking for a challenge? Here are some more complex games to try:</h3>
-
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in hard_recs %}
-                <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <br>
-        <h2>Your current favorite designer seems to be: {{designer}}</h2>        
-        <br>
-
-        <h3> Check out these other games by {{designer}}:</h3>
-
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in design_recs %}
-                <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-</body>
-
-{% endblock %}
+<table
+  class="table table-hover table-primary table-striped table-bordered container"
+>
+  <thead>
+    <tr>
+      <th>Game ID</th>
+      <th>Game Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rec in recommended[loop.index0] %}
+    <tr>
+      <td>{{rec.gid}}</td>
+      <td>{{rec.name}}</td>
+      <td>{{rec.description}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br />
+{% endfor %} {% endblock %}

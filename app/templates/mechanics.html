@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1> Mechanics</h1>
+</header> Mechanics</header>
 
 <br>
 
@@ -15,9 +15,10 @@
             </tr>
         </thead>
         <tbody>
-            {% for mech in mechs %}
+            <tr>yes</tr>
+            {% for mech in mechanics %}
             <tr>
-                <td>{{mech.name}}</td>
+                <td>{{mech.mech_name}}</td>
                 <td>{{mech.description}}</td>
             </tr>
             {% endfor %}
