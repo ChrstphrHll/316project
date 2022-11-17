@@ -7,9 +7,12 @@
 <h4> Created by: {{collection.creator.name}}</h4>
 <p>{{collection.description}}</p>
 
-<table class='table table-hover table-primary table-striped table-bordered container'>
+<table
+  class="table table-hover table-primary table-striped table-bordered container"
+>
   <thead class="thead-dark">
     <tr>
+      <th scope="col">Thumbnail</th>
       <th scope="col">Name</th>
       <th scope="col">Complexity</th>
       <th scope="col">Players</th>
@@ -19,17 +22,36 @@
   </thead>
   <tbody>
     {% for game in games%}
-      <tr>
-        <th scope="row">{{game.name}}</th>
-        <td>{{game.complexity}}</td>
-        <td>{{game.min_players}}-{{game.max_players}}</td>
-        <td>{{game.length}} minutes</td>
-        <td><a href="{{ url_for('game.game', gid=game.gid) }}" class="badge bg-primary text-light" role="button">GO </a></td>
-
-      </tr>
+    <tr>
+      <td>
+        <img
+          src="{{game.thumbnail_url}}"
+          style="max-width: 100px"
+          alt="Cover art for {{game.name}}"
+        />
+      </td>
+      <th scope="row">{{game.name}}</th>
+      <td>{{game.complexity}}</td>
+      <td>{{game.min_players}}-{{game.max_players}}</td>
+      <td>{{game.length}} minutes</td>
+      <td>
+        <a
+          href="{{ url_for('game.game', gid=game.gid) }}"
+          class="badge bg-primary text-light"
+          role="button"
+          >GO</a
+        >
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
 
-<a href="{{ url_for('collection.collections') }}" role="button" class="btn btn-danger">Back</a>
+<a
+  role="button"
+  class="btn btn-danger text-light"
+  onclick="history.back()"
+  style="cursor: pointer"
+  >Back</a
+>
 {% endblock %}

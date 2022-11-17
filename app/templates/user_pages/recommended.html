@@ -59,7 +59,7 @@
             <tbody>
                 {% for rec in hard_recs %}
                 <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>
@@ -90,7 +90,7 @@
             <tbody>
                 {% for rec in design_recs %}
                 <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>
