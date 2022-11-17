@@ -136,7 +136,7 @@ def collections(uid):
     if create_form and create_form.validate_on_submit():
         collection = Collection.create(create_form.title.data, create_form.description.data, current_user.uid)
         if collection:
-            return redirect(url_for('collection.collection', cid=collection.cid))
+            return redirect(url_for('users.collections', uid=uid))
 
     return render_template('user_pages/collections.html', user=User.get(uid), collections=collections, form=search_form, create=create_form)
 
@@ -154,7 +154,7 @@ def libraries(uid):
         print("here")
         library = Library.create(create_form.title.data, create_form.description.data, current_user.uid)
         if library:
-            return redirect(url_for('library.library', lid=library.lid))
+            return redirect(url_for('users.libraries', uid=uid))
 
     return render_template('user_pages/libraries.html', user=User.get(uid), libraries=libraries, form=form, create=create_form)
 
