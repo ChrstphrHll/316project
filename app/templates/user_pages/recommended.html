@@ -9,16 +9,16 @@
 
 <body>
 
-        <h2>Your current favorite mechanic is: {{pop_name}}</h2>
+        <h2>Your favorite mechanic seems to be: {{pop_name}}</h2>
         
         <br>
 
-        <h3> Here are some new low-level games to ease you into the mechanic:</h3>
+        <h3> Here are some low-complexity games to check out:</h3>
 
         <br>
                 
         <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th></th>
                     <th>Game Name</th>
@@ -30,7 +30,7 @@
             <tbody>
                 {% for rec in easy_recs %}
                 <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="width:75px;height:90px;"></td>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>
@@ -42,12 +42,12 @@
 
         <br>
         
-        <h3>Looking for a challenge? Here's some more games with your favorite mechanic:</h3>
+        <h3>Looking for a challenge? Here are some more complex games to try:</h3>
 
         <br>
                 
         <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th></th>
                     <th>Game Name</th>
@@ -59,7 +59,7 @@
             <tbody>
                 {% for rec in hard_recs %}
                 <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="width:75px;height:90px;"></td>
+                    <td><img src={{rec.image_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>
@@ -70,7 +70,7 @@
         </table>
 
         <br>
-        <h2>Your current favorite designer is: {{designer}}</h2>        
+        <h2>Your current favorite designer seems to be: {{designer}}</h2>        
         <br>
 
         <h3> Check out these other games by {{designer}}:</h3>
@@ -78,7 +78,7 @@
         <br>
                 
         <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th></th>
                     <th>Game Name</th>
@@ -90,7 +90,7 @@
             <tbody>
                 {% for rec in design_recs %}
                 <tr>
-                    <td><img src={{rec.image_url}} alt={{rec.name}} style="width:75px;height:90px;"></td>
+                    <td><img src={{rec.image_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>
