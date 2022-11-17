@@ -1,10 +1,12 @@
 from flask import current_app as app
+from .models.game import Game
 
 class Mechanic:
     def __init__(self, mech_name, description):
         self.mech_name = mech_name
         self.description = description
 
+    #given a game, return all mechanics
     @staticmethod
     def get(gid):
         rows = app.db.execute('''
@@ -16,27 +18,19 @@ class Mechanic:
 
         return [Mechanic(*row) for row in rows]
 
+    #given a set of games, return all mechanics used, sorted by popularity
+
     @staticmethod
     def get_all():
         rows = app.db.execute('''
-            SELECT *
+            SELECT M.*
             FROM Mechanics as M
             ORDER BY M.mech_name
             ''', )
 
-    #forms are part of html
-        return [Mechanic(*row) for row in rows]
-
-    @staticmethod
-    def get_desc(name):
-        rows = app.db.execute('''
-            SELECT mech_name, description
-            FROM Mechanics 
-            WHERE mech_name = :name''', 
-            name=name)
-
         return [Mechanic(*row) for row in rows]
     
+    #get all games that use a given mechanic
     @staticmethod
     def get_games(name):
         rows = app.db.execute('''
@@ -45,4 +39,4 @@ class Mechanic:
             WHERE I.mech_name = :name and g.gid = I.gid''', 
             name=name)
 
-        return [Mechanic(*row) for row in rows]
+        return [Game(*row) for row in rows]
