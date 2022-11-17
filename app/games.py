@@ -33,7 +33,7 @@ def game(gid):
     return render_template("game.html", game=game, mechanics=mechanics)
 
 @bp.route('/try')
-def game():
+def try_this():
     games = [0,1,2]
     mechs = Mechanic.get_games_mechs(games)
-    return render_template("mechanics.html", game=game, mechs=mechs)
+    return render_template("mechanics.html", mechs=mechs)
