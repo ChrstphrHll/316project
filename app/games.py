@@ -6,6 +6,7 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 from .models.game import Game
+from .models.mechanic import Mechanic
 from flask import current_app as app
 
 from flask import Blueprint
@@ -28,7 +29,11 @@ def games():
 @bp.route('/<gid>')
 def game(gid):
     game = Game.get(gid)
-    mechanics = Game.get_mechanics(gid)
-    print(mechanics)
+    mechanics = Mechanic.get_mechs(gid)
     return render_template("game.html", game=game, mechanics=mechanics)
 
+@bp.route('/try')
+def game():
+    games = [0,1,2]
+    mechs = Mechanic.get_games_mechs(games)
+    return render_template("mechanics.html", game=game, mechs=mechs)

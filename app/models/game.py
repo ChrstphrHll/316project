@@ -1,7 +1,6 @@
 from flask import current_app as app
 from sqlalchemy import null
 import html
-from app.models.mechanic import Mechanic
 
 class Game:
     def __init__(self, gid, name, description, image_url, thumbnail_url, complexity, length, min_players, max_players):
@@ -41,11 +40,3 @@ ORDER BY RANDOM()
 LIMIT 1
 ''')
         return Game(*game_raw[0]) if game_raw else null
-
-    def get_mechanics(gid):
-        rows = app.db.execute('''
-SELECT m.*
-FROM Mechanics m, Implements i
-WHERE :gid = i.gid and i.mech_name = m.mech_name
-''', gid=gid)
-        return [Mechanic(*row) for row in rows]

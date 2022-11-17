@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
-from app.models.copy import Copy
+from .models.copy import Copy
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
@@ -90,13 +90,8 @@ def liked(uid):
     liked_games = User.get_liked_games(uid)
     return render_template("user_pages/liked.html", user=User.get(uid), liked_games=liked_games)
 
-    #find the most liked mechanics
-    #find games that share that mechanic
-    #minus the games you've already liked
-
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
-
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech[0].mech_name
     pop_designer = Recommendation.get_pop_designer(uid)
