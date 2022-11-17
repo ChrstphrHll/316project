@@ -1,17 +1,78 @@
-{% extends "user_pages/base_user.html" %}
-
-{% block user_content %}
+{% extends "user_pages/base_user.html" %} {% block user_content %}
 
 <h2>Search Collections:</h2>
 <form>
   <div class="d-flex p-2 border justify-content-end align-items-center">
-  
-    {{ form.search }}
-    <button type="submit" class="btn btn-primary mx-1">Search</button>
+    <form>
+      {{ form.search }}
+      <button type="submit" class="btn btn-primary mx-1">Search</button>
+    </form>
+
+    {% if create %}
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-toggle="modal"
+      data-target="#createForm"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      +
+    </button>
+    <form
+      action=""
+      method="POST"
+      novalidate
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+      id="createForm"
+    >
+      {{ create.hidden_tag() }}
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">New Collection</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>{{ create.title.label }}</label>
+              {{ create.title(class_="form-control") }}
+            </div>
+            <div class="form-group">
+              <label>{{ create.description.label }}</label>
+              {{ create.description(class_="form-control") }}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            {{ create.submit(class_="btn btn-primary text-light")}}
+          </div>
+        </div>
+      </div>
+    </form>
+    {% endif %}
   </div>
 </form>
 
-<table class='table table-hover table-primary table-striped table-bordered container'>
+<table
+  class="table table-hover table-primary table-striped table-bordered container"
+>
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
@@ -22,16 +83,21 @@
   </thead>
   <tbody>
     {% for collection in collections%}
-      <tr>
-        <th scope="row">{{collection.title}}</th>
-        <td>{{collection.description}}</td>
-        <td>{{collection.creator.name}}</td>
-        <td><a href="{{ url_for('collection.collection', cid=collection.cid) }}" class="badge bg-primary text-light" role="button">GO</a></td>
-
-      </tr>
+    <tr>
+      <th scope="row">{{collection.title}}</th>
+      <td>{{collection.description}}</td>
+      <td>{{collection.creator.name}}</td>
+      <td>
+        <a
+          href="{{ url_for('collection.collection', cid=collection.cid) }}"
+          class="badge bg-primary text-light"
+          role="button"
+          >GO</a
+        >
+      </td>
+    </tr>
     {% endfor %}
   </tbody>
 </table>
-
 
 {% endblock %}

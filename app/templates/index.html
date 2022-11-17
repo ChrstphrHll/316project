@@ -1,13 +1,44 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-
-{% block content %}
-
-{% if current_user.is_authenticated %}
-<h2> Home </h2>
-<h4> Signed in as: {{current_user.name}}</h4>
-{% else %}
-<p><a href="{{ url_for('users.login') }}">Log in</a> to create and view your own board game collection!</p>
-{% endif %}
-
+<div class="container">
+  <h1>Board Game Website</h1>
+  <div class="row">
+    <div class="col-8">
+      <p>
+        Sed ut perspiciatis unde omnis iste natus error sit
+        voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+        qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
+        dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
+        non numquam eius modi tempora incidunt ut labore et dolore magnam
+        aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+        commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
+        voluptate velit esse quam nihil molestiae consequatur, vel illum qui
+        dolorem eum fugiat quo voluptas nulla pariatur?
+      </p>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{{rand_game.image_url}}"
+          class="card-img-top"
+          alt="Cover art for {{rand_game.name}}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Check out {{rand_game.name}}</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="/games/{{rand_game.gid}}" class="btn btn-primary"
+            >Read More</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

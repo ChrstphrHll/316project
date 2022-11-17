@@ -3,61 +3,103 @@
 
 {% block user_content %}
 
-
-<h1> Your Recommended </h1>
+<h1> Your Recommended</h1>
 
 <br>
 
 <body>
 
-    Hi
-    <table>
-        <thead>
-            <tr>
-                <th>Game ID</th>
-                <th>Game Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>yes</tr>
-            {% for rec in recommended %}
-            <tr>
-                <td>{{rec.gid}}</td>
-                <td>{{rec.gid}}</td>
-                <td>{{rec.mech_name}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-
-    {% for like in liked %}
-        Since you liked {{liked[loop.index0].name}},
+        <h2>Your favorite mechanic seems to be: {{pop_name}}</h2>
+        
         <br>
-        We recommend games with: {% for mech in mechs[loop.index0] %} {{mech.name}}, {% endfor %}
+
+        <h3> Here are some low-complexity games to check out:</h3>
+
         <br>
                 
         <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead>
+            <thead class="thead-dark">
                 <tr>
-                    <th>Game ID</th>
+                    <th></th>
                     <th>Game Name</th>
-                    <th>Description</th>
+                    <th>Complexity</th>
+                    <th>Players</th>
+                    <th>Length</th>
                 </tr>
             </thead>
             <tbody>
-                {% for rec in recommended[loop.index0] %}
+                {% for rec in easy_recs %}
                 <tr>
-                    <td>{{rec.gid}}</td>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>
-                    <td>{{rec.description}}</td>
+                    <td>{{rec.complexity}}</td>
+                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                    <td>{{rec.length}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
         <br>
-    {% endfor %}
+        
+        <h3>Looking for a challenge? Here are some more complex games to try:</h3>
+
+        <br>
+                
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Game Name</th>
+                    <th>Complexity</th>
+                    <th>Players</th>
+                    <th>Length</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in hard_recs %}
+                <tr>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.complexity}}</td>
+                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                    <td>{{rec.length}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <h2>Your current favorite designer seems to be: {{designer}}</h2>        
+        <br>
+
+        <h3> Check out these other games by {{designer}}:</h3>
+
+        <br>
+                
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Game Name</th>
+                    <th>Complexity</th>
+                    <th>Players</th>
+                    <th>Length</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in design_recs %}
+                <tr>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.complexity}}</td>
+                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                    <td>{{rec.length}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
 </body>
 
 {% endblock %}
