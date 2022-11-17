@@ -78,9 +78,14 @@ def logout():
     logout_user()
     return redirect(url_for('index.index'))
 
+
+class EditUserInfo(FlaskForm):
+    def __init__(self, field):
+        self.new_value = StringField(field, validators=[DataRequired()])
+    
 @bp.route('/users/<uid>')
 def profile(uid):
-    print(type(uid))
+    edit_username = EditUserInfo("Username")
     return render_template("user_pages/user_profile.html", user=User.get(uid))
 
 
