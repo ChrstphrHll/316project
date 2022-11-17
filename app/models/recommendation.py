@@ -44,7 +44,7 @@ class Recommendation:
         return [Game(*row) for row in rows]
 
     @staticmethod
-    def get_similar_mech(cid):
+    def get_common_mech(cid):
         rows = app.db.execute('''
         SELECT M.*
         FROM HasGame as H, Implements as I, Mechanics as M
@@ -52,6 +52,23 @@ class Recommendation:
         GROUP BY M.mech_name, M.description
         ORDER BY COUNT(*) DESC     
         ''', cid = cid)
+        return [Game(*row) for row in rows]
+
+    #more games like this; input is one singular game
+    #games that share two mechanics in common
+
+    #returns games with similar mechs to those in the collection
+    @staticmethod
+    def get_new_coll(cid, mech):
+        rows = app.db.execute('''
+        (SELECT G.*
+        FROM Games as G, Implements as I
+        WHERE G.gid = I.gid AND I.mech_name =:mech)
+        EXCEPT
+        (SELECT G.*
+        FROM Games as G, HasGame as H
+        WHERE G.gid = H.gid and H.cid =:cid)    
+        ''', mech=mech, cid = cid)
         return [Game(*row) for row in rows]
 
     @staticmethod
