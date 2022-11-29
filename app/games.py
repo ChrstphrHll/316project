@@ -24,10 +24,18 @@ def games():
     
     games = Game.get_all()
 
+    page = int(request.args.get('page') or 0) 
+    per_page = int(request.args.get('per_page') or 10)
+
+
     if "search" in request.args:
         games = filter(lambda x: request.args.get("search").lower() in x.name.lower(), games)
+    
 
-    return render_template("game_search.html", games = games, form=form)
+    games = games[0 + (page * per_page): per_page + (page * per_page)]
+
+
+    return render_template("game_search.html", games = games, form=form, current_page = page)
 
 @bp.route('/<gid>', methods=['GET', 'POST'])
 def game(gid):
