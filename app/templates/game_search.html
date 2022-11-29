@@ -52,6 +52,9 @@
 <div class="d-flex mb-5 p-2 border justify-content-center align-items-center">
   <form method="GET" action="/games/">
     <div class="btn-group mx-auto" role="group" aria-label="Basic example">
+      <!-- could automate this with list of tuples -->
+      <input type="hidden" name="per_page" value="{{per_page}}">
+      <input type="hidden" name="mechanic" value="{{mechanic}}"> 
       <button class="btn btn-primary {{'disabled' if current_page <= 0 else ''}}" type="submit" name="page" value="{{current_page - 1}}"><</button>
       <button class="btn btn-primary" type="submit" name="page" value="{{current_page + 1}}">></button>
     </div>

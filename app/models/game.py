@@ -34,6 +34,30 @@ WHERE Games.gid = :gid
         return Game(*game_raw[0]) if game_raw else null
 
     @staticmethod
+    def get_some(mechanic = None, page = 0, per_page = 10):
+        offset = page * per_page
+        query = '''
+SELECT Games.*
+FROM Games
+'''
+        query_back = '''
+LIMIT :per_page OFFSET :offset
+'''
+        conditions = []
+
+        if mechanic:
+            conditions.append(":mechanic in (SELECT mech_name FROM Implements WHERE Implements.gid = Games.gid)")
+
+
+        if len(conditions) > 0:
+            full_query = query + " WHERE " + " AND ".join(conditions) + query_back
+        else:
+            full_query = query + query_back
+
+        game_raw = app.db.execute(full_query, per_page=per_page, offset=offset, mechanic=mechanic)
+        return [Game(*row) for row in game_raw]
+
+    @staticmethod
     def get_random():
         game_raw = app.db.execute('''
 SELECT * FROM Games
