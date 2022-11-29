@@ -82,3 +82,27 @@ WHERE uid = :uid AND LikesGame.gid = Games.gid
                             uid=uid)
         return [Game(*row) for row in rows]
 
+    @staticmethod
+    def get_play_count(uid, gid):
+        rows = app.db.execute("""
+SELECT PlayCount.count
+FROM PlayCount
+Where uid = :uid AND gid = :gid
+        """, uid=uid, gid=gid)
+        if len(rows) != 1:
+            return None
+        return rows[0][0]
+
+    def increment_play_count(uid, gid):
+        updated = app.db.execute("""
+UPDATE PlayCount
+SET count = count + 1
+WHERE gid = :gid AND uid = :uid
+        """, uid=uid, gid=gid)
+        print(updated)
+
+        if updated == 0:
+            app.db.execute("""
+INSERT INTO PlayCount (gid, uid, count)
+VALUES (:gid, :uid, 1)
+""", gid=gid, uid=uid)

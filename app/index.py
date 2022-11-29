@@ -14,3 +14,6 @@ def index():
     rand_game = Game.get_random()
     return render_template('index.html', rand_game=rand_game)
 
+@bp.route('/404')
+def notFound():
+    return render_template('404.html')
