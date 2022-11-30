@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from app.models.copy import Copy
@@ -81,8 +81,11 @@ def logout():
 
 class EditUserInfo(FlaskForm):
     name = StringField('Username', validators=[DataRequired()], render_kw={"size": 32})
+    image_url = StringField('Profile Pic URL', render_kw={"size": 32, "type":"url"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"size": 32})
     about = TextAreaField('About', render_kw={"cols": 48, "rows": 4})
+    password = PasswordField('New Password', validators=[EqualTo('repeat_password', message='Passwords must match')])
+    repeat_password = PasswordField('Repeat Password')
     submit = SubmitField('Save Changes')
 
 @bp.route('/users/<uid>', methods=['GET','POST'])

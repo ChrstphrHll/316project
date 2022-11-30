@@ -36,7 +36,8 @@
                     {% if field.type != "CSRFTokenField" and field.type != "SubmitField" %}
                     <div class="form-group">
                         {{ field.label }}<br>
-                        {{ field(class="modal_input_field", default_on_open="" if not default_vals_obj else default_vals_obj[field.name]) }}<br>
+                        {{ field(class="modal_input_field", default_on_open="" if not default_vals_obj else
+                        default_vals_obj[field.name]) }}<br>
                         {% for error in field.errors %}
                         <span class="error_display" style="color: red;">[{{ error }}]</span>
                         {% endfor %}
@@ -62,7 +63,7 @@
         trigger_elem.setAttribute("data-target", "#modal");
 
         trigger_elem.addEventListener("click", function () {
-            document.querySelectorAll(".error_display").forEach((el) => { el.textContent = "" });
+            document.querySelectorAll(".error_display").forEach((el) => { el.parentElement.removeChild(el) });
             document.querySelectorAll(".modal_input_field").forEach((input) => {
                 input.value = input.getAttribute("default_on_open");
             });
@@ -71,13 +72,18 @@
 </script>
 
 
-<!-- if we submitted invalid data (page will refresh), show the modal immediately so we 
-can see the errors -->
+<!-- if we submitted invalid data (page will refresh), show the modal immediately  and
+    scroll to the errors so we can see them -->
 {% if request.method == 'POST' and not form.validate() %}
 <script>
-    window.addEventListener("load", function () { $("#modal").modal("show") })
+    window.addEventListener("load", function () {
+        $('#modal').on('shown.bs.modal', function () {
+            let error_msg = document.querySelector(".error_display");
+            if (error_msg) error_msg.scrollIntoView({ behavior: "smooth", block: "center"});
+        });
+        $("#modal").modal("show");
+    })
 </script>
 {% endif %}
-
 
 {% endmacro %}
