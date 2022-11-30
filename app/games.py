@@ -27,7 +27,10 @@ def games():
     per_page = int(request.args.get('per_page') or 10)
     mechanic = request.args.get('mechanic') or None
 
-    games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic)
+    try:
+        games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic)
+    except:
+        return redirect(url_for('index.notFound'))
 
     max_page = ceil(len(games)/per_page)
 
@@ -40,7 +43,7 @@ def games():
 
     # games = games[0 + (page * per_page): per_page + (page * per_page)]
 
-    return render_template("game_search.html", games = games, form=form, current_page = page, per_page = per_page, mechanic=mechanic)
+    return render_template("game_pages/game_search.html", games = games, form=form, current_page = page, per_page = per_page, mechanic=mechanic)
 
 @bp.route('/<gid>', methods=['GET', 'POST'])
 def game(gid):
@@ -58,5 +61,5 @@ def game(gid):
         playCount = playCount if playCount else 0
     else:
         playCount = None
-    return render_template("game.html", game=game, mechanics=mechanics, playCount=playCount)
+    return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount)
 

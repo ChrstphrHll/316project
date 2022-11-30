@@ -45,7 +45,7 @@ LIMIT :per_page OFFSET :offset
 '''
         conditions = []
 
-        if mechanic:
+        if mechanic and mechanic != "None":
             conditions.append(":mechanic in (SELECT mech_name FROM Implements WHERE Implements.gid = Games.gid)")
 
 

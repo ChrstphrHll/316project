@@ -1,13 +1,16 @@
+{% from "macros/table_controls.html" import table_controls with context %}
+
+
 {% extends "base.html" %} {% block content %}
 
 <h2>Search Games:</h2>
-<form>
   <div class="d-flex p-2 border justify-content-end align-items-center">
-  
-    {{ form.search }}
-    <button type="submit" class="btn btn-primary mx-1">Search</button>
+    {{table_controls(mechanic, current_page, per_page)}}
+    <form>
+      {{ form.search }}
+      <button type="submit" class="btn btn-primary mx-1">Search</button>
+    </form>
   </div>
-</form>
 
 <table
   class="table table-hover table-primary table-striped table-bordered mb-0"
@@ -50,15 +53,7 @@
 </table>
 
 <div class="d-flex mb-5 p-2 border justify-content-center align-items-center">
-  <form method="GET" action="/games/">
-    <div class="btn-group mx-auto" role="group" aria-label="Basic example">
-      <!-- could automate this with list of tuples -->
-      <input type="hidden" name="per_page" value="{{per_page}}">
-      <input type="hidden" name="mechanic" value="{{mechanic}}"> 
-      <button class="btn btn-primary {{'disabled' if current_page <= 0 else ''}}" type="submit" name="page" value="{{current_page - 1}}"><</button>
-      <button class="btn btn-primary" type="submit" name="page" value="{{current_page + 1}}">></button>
-    </div>
-  </form>
+  {{table_controls(mechanic, current_page, per_page)}}
 </div>
 
 
