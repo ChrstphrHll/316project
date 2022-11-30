@@ -1,75 +1,34 @@
 {% extends "user_pages/base_user.html" %}
+{% from "_modal_form.html" import modal_form %}
+
 
 {% block user_content %}
 
-<div id="edit_modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+{{ modal_form(edit_info_form, "Edit Your Information", "open_modal") }}
 
-<p style="font-size: 24px;">
-    Username: {{ user.name }}
-    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-    (<a href data-toggle="modal" data-target="#edit_modal">edit</a>)
-    {% endif %}
+<p class="m-0" style="font-size: 24px;">
+  Username: {{ user.name }}
 </p>
-<img src="{{ user.image_url }}" style="height: 150px; display: block; border: 1px solid black;" />
+
 {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-(<a href="">edit</a>)<br><br>
+(<a id="open_modal" href>Edit my information</a>)<br>
 {% endif %}
 
+<br>
+<img src="{{ user.image_url }}" style="height: 150px; display: block; border: 1px solid black;" />
+<br>
+
 <p>
-    <b>Email</b>
-    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-    (<a href="">edit</a>)
-    {% endif %}
-    <br>
-    {{ user.email }}
+  <b>Email</b><br>
+  {{ user.email }}
 </p>
 
 {% if user.about %}
 <p>
-    <b>About</b>
-    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-    (<a href="">edit</a>)
-    {% endif %}
-    <br>
-    {{ user.about }}
+  <b>About</b><br>
+  {{ user.about }}
 </p>
 {% endif %}
 
-
-
-<!--
-<form action="" method="POST" novalidate class="modal fade" tabindex="-1" role="dialog" aria-hidden="false" id="editForm">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit [field]</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</form>
--->
 
 {% endblock %}

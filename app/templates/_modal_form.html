@@ -1,0 +1,57 @@
+{% macro modal_form(form, title, trigger_elem_id, default_vals_obj=False) %}
+
+<script>
+    window.addEventListener("load", function () {
+        let trigger_elem = document.getElementById("{{ trigger_elem_id }}");
+        trigger_elem.setAttribute("data-toggle", "modal");
+        trigger_elem.setAttribute("data-target", "#modal");
+
+        trigger_elem.addEventListener("click", function () {
+            document.querySelectorAll(".error_display").forEach((el) => { el.textContent = "" });
+            document.querySelectorAll(".modal_input_field").forEach((input) => {
+                input.value = input.getAttribute("default_on_open");
+            });
+        });
+    });
+</script>
+
+{% if request.method == 'POST' and not form.validate() %}
+<script>
+    window.addEventListener("load", function () { $("#modal").modal("show") })
+</script>
+{% endif %}
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="modal-body">
+                    {% for field in form %}
+                    {% if field.type != "CSRFTokenField" and field.type != "SubmitField" %}
+                    <div class="form-group">
+                        {{ field.label }}<br>
+                        {{ field(class="modal_input_field", default_on_open="" if not default_vals_obj else default_vals_obj[field.name]) }}<br>
+                        {% for error in field.errors %}
+                        <span class="error_display" style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    {{ form.submit(class="btn btn-primary") }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endmacro %}

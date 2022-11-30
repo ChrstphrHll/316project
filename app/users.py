@@ -46,7 +46,7 @@ def login():
 
 
 class RegistrationForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
+    name = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
@@ -80,13 +80,21 @@ def logout():
 
 
 class EditUserInfo(FlaskForm):
-    def __init__(self, field):
-        self.new_value = StringField(field, validators=[DataRequired()])
-    
-@bp.route('/users/<uid>')
+    name = StringField('Username', validators=[DataRequired()], render_kw={"size": 32})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"size": 32})
+    about = TextAreaField('About', render_kw={"cols": 48, "rows": 4})
+    submit = SubmitField('Save Changes')
+
+@bp.route('/users/<uid>', methods=['GET','POST'])
 def profile(uid):
-    edit_username = EditUserInfo("Username")
-    return render_template("user_pages/user_profile.html", user=User.get(uid))
+    edit_info_form = EditUserInfo()
+    
+    if request.method == 'POST':
+        if edit_info_form.validate_on_submit():
+            #TODO update user info
+            pass
+
+    return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form)
 
 
 @bp.route('/users/<uid>/liked')
