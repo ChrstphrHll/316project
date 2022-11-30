@@ -20,7 +20,7 @@
     bad data so you can see the error messages).
 -->
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+<div id="modal_id" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,7 +60,7 @@
     window.addEventListener("load", function () {
         let trigger_elem = document.getElementById("{{ trigger_elem_id }}");
         trigger_elem.setAttribute("data-toggle", "modal");
-        trigger_elem.setAttribute("data-target", "#modal");
+        trigger_elem.setAttribute("data-target", "#modal_id");
 
         trigger_elem.addEventListener("click", function () {
             document.querySelectorAll(".error_display").forEach((el) => { el.parentElement.removeChild(el) });
@@ -77,11 +77,11 @@
 {% if request.method == 'POST' and not form.validate() %}
 <script>
     window.addEventListener("load", function () {
-        $('#modal').on('shown.bs.modal', function () {
+        $('#modal_id').on('shown.bs.modal', function () {
             let error_msg = document.querySelector(".error_display");
             if (error_msg) error_msg.scrollIntoView({ behavior: "smooth", block: "center"});
         });
-        $("#modal").modal("show");
+        $("#modal_id").modal("show");
     })
 </script>
 {% endif %}
