@@ -1,7 +1,8 @@
 {% macro modal_form(form, title, trigger_elem_id, default_vals_obj=False) %}
 
 <!--
-    Use like so: {{ modal_form(form_object, "Modal Title", "elem_id", object) }}
+    Use like so (in double curly braces):
+    modal_form(form_object, "Modal Title", "elem_id", object)
     
     form: your form object
     title: modal title
@@ -11,8 +12,11 @@
                         (e.g. a User object). Your object must have variable names matching
                         the names of the fields.
     
-    NOTES: Can only have one of these on a webpage at a time b/c of the modal id.
-    Also this supports dealing with data validation (will redisplay the modal after submitting
+    NOTES:
+    - Can only have one of these on a webpage at a time b/c of the modal id.
+    - It is assumed that your form has a SubmitField called "submit"
+    - No need to include it or anything, the base HTML page includes it
+    - Also this supports dealing with data validation (will redisplay the modal after submitting
     bad data so you can see the error messages).
 -->
 

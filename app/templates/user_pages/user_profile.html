@@ -1,10 +1,8 @@
 {% extends "user_pages/base_user.html" %}
-{% from "_modal_form.html" import modal_form %}
-
 
 {% block user_content %}
 
-{{ modal_form(edit_info_form, "Edit Your Information", "open_modal") }}
+{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", user) }}
 
 <p class="m-0" style="font-size: 24px;">
   Username: {{ user.name }}
