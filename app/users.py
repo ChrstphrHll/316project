@@ -94,8 +94,7 @@ def profile(uid):
     
     if request.method == 'POST':
         if edit_info_form.validate_on_submit():
-            #TODO update user info
-            pass
+            User.get(uid).update_information(edit_info_form.data) # filters these to only use the relevant ones
 
     return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form)
 
