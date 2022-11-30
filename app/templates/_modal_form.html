@@ -1,25 +1,20 @@
 {% macro modal_form(form, title, trigger_elem_id, default_vals_obj=False) %}
 
-<script>
-    window.addEventListener("load", function () {
-        let trigger_elem = document.getElementById("{{ trigger_elem_id }}");
-        trigger_elem.setAttribute("data-toggle", "modal");
-        trigger_elem.setAttribute("data-target", "#modal");
-
-        trigger_elem.addEventListener("click", function () {
-            document.querySelectorAll(".error_display").forEach((el) => { el.textContent = "" });
-            document.querySelectorAll(".modal_input_field").forEach((input) => {
-                input.value = input.getAttribute("default_on_open");
-            });
-        });
-    });
-</script>
-
-{% if request.method == 'POST' and not form.validate() %}
-<script>
-    window.addEventListener("load", function () { $("#modal").modal("show") })
-</script>
-{% endif %}
+<!--
+    Use like so: {{ modal_form(form_object, "Modal Title", "elem_id", object) }}
+    
+    form: your form object
+    title: modal title
+    trigger_elem_id: when the HTML element with this id gets clicked, open the modal
+    default_vals_obj: By default, opening the modal will clear the fields. Provide an object here
+                        with default values to be populated instead of clearing the fields
+                        (e.g. a User object). Your object must have variable names matching
+                        the names of the fields.
+    
+    NOTES: Can only have one of these on a webpage at a time b/c of the modal id.
+    Also this supports dealing with data validation (will redisplay the modal after submitting
+    bad data so you can see the error messages).
+-->
 
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -53,5 +48,32 @@
         </div>
     </div>
 </div>
+
+
+<!-- init modal opening event handling, and auto-clearing of inputs -->
+<script>
+    window.addEventListener("load", function () {
+        let trigger_elem = document.getElementById("{{ trigger_elem_id }}");
+        trigger_elem.setAttribute("data-toggle", "modal");
+        trigger_elem.setAttribute("data-target", "#modal");
+
+        trigger_elem.addEventListener("click", function () {
+            document.querySelectorAll(".error_display").forEach((el) => { el.textContent = "" });
+            document.querySelectorAll(".modal_input_field").forEach((input) => {
+                input.value = input.getAttribute("default_on_open");
+            });
+        });
+    });
+</script>
+
+
+<!-- if we submitted invalid data (page will refresh), show the modal immediately so we 
+can see the errors -->
+{% if request.method == 'POST' and not form.validate() %}
+<script>
+    window.addEventListener("load", function () { $("#modal").modal("show") })
+</script>
+{% endif %}
+
 
 {% endmacro %}
