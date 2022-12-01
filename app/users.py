@@ -54,9 +54,13 @@ class RegistrationForm(FlaskForm):
                                        EqualTo('password')])
     submit = SubmitField('Register')
 
-    def validate_email(self, email):
-        if User.email_exists(email.data):
-            raise ValidationError('Already a user with this email.')
+    def validate_name(self, name_field):
+        if User.username_exists(name_field.data):
+            raise ValidationError("Already a user with this username")
+
+    def validate_email(self, email_field):
+        if User.email_exists(email_field.data):
+            raise ValidationError('Already a user with this email')
 
 
 @bp.route('/register', methods=['GET', 'POST'])
@@ -85,7 +89,7 @@ class EditUserInfo(FlaskForm):
         super().__init__(*args, **kwargs)
 
     name = StringField('Username', validators=[DataRequired()], render_kw={"size": 32})
-    image_url = StringField('Profile Pic URL', render_kw={"size": 32, "type":"url"})
+    image_url = StringField('Profile Pic URL (leave blank to remove current pic)', render_kw={"size": 32, "type":"url"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"size": 32})
     about = TextAreaField('About', render_kw={"cols": 48, "rows": 4})
     password = PasswordField('New Password', validators=[EqualTo('repeat_password', message='Passwords must match')])
