@@ -72,8 +72,10 @@ def register():
         if User.register(form.name.data,
                          form.email.data,
                          form.password.data):
-            flash('Congratulations, you are now a registered user!')
-            return redirect(url_for('users.login'))
+            user = User.get_by_auth(form.email.data, form.password.data)
+            if user: # should always be true
+                login_user(user)
+                return redirect(url_for('index.index'))
     return render_template('register.html', title='Register', form=form)
 
 
