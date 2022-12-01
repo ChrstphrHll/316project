@@ -78,13 +78,15 @@ WHERE email = :email
     def register(name, email, password):
         try:
             rows = app.db.execute("""
-INSERT INTO Users(name, email, password)
-VALUES(:name, :email, :password)
+INSERT INTO Users(name, email, password, about, image_url)
+VALUES(:name, :email, :password, :about, :image_url)
 RETURNING uid
 """,
                                   name=name,
                                   email=email,
-                                  password=generate_password_hash(password))
+                                  password=generate_password_hash(password),
+                                  about="",
+                                  image_url="")
             uid = rows[0][0]
             return User.get(uid)
         except Exception as e:
