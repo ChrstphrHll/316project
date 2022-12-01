@@ -48,3 +48,5 @@ SELECT pg_catalog.setval('public.libraries_lid_seq',
 \COPY CheckedOutBy FROM 'CheckedOutBy.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY DesignedBy FROM 'DesignedBy.csv' WITH DELIMITER ',' NULL '' CSV;
+
+\COPY PlayCount FROM 'PlayCount.csv' WITH DELIMITER ',' NULL '' CSV;
