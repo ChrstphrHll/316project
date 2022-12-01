@@ -75,7 +75,7 @@ def register():
             user = User.get_by_auth(form.email.data, form.password.data)
             if user: # should always be true
                 login_user(user)
-                return redirect(url_for('index.index'))
+                return redirect(url_for('users.profile', uid=user.uid))
     return render_template('register.html', title='Register', form=form)
 
 
