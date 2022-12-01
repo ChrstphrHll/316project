@@ -15,6 +15,28 @@ class User(UserMixin):
 
     def get_id(self):   # override mixin default of reading "id" field because we call it uid
         return self.uid
+    
+    def update_information(self, attrs): # attrs is a dictionary of "user_attr":value
+        try:
+            app.db.execute("""
+UPDATE Users
+SET name = :name, email = :email, about = :about, image_url = :image_url
+WHERE uid = :uid
+            """, name=attrs["name"], email=attrs["email"], about=attrs["about"], image_url=attrs["image_url"], uid=self.uid)
+        
+            if attrs["password"] and len(attrs["password"]) > 0:
+                app.db.execute("""
+UPDATE Users
+SET password = :new_hash
+WHERE uid = :uid
+                """, new_hash = generate_password_hash(attrs["password"]), uid=self.uid)
+            
+            return True
+
+        except Exception as e:
+            print(str(e))
+            return False
+
 
     @staticmethod
     def get_by_auth(email, password):
@@ -33,6 +55,16 @@ WHERE email = :email
             return User(*(rows[0][1:]))
 
     @staticmethod
+    def username_exists(name):
+        rows = app.db.execute("""
+SELECT name
+FROM Users
+WHERE name = :name
+""",
+                              name=name)
+        return len(rows) > 0
+
+    @staticmethod
     def email_exists(email):
         rows = app.db.execute("""
 SELECT email
@@ -46,13 +78,15 @@ WHERE email = :email
     def register(name, email, password):
         try:
             rows = app.db.execute("""
-INSERT INTO Users(name, email, password)
-VALUES(:name, :email, :password)
+INSERT INTO Users(name, email, password, about, image_url)
+VALUES(:name, :email, :password, :about, :image_url)
 RETURNING uid
 """,
                                   name=name,
                                   email=email,
-                                  password=generate_password_hash(password))
+                                  password=generate_password_hash(password),
+                                  about="",
+                                  image_url="")
             uid = rows[0][0]
             return User.get(uid)
         except Exception as e:
