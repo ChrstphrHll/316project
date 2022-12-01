@@ -15,8 +15,11 @@
     NOTES:
     - Can only have one of these on a webpage at a time b/c of the modal id.
     - It is assumed that your form has a SubmitField called "submit"
-    - No need to include it or anything, the base HTML page includes it
-    - Also this supports dealing with data validation (will redisplay the modal after submitting
+    - Make sure to call redirect(url_for(...)) upon successful form submission, to make a new GET
+        request (best practice according to WTForms), so that the modal doesn't reopen by accident
+        because of the form being invalid (rare but can happen if you change the database)
+    - Can use this directly without an include statement, the base HTML page includes it
+    - FYI this supports dealing with data validation (will redisplay the modal after submitting
     bad data so you can see the error messages).
 -->
 
@@ -70,7 +73,6 @@
         });
     });
 </script>
-
 
 <!-- if we submitted invalid data (page will refresh), show the modal immediately  and
     scroll to the errors so we can see them -->

@@ -25,7 +25,6 @@ WHERE uid = :uid
             """, name=attrs["name"], email=attrs["email"], about=attrs["about"], image_url=attrs["image_url"], uid=self.uid)
         
             if attrs["password"] and len(attrs["password"]) > 0:
-                print("new password")
                 app.db.execute("""
 UPDATE Users
 SET password = :new_hash
@@ -54,6 +53,16 @@ WHERE email = :email
             return None
         else:
             return User(*(rows[0][1:]))
+
+    @staticmethod
+    def username_exists(name):
+        rows = app.db.execute("""
+SELECT name
+FROM Users
+WHERE name = :name
+""",
+                              name=name)
+        return len(rows) > 0
 
     @staticmethod
     def email_exists(email):

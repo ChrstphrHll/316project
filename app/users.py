@@ -80,6 +80,10 @@ def logout():
 
 
 class EditUserInfo(FlaskForm):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
     name = StringField('Username', validators=[DataRequired()], render_kw={"size": 32})
     image_url = StringField('Profile Pic URL', render_kw={"size": 32, "type":"url"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"size": 32})
@@ -88,13 +92,22 @@ class EditUserInfo(FlaskForm):
     repeat_password = PasswordField('Repeat Password')
     submit = SubmitField('Save Changes')
 
+    def validate_name(self, name_field):
+        if name_field.data != self.user.name and User.username_exists(name_field.data):
+            raise ValidationError("Another user has this username already")
+
+    def validate_email(self, email_field):
+        if email_field.data != self.user.email and User.email_exists(email_field.data):
+            raise ValidationError("Another user has this email already")
+
 @bp.route('/users/<uid>', methods=['GET','POST'])
 def profile(uid):
-    edit_info_form = EditUserInfo()
+    edit_info_form = EditUserInfo(User.get(uid))
     
     if request.method == 'POST':
         if edit_info_form.validate_on_submit():
             User.get(uid).update_information(edit_info_form.data) # filters these to only use the relevant ones
+            return redirect(url_for('users.profile', uid=uid))
 
     return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form)
 
@@ -166,7 +179,6 @@ def libraries(uid):
     create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
     if create_form and create_form.validate_on_submit():
-        print("here")
         library = Library.create(create_form.title.data, create_form.description.data, current_user.uid)
         if library:
             return redirect(url_for('library.library', lid=library.lid))
