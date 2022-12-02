@@ -2,9 +2,8 @@ from flask import current_app as app
 
 
 class Review:
-    def __init__(self, uid, gid, rating, description, time_posted):
-        self.gid = gid
-        self.uid = uid
+    def __init__(self, name, rating, description, time_posted):
+        self.name = name
         self.description = description
         self.rating = rating
         self.time_posted = time_posted
@@ -23,7 +22,7 @@ AND uid = :uid
     @staticmethod
     def get_top_5(uid):
         rows = app.db.execute('''
-SELECT uid, gid, rating, description, time_posted
+SELECT gid, rating, description, time_posted
 FROM ReviewOf
 WHERE uid = :uid
 ORDER BY time_posted
@@ -31,3 +30,16 @@ DESC LIMIT 5
 ''',
                               uid=uid)
         return [Review(*row) for row in rows]
+
+    @staticmethod
+    def get_top_5_game(gid):
+        rows = app.db.execute('''
+SELECT u.name, r.rating, r.description, r.time_posted
+FROM ReviewOf as r, Users as u
+WHERE r.gid = :gid AND u.uid = r.uid 
+ORDER BY time_posted
+DESC LIMIT 5
+''',
+                              gid=gid)
+        return [Review(*row) for row in rows]
+    

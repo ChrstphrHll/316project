@@ -8,6 +8,7 @@ from wtforms.validators import DataRequired
 
 from .models.game import Game
 from .models.user import User
+from .models.review import Review
 from flask import current_app as app
 from flask_login import current_user
 
@@ -56,10 +57,12 @@ def game(gid):
 
     game = Game.get(gid)
     mechanics = Game.get_mechanics(gid)
+    gameReviews = Review.get_top_5_game(gid)
     if current_user.is_authenticated:
         playCount = User.get_play_count(current_user.uid, gid)
         playCount = playCount if playCount else 0
+        
     else:
         playCount = None
-    return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount)
+    return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount, gameReviews=gameReviews)
 

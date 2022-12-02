@@ -41,6 +41,31 @@
       {% endfor %}
     </div>
   </div>
+  <div class="row d-flex mt-2 p-2 bg-light rounded">
+    <h2>Reviews</h2>
+    <div class="justify-content-end align-items-center">
+      <button type="button" class="btn btn-primary">Add Review</button>
+    </div>
+    <table class='table table-hover table-primary table-striped table-bordered container'>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Username</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Description</th>
+          <th scope="col">timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for review in gameReviews%}
+          <tr>
+            <th scope="row">{{review.name}}</th>
+            <td>{{review.rating}}</td>
+            <td>{{review.description}}</td>
+            <td>{{review.time_posted}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+  </div>
 </div>
 
 
