@@ -11,13 +11,13 @@ class Review:
     @staticmethod
     def get(gid, uid):
         rows = app.db.execute('''
-SELECT gid, uid, rating, description, time_posted
+SELECT gid, rating, description, time_posted
 FROM ReviewOf
 WHERE gid = :gid
 AND uid = :uid
 ''',
                               gid=gid, uid=uid)
-        return Review(*(rows[0])) if rows is not None else None
+        return [Review(*row) for row in rows]
 
     @staticmethod
     def get_top_5(uid):
