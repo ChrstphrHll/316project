@@ -12,8 +12,6 @@
 {% endif %}
 
 <br>
-<img src="{{ user.image_url }}" style="height: 150px; display: block; border: 1px solid black;" />
-<br>
 
 <p>
   <b>Email</b><br>
@@ -27,5 +25,8 @@
 </p>
 {% endif %}
 
+{% if designed_games|length > 0 %}
+<p style="font-size: 24px;">Games designed by {{ user.name }}:</p><br>
+{% endif %}
 
 {% endblock %}
