@@ -1,4 +1,4 @@
-{% from "_modal_form.html" import modal_form %}
+{% from "macros/modal_form.html" import modal_form %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +54,11 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('library.libraries') }}">
               Libraries
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('users.user_search') }}">
+              Users
             </a>
           </li>
 

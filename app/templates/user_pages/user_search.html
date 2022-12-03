@@ -1,0 +1,50 @@
+{% from "macros/table_controls.html" import table_controls with context %}
+
+
+{% extends "base.html" %} {% block content %}
+
+<h2>Search Users:</h2>
+  <div class="d-flex p-2 border justify-content-end align-items-center">
+    <form>
+      {{ search_form.search(value = prev_search_string) }}
+      <button type="submit" class="btn btn-primary mx-1">Search</button>
+    </form>
+    <a href="{{ url_for('users.user_search') }}" class="btn btn-primary mx-1">Clear Search</a>
+  </div>
+
+<table
+  class="table table-hover table-primary table-striped table-bordered mb-0"
+>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Profile Pic</th>
+      <th scope="col">Name</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>
+        <img
+          src="{{ user.image_url }}"
+          style="max-width: 100px"
+          alt="Profile pic for {{user.name}}"
+        />
+      </td>
+      <th scope="row">{{user.name}}</th>
+      <td>
+        <a
+          href="{{ url_for('users.profile', uid=user.uid) }}"
+          class="badge bg-primary text-light"
+          role="button"
+          >GO</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

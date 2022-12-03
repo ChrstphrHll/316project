@@ -85,6 +85,23 @@ def logout():
     return redirect(url_for('index.index'))
 
 
+
+class Search(FlaskForm):
+    search = StringField('search', validators=[DataRequired()])
+
+@bp.route('/users', methods=['GET','POST'])
+def user_search():
+    search_form = Search()
+    prev_search_string = ""
+    users = User.get_all()
+
+    if "search" in request.args:
+        users = filter(lambda x: request.args.get("search").lower() in x.name.lower(), users)
+        prev_search_string = request.args.get("search")
+
+    return render_template("user_pages/user_search.html", users=users, search_form=search_form, prev_search_string=prev_search_string)
+
+
 class EditUserInfo(FlaskForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
@@ -161,9 +178,11 @@ class Create(FlaskForm):
 def collections(uid):
     collections = Collection.get_user_collections(uid)
     search_form = Search()
+    prev_search_string = ""
     
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
+        prev_search_string = request.args.get("search")
 
     create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
@@ -172,15 +191,17 @@ def collections(uid):
         if collection:
             return redirect(url_for('users.collections', uid=uid))
 
-    return render_template('user_pages/collections.html', user=User.get(uid), collections=collections, form=search_form, create=create_form)
+    return render_template('user_pages/collections.html', user=User.get(uid), collections=collections, form=search_form, prev_search_string = prev_search_string, create=create_form)
 
 @bp.route('/users/<uid>/libraries', methods=['GET', 'POST'])
 def libraries(uid):
     libraries = Library.get_user_libraries(uid)
     form = Search()
+    prev_search_string = ""
 
     if "search" in request.args:
         libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
+        prev_search_string = request.args.get("search")
 
     create_form = Create() if current_user.is_authenticated and current_user.uid == int(uid) else None
 
@@ -189,7 +210,7 @@ def libraries(uid):
         if library:
             return redirect(url_for('users.libraries', uid=uid))
 
-    return render_template('user_pages/libraries.html', user=User.get(uid), libraries=libraries, form=form, create=create_form)
+    return render_template('user_pages/libraries.html', user=User.get(uid), libraries=libraries, form=form, prev_search_string=prev_search_string, create=create_form)
 
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):

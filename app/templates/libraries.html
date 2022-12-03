@@ -3,8 +3,11 @@
 <h2>Search Libraries:</h2>
 
 <div class="d-flex p-2 border justify-content-end align-items-center">
-  {{ form.search }}
-  <button type="submit" class="btn btn-primary mx-1">Search</button>
+  <form>
+    {{ form.search(value = prev_search_string) }}
+    <button type="submit" class="btn btn-primary mx-1">Search</button>
+  </form>
+  <a href="{{ url_for('library.libraries') }}" class="btn btn-primary mx-1">Clear Search</a>
 </div>
 
 <table

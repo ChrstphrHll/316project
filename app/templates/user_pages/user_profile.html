@@ -8,7 +8,7 @@
 
 {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
 (<a id="open_modal" href>Edit my information</a>)<br>
-{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", user) }}
+{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", "POST", user) }}
 {% endif %}
 
 <br>
