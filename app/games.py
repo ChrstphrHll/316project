@@ -60,7 +60,7 @@ def game(gid):
         playCount = User.get_play_count(current_user.uid, gid)
         playCount = playCount if playCount else 0
     else:
-    return render_template("game.html", game=game, mechanics=mechanics)
+        return render_template("game.html", game=game, mechanics=mechanics)
 
 @bp.route('/try')
 def try_this():
