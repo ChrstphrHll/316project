@@ -1,0 +1,91 @@
+{% macro modal_form(form, title, trigger_elem_id, default_vals_obj=False) %}
+
+<!--
+    Use like so (in double curly braces):
+    modal_form(form_object, "Modal Title", "elem_id", object)
+    
+    form: your form object
+    title: modal title
+    trigger_elem_id: when the HTML element with this id gets clicked, open the modal
+    default_vals_obj: By default, opening the modal will clear the fields. Provide an object here
+                        with default values to be populated instead of clearing the fields
+                        (e.g. a User object). Your object must have variable names matching
+                        the names of the fields.
+    
+    NOTES:
+    - Can only have one of these on a webpage at a time b/c of the modal id.
+    - It is assumed that your form has a SubmitField called "submit"
+    - Make sure to call redirect(url_for(...)) upon successful form submission, to make a new GET
+        request (best practice according to WTForms), so that the modal doesn't reopen by accident
+        because of the form being invalid (rare but can happen if you change the database)
+    - Can use this directly without an include statement, the base HTML page includes it
+    - FYI this supports dealing with data validation (will redisplay the modal after submitting
+    bad data so you can see the error messages).
+-->
+
+<div id="modal_id" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="modal-body">
+                    {% for field in form %}
+                    {% if field.type != "CSRFTokenField" and field.type != "SubmitField" %}
+                    <div class="form-group">
+                        {{ field.label }}<br>
+                        {{ field(class="modal_input_field", default_on_open="" if not default_vals_obj else
+                        default_vals_obj[field.name]) }}<br>
+                        {% for error in field.errors %}
+                        <span class="error_display" style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    {{ form.submit(class="btn btn-primary") }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- init modal opening event handling, and auto-clearing of inputs -->
+<script>
+    window.addEventListener("load", function () {
+        let trigger_elem = document.getElementById("{{ trigger_elem_id }}");
+        trigger_elem.setAttribute("data-toggle", "modal");
+        trigger_elem.setAttribute("data-target", "#modal_id");
+
+        trigger_elem.addEventListener("click", function () {
+            document.querySelectorAll(".error_display").forEach((el) => { el.parentElement.removeChild(el) });
+            document.querySelectorAll(".modal_input_field").forEach((input) => {
+                input.value = input.getAttribute("default_on_open");
+            });
+        });
+    });
+</script>
+
+<!-- if we submitted invalid data (page will refresh), show the modal immediately  and
+    scroll to the errors so we can see them -->
+{% if request.method == 'POST' and not form.validate() %}
+<script>
+    window.addEventListener("load", function () {
+        $('#modal_id').on('shown.bs.modal', function () {
+            let error_msg = document.querySelector(".error_display");
+            if (error_msg) error_msg.scrollIntoView({ behavior: "smooth", block: "center"});
+        });
+        $("#modal_id").modal("show");
+    })
+</script>
+{% endif %}
+
+{% endmacro %}

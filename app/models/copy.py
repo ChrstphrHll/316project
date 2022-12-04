@@ -111,6 +111,18 @@ class Copy:
       uid=uid)
       return [Copy(*row) for row in rows]
 
+    # Get all libraries owned by user
+    # Get all copies in those libraries
+    @staticmethod
+    def user_owned_copies(uid):
+      rows = app.db.execute('''
+      SELECT Copies.*
+      FROM Libraries, HasCopy, Owns, Copies
+      WHERE Owns.uid=:uid AND Owns.lid = Libraries.lid AND HasCopy.lid = Libraries.lid AND Copies.cpid=HasCopy.cpid
+      ''',
+      uid=uid)
+      return [Copy(*row) for row in rows]
+
     @staticmethod
     def checked_out_by(cpid):
       rows = app.db.execute('''

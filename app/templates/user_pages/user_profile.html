@@ -2,30 +2,30 @@
 
 {% block user_content %}
 
-<p style="font-size: 24px;">
-    Username: {{ user.name }}
-    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-    (<a href="">edit</a>)
-    {% endif %}
+<p class="m-0" style="font-size: 24px;">
+  Username: {{ user.name }}
 </p>
+
+{% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+(<a id="open_modal" href>Edit my information</a>)<br>
+{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", user) }}
+{% endif %}
+
+<br>
+<img src="{{ user.image_url }}" style="height: 150px; display: block; border: 1px solid black;" />
+<br>
+
 <p>
-    <b>Email</b>
-    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-    (<a href="">edit</a>)
-    {% endif %}
-    <br>
-    {{ user.email }}
+  <b>Email</b><br>
+  {{ user.email }}
 </p>
 
 {% if user.about %}
 <p>
-    <b>About</b>
-    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-    (<a href="">edit</a>)
-    {% endif %}
-    <br>
-    {{ user.about }}
+  <b>About</b><br>
+  {{ user.about }}
 </p>
 {% endif %}
+
 
 {% endblock %}

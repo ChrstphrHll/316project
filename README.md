@@ -6,10 +6,10 @@ Github link: https://github.com/ChrstphrHll/316project
 Group Name: Weak Entity Set
 
 Contributors:
-Christopher Hall 
-Kegan Lovell
-Molly Borowiak
-Adam Kosinski
+Christopher Hall, 
+Kegan Lovell,
+Molly Borowiak,
+Adam Kosinski,
 Aryan Mathur
 
 

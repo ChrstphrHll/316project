@@ -16,10 +16,15 @@
           <p>Players: {{game.min_players}}-{{game.max_players}}</p>
           <p>Length: {{game.length}} minutes</p>
           <p>Complexity: {{game.complexity}}/5</p>
-          <div class="btn-group mx-auto" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary disabled">Log Play</button>
-            <button type="button" class="btn btn-primary disabled">Like</button>
-          </div>
+          {% if playCount != None %}
+            <p>Play Count: {{playCount}}</p>
+          {% endif %}
+            <form method="POST" action="/games/{{game.gid}}">
+              <div class="btn-group mx-auto" role="group" aria-label="Basic example">
+                <input class="btn btn-primary" type="submit" value="Log Play" name="log_play">
+                <input class="btn btn-primary" type="submit" value="Like" name="like">
+              </div>
+            </form>
         </div>
       </div>
     </div>
@@ -32,7 +37,7 @@
 
     <div class="col-10 d-flex flex-wrap">
       {% for mechanic in mechanics%}
-        <h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4>
+      <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
       {% endfor %}
     </div>
   </div>
