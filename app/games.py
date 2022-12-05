@@ -8,6 +8,7 @@ from wtforms.validators import DataRequired
 
 from .models.game import Game
 from .models.user import User
+from.models.recommendation import Recommendation
 from flask import current_app as app
 from flask_login import current_user
 
@@ -56,11 +57,13 @@ def game(gid):
 
     game = Game.get(gid)
     mechanics = Game.get_mechanics(gid)
+
+    sim_games = Recommendation.get_sim_games(gid)
     if current_user.is_authenticated:
         playCount = User.get_play_count(current_user.uid, gid)
         playCount = playCount if playCount else 0
     else:
-        return render_template("game.html", game=game, mechanics=mechanics)
+        return render_template("game_pages/game.html", game=game, mechanics=mechanics, sim_games=sim_games)
 
 @bp.route('/try')
 def try_this():

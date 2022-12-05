@@ -114,6 +114,15 @@ class Recommendation:
         return [Game(*row) for row in rows[:5]]
 
     @staticmethod
+    def liked(uid):
+        rows = app.db.execute('''
+        SELECT G.*
+        FROM Games as G, LikesGame as L
+        WHERE G.gid=L.gid AND L.uid=:uid
+        ''', uid=uid)
+        return [Game(*row) for row in rows]
+
+    @staticmethod
     def get(uid, gid):
         rows = app.db.execute('''
     WITH liked_mech AS (SELECT I.mech_name FROM LikesGame as L, Implements as I
