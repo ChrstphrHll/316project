@@ -109,7 +109,7 @@ class Recommendation:
         FROM Games as G, all_imp as I
         WHERE G.gid=I.gid       
         GROUP BY G.gid, G.name, G.description, G.image_url, G.thumbnail_url, G.complexity, G.length, G.min_players, G.max_players
-        HAVING COUNT(*) > 5
+        ORDER BY COUNT(*) DESC
         ''', gid=gid)
         return [Game(*row) for row in rows[:5]]
 
