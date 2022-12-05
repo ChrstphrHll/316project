@@ -21,26 +21,32 @@ class Recommendation:
     @staticmethod
     def get_w_easy_mech(uid, mech_name):
         rows = app.db.execute('''
+        WITH IG as 
         (SELECT G.*
         FROM Implements as I, Games as G
         WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity <= 2)
-        EXCEPT
-        (SELECT G.*
-        FROM LikesGame as L, Games as G
-        WHERE L.uid =:uid AND L.gid=G.gid)        
+        SELECT IG.*
+        FROM LikesGame as L, IG
+        WHERE L.uid !=:uid AND L.gid=IG.gid
+        GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, 
+        IG.complexity, IG.length, IG.min_players, IG.max_players
+        ORDER BY COUNT(*) DESC    
         ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows[:5]]
 
     @staticmethod
     def get_w_hard_mech(uid, mech_name):
         rows = app.db.execute('''
+        WITH IG as
         (SELECT G.*
         FROM Implements as I, Games as G
         WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity >= 4)
-        EXCEPT
-        (SELECT G.*
-        FROM LikesGame as L, Games as G
-        WHERE L.uid =:uid AND L.gid=G.gid)        
+        SELECT IG.*
+        FROM LikesGame as L, IG
+        WHERE L.uid !=:uid AND L.gid=IG.gid
+        GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, 
+        IG.complexity, IG.length, IG.min_players, IG.max_players
+        ORDER BY COUNT(*) DESC            
         ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows[:5]]
 
@@ -75,28 +81,27 @@ class Recommendation:
     @staticmethod
     def get_pop_designer(uid):
         rows = app.db.execute('''
-        (SELECT U.uid, U.name, U.email, U.about, U.image_url
+        SELECT U.uid, U.name, U.email, U.about, U.image_url
         FROM LikesGame as L, DesignedBy as D, Users as U
-        WHERE L.uid =:uid AND L.gid = D.gid AND U.uid = D.uid
+        WHERE L.uid =:uid AND L.gid = D.gid AND U.uid = D.uid AND U.uid !=:uid
         GROUP BY U.uid, U.name, U.email, U.about, U.image_url
-        ORDER BY COUNT(*) DESC)
-        EXCEPT
-        (SELECT U.uid, U.name, U.email, U.about, U.image_url
-        FROM Users as U
-        WHERE U.uid =:uid)
+        ORDER BY COUNT(*) DESC
         ''', uid = uid)
         return User(*(rows[0])) if rows else []
 
     @staticmethod
     def get_w_designer(uid, did):
         rows = app.db.execute('''
+        WITH DG as
         (SELECT G.*
         FROM DesignedBy as D, Games as G
         WHERE D.uid =:did AND D.gid = G.gid)
-        EXCEPT
-        (SELECT G.*
-        FROM LikesGame as L, Games as G
-        WHERE L.uid =:uid AND L.gid=G.gid)        
+        SELECT DG.*
+        FROM LikesGame as L, DG
+        WHERE L.uid !=:uid AND L.gid=DG.gid
+        GROUP BY DG.gid, DG.name, DG.description, DG.image_url, DG.thumbnail_url, 
+        DG.complexity, DG.length, DG.min_players, DG.max_players
+        ORDER BY COUNT(*) DESC       
         ''', uid = uid, did=did)
         return [Game(*row) for row in rows[:5]]
 
