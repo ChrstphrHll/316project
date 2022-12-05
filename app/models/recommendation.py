@@ -6,6 +6,7 @@ from .user import User
 
 class Recommendation:
   
+    #returns the most common mechanic of the games liked
     @staticmethod
     def get_pop_mech(uid):
         rows = app.db.execute('''
@@ -97,6 +98,19 @@ class Recommendation:
         FROM LikesGame as L, Games as G
         WHERE L.uid =:uid AND L.gid=G.gid)        
         ''', uid = uid, did=did)
+        return [Game(*row) for row in rows[:5]]
+
+    @staticmethod
+    def get_sim_games(gid):
+        rows = app.db.execute('''
+        WITH GI AS (SELECT * FROM Games as G, Implements as I WHERE G.gid=I.gid AND G.gid=:gid),
+        all_imp AS (SELECT I.gid FROM GI, Implements as I WHERE GI.mech_name=I.mech_name AND I.gid!=:gid)
+        SELECT G.*
+        FROM Games as G, all_imp as I
+        WHERE G.gid=I.gid       
+        GROUP BY G.gid, G.name, G.description, G.image_url, G.thumbnail_url, G.complexity, G.length, G.min_players, G.max_players
+        HAVING COUNT(*) > 5
+        ''', gid=gid)
         return [Game(*row) for row in rows[:5]]
 
     @staticmethod

@@ -1,5 +1,6 @@
 from flask import current_app as app
 from sqlalchemy import null
+from .mechanic import Mechanic
 import html
 
 class Game:
@@ -64,3 +65,12 @@ ORDER BY RANDOM()
 LIMIT 1
 ''')
         return Game(*game_raw[0]) if game_raw else null
+
+    @staticmethod
+    def get_mechanics(gid):
+        rows = app.db.execute('''
+SELECT m.*
+FROM Mechanics m, Implements i
+WHERE :gid = i.gid and i.mech_name = m.mech_name
+''', gid=gid)
+        return [Mechanic(*row) for row in rows]
