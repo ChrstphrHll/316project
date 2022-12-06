@@ -70,7 +70,10 @@ def game(gid):
         if "log_play" in request.form:
             if current_user.is_authenticated:
                 User.increment_play_count(current_user.uid, gid)
-        if "rating" in request.form:
+        elif "like" in request.form:
+            if current_user.is_authenticated:
+                User.toggle_like_game(current_user.uid, gid)
+        elif "rating" in request.form:
             if current_user.is_authenticated:
                 Review.create(current_user.uid, gid,request.form['rating'], 
                 request.form['description'],  datetime.datetime.now())
@@ -87,11 +90,15 @@ def game(gid):
         user = User.get(current_user.uid)
         playCount = User.get_play_count(current_user.uid, gid)
         playCount = playCount if playCount else 0
+        likeStatus = User.check_likes(current_user.uid, gid)
         userReview = Review.get(gid, current_user.uid)
         
     else:
         playCount = None
         userReview = []
         user = None
+        review_form = None
+        likeStatus = None
+
     return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount, 
-    gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating)
+    gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating, likeStatus=likeStatus)
