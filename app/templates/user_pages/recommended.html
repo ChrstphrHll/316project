@@ -100,6 +100,25 @@
             </tbody>
         </table>
 
+        <h2>Check out these cool collections!</h2>
+
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Collection</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coll in sim_coll %}
+                <tr>
+                    <td>{{coll.title}}</td>
+                    <td>{{coll.description}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 </body>
 
 {% endblock %}
