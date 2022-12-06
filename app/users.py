@@ -140,7 +140,9 @@ class ProfilePic(FlaskForm):
 
 @bp.route('/users/<uid>', methods=['GET','POST'])
 def profile(uid):
-
+    if not User.get(uid):
+        return redirect(url_for("index.notFound"))
+    
     user = User.get(uid)
     edit_info_form = EditUserInfo(user)
     profile_pic_form = ProfilePic(User.get(uid))
@@ -159,6 +161,9 @@ def profile(uid):
 
 @bp.route('/users/<uid>/liked')
 def liked(uid):
+    if not User.get(uid):
+        return redirect(url_for("index.notFound"))
+    
     # return all games this user likes
     liked_games = User.get_liked_games(uid)
     return render_template("user_pages/liked.html", user=User.get(uid), liked_games=liked_games)
@@ -169,6 +174,8 @@ def liked(uid):
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
+    if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
+        return redirect(url_for("index.notFound"))
 
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech[0].mech_name
@@ -198,6 +205,9 @@ class Create(FlaskForm):
 
 @bp.route('/users/<uid>/collections', methods=['GET', 'POST'])
 def collections(uid):
+    if not User.get(uid):
+        return redirect(url_for("index.notFound"))
+
     collections = Collection.get_user_collections(uid)
     search_form = Search()
     prev_search_string = ""
@@ -217,6 +227,9 @@ def collections(uid):
 
 @bp.route('/users/<uid>/libraries', methods=['GET', 'POST'])
 def libraries(uid):
+    if not User.get(uid):
+        return redirect(url_for("index.notFound"))
+    
     libraries = Library.get_user_libraries(uid)
     form = Search()
     prev_search_string = ""
@@ -236,6 +249,10 @@ def libraries(uid):
 
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):
+    print("current",current_user)
+    if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
+        return redirect(url_for("index.notFound"))
+    
     borrowed_copies = Copy.user_borrowed_copies(uid)
     owned_copies = Copy.user_owned_copies(uid)
     for copy in owned_copies:
@@ -249,5 +266,8 @@ def borrowed(uid):
 
 @bp.route('/users/<uid>/reviews', methods=['GET', 'POST'])
 def reviews(uid):
+    if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
+        return redirect(url_for("index.notFound"))
+    
     reviews = Review.get_all_user(int(uid))
     return render_template('user_pages/reviews.html', user=User.get(uid), review_history=reviews)
