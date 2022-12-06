@@ -26,14 +26,19 @@
 {% endif %}
 
 {% if designed_games|length > 0 %}
-<p style="font-size: 24px;">Games designed by {{ user.name }}:</p>
+<p style="font-size: 18px;"><b>Games designed by {{ user.name }}:</b></p>
 
 <style>
   #card_container {
     display: flex;
     align-items: center;
     overflow-x: hidden;
-    width: 38.5rem;
+    width: calc(4*9rem + 3*1.25rem);
+  }
+
+  .designed_by {
+    min-width: 9rem;
+    font-size: 12px;
   }
 
   .designed_by:hover {
@@ -61,6 +66,12 @@
     color: black;
     margin: 0;
   }
+
+  .card img {
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+  }
 </style>
 
 <div id="designed_by_container" style="display: flex; align-items: center; gap: 10px;">
@@ -72,9 +83,8 @@
   <div id="card_container">
     {% for game in designed_games %}
     <a href="/games/{{ game.gid }}" class="card-link">
-      <div class="card designed_by" style="min-width: 12rem; display: inline-block;">
-        <img class="card-img-top" src="{{ game.thumbnail_url }}"
-          style="height: 200px; object-fit: cover; object-position: top;" alt="Game Image">
+      <div class="card designed_by">
+        <img class="card-img-top" src="{{ game.thumbnail_url }}" alt="Game Image">
         <div class="card-body">
           <p class="card-text" style="text-align: center;">{{ game.name }}</p>
         </div>
@@ -83,7 +93,7 @@
     {% endfor %}
   </div>
 
-  {% if designed_games|length > 3 %}
+  {% if designed_games|length > 4 %}
   <button id="scroll_right" class="scroll_button">&gt;</button>
   {% endif %}
 </div><br>
@@ -92,7 +102,7 @@
   let cards = document.querySelectorAll(".card-link");
 
   let card_index = 0;
-  let max_index = Math.max(0, cards.length - 3); //because 3 cards visible
+  let max_index = Math.max(0, cards.length - 4); //because 4 cards visible
 
   function setDisabled() {
     document.getElementById("scroll_left").disabled = card_index == 0;
