@@ -118,15 +118,20 @@ class Collection:
     @staticmethod
     def add_game(cid, gid):
       try:
-        app.db.execute("""
-            INSERT INTO HasGame(cid, gid)
-            VALUES(:cid, :gid)
-            """,
-            cid=cid,
-            gid=gid,
-          )
+        rows = app.db.execute("""
+            SELECT * FROM HasGame
+            WHERE gid=:gid AND cid=:cid
+        """)
 
-        return Collection.get(cid)
+        if not len(rows):
+          app.db.execute("""
+              INSERT INTO HasGame(cid, gid)
+              VALUES(:cid, :gid)
+              """,
+              cid=cid,
+              gid=gid,
+            )
+          return Collection.get(cid)
       except Exception as e:
         print(str(e))
         return None
