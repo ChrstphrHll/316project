@@ -46,6 +46,9 @@
         <tr>
             <td><img src={{sim.thumbnail_url}} alt={{sim.name}} style="max-width: 100px;"></td>
             <td>{{sim.name}}</td>
+            <td>
+              {{shared_mechs[loop.index0]}}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -93,9 +96,4 @@
       </tbody>
   </div>
 </div>
-
-
-
-
-
 {% endblock %}

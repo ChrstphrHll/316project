@@ -11,7 +11,8 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from .models.game import Game
 from .models.user import User
-from.models.recommendation import Recommendation
+from .models.recommendation import Recommendation
+from .models.mechanic import Mechanic
 from .models.review import Review
 from flask import current_app as app
 from flask_login import current_user
@@ -85,7 +86,8 @@ def game(gid):
         avgRating = round(avgRating, 2)
 
     sim_games = Recommendation.get_sim_games(gid)
-    shared_mechs = Recommendation.get_shared_mechs_all(gid, sim_games)
+    shared_mechs = Mechanic.get_shared_mechs_all(gid, sim_games)
+
     if current_user.is_authenticated:
         review_form = sumbitReview(User.get(current_user.uid))
         user = User.get(current_user.uid)
@@ -94,12 +96,8 @@ def game(gid):
         userReview = Review.get(gid, current_user.uid)
         
     else:
-            userReview = []
+        userReview = []
         user = None
+        review_form = None
     return render_template("game_pages/game.html", game=game, mechanics=mechanics, sim_games=sim_games, shared_mechs=shared_mechs, 
     gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating)
-@bp.route('/try')
-def try_this():
-    games = [0,1,2]
-    mechs = Mechanic.get_games_mechs(games)
-    return render_template("mechanics.html", mechs=mechs)

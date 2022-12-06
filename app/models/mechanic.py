@@ -18,27 +18,25 @@ class Mechanic:
         return [Mechanic(*row) for row in rows]
 
     #given a set of games, return the mechanics they share with gid
-    @staticmethod
     def get_shared_mechs_all(gid, games):
         shared_mechs = []
         for i in range(len(games)):
-            mechs = get_shared_mechs(gid, games[i].gid)
+            mechs = Mechanic.get_shared_mechs(gid, games[i].gid)
             shared_mechs.append(mechs)
         return shared_mechs
 
     #given two games, return all mechanics they have in common
-    @staticmethod
     def get_shared_mechs(gid1, gid2):
         rows = app.db.execute('''
-            WITH M1 as (SELECT I.* FROM Implements WHERE I.gid=:gid1),
-            M2 as (SELECT I.* FROM Implements WHERE I.gid=:gid2)
+            WITH M1 as (SELECT I.* FROM Implements as I WHERE I.gid=:gid1),
+            M2 as (SELECT I.* FROM Implements as I WHERE I.gid=:gid2)
             SELECT M.*
             FROM Mechanics as M, M1, M2
             WHERE M.mech_name = M1.mech_name AND M1.mech_name=M2.mech_name
             ''', 
             gid1=gid1, gid2=gid2)
 
-        return [Mechanic(*row) for row in rows]
+        return [Mechanic(*row).mech_name for row in rows]
 
     #given a set of games, return all mechanics used, sorted by popularity
     @staticmethod
