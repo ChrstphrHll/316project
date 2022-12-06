@@ -65,17 +65,16 @@ class sumbitReview(FlaskForm):
 def game(gid):
 
     
-    if request.method == 'POST':
+    if request.method == 'POST' and current_user.is_authenticated:
         if "log_play" in request.form:
-            if current_user.is_authenticated:
                 User.increment_play_count(current_user.uid, gid)
         elif "like" in request.form:
-            if current_user.is_authenticated:
                 User.toggle_like_game(current_user.uid, gid)
         elif "rating" in request.form:
-            if current_user.is_authenticated:
                 Review.create(current_user.uid, gid,request.form['rating'], 
                 request.form['description'],  datetime.datetime.now())
+        elif "deleteReview" in request.form:
+            Review.delete(current_user.uid, gid)
 
 
     game = Game.get(gid)

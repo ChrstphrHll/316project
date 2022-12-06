@@ -54,6 +54,17 @@ DESC LIMIT 5
       except Exception as e:
         print(str(e))
         return None
+    @staticmethod
+    def delete(uid, gid):
+      try:
+        rows = app.db.execute("""
+          DELETE FROM ReviewOf
+          WHERE uid = :uid AND gid = :gid
+          """,
+          uid=uid, gid=gid)
+      except Exception as e:
+        print(str(e))
+        return None
     
     @staticmethod
     def get_all_user(uid):
