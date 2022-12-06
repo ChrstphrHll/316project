@@ -2,30 +2,191 @@
 
 {% block user_content %}
 
-<p class="m-0" style="font-size: 24px;">
-  Username: {{ user.name }}
-</p>
+<style>
+  #pic_select img {
+    max-width: 100px;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  #pic_select img.selected {
+    outline: 5px solid orange;
+  }
+
+  #card_container {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    width: calc(4*9rem + 3*1.25rem);
+  }
+
+  .designed_by {
+    min-width: 9rem;
+    font-size: 12px;
+  }
+
+  .designed_by:hover {
+    text-decoration: underline;
+  }
+
+  .scroll_button {
+    height: 50px;
+    min-width: 40px;
+    display: block;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    outline: none;
+    background-color: lightblue;
+    border: none;
+  }
+
+  .scroll_button:focus {
+    outline: none;
+  }
+
+  .card-link {
+    text-decoration: none;
+    color: black;
+    margin: 0;
+  }
+
+  .card img {
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+  }
+</style>
 
 {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-(<a id="open_modal" href>Edit my information</a>)<br>
-{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", user) }}
+
+{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", "POST", user) }}
+
+<div id="pic_select_modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Choose Your Profile Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="POST">
+        {{ pic_form.hidden_tag() }}
+        <div id="pic_select" class="modal-body" style="display: grid; gap: 10px; justify-items: center; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));">
+          {% for image_url in pic_form.valid_urls %}
+          <img src="{{ image_url }}" class="profile_pic_option">
+          {% endfor %}
+          {{ pic_form.image_url }}
+        </div>
+        <div class="modal-footer">
+          {{ pic_form.submit(class="btn btn-primary") }}
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endif %}
 
-<br>
-<img src="{{ user.image_url }}" style="height: 150px; display: block; border: 1px solid black;" />
-<br>
 
-<p>
-  <b>Email</b><br>
-  {{ user.email }}
-</p>
 
-{% if user.about %}
-<p>
-  <b>About</b><br>
-  {{ user.about }}
-</p>
+<div style="display: flex; gap: 20px;">
+  <div style="flex-grow: 2;">
+    <p class="m-0" style="font-size: 24px;">
+      Username: {{ user.name }}
+    </p>
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a id="open_modal" href>Edit my information</a>)<br>
+    {% endif %}
+
+    <br>
+
+    <p>
+      <b>Email</b><br>
+      {{ user.email }}
+    </p>
+
+    {% if user.about %}
+    <p>
+      <b>About</b><br>
+      {{ user.about }}
+    </p>
+    {% endif %}
+  </div>
+  <div style="text-align: right;">
+    <img src="{{ user.image_url }}" style="width: 300px; display: block; border: 1px solid black;" />
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a href data-toggle="modal" data-target="#pic_select_modal">Edit</a>)
+    {% endif %}
+  </div>
+  
+</div>
+
+
+<script>
+  document.getElementById("pic_select").addEventListener("click", function(e){
+    if(e.target.classList.contains("profile_pic_option")){
+      document.getElementById("image_url").value = e.target.src;
+      document.querySelectorAll(".selected").forEach(el => el.classList.remove("selected"));
+      e.target.classList.add("selected");
+    }
+  })
+</script>
+
+{% if designed_games|length > 0 %}
+<p style="font-size: 18px;"><b>Games designed by {{ user.name }}:</b></p>
+
+<div id="designed_by_container" style="display: flex; align-items: center; gap: 10px;">
+
+  {% if designed_games|length > 3 %}
+  <button id="scroll_left" class="scroll_button" disabled>&lt;</button>
+  {% endif %}
+
+  <div id="card_container">
+    {% for game in designed_games %}
+    <a href="/games/{{ game.gid }}" class="card-link">
+      <div class="card designed_by">
+        <img class="card-img-top" src="{{ game.thumbnail_url }}" alt="Game Image">
+        <div class="card-body">
+          <p class="card-text" style="text-align: center;">{{ game.name }}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if designed_games|length > 4 %}
+  <button id="scroll_right" class="scroll_button">&gt;</button>
+  {% endif %}
+</div><br>
+
+<script>
+  let cards = document.querySelectorAll(".card-link");
+
+  let card_index = 0;
+  let max_index = Math.max(0, cards.length - 4); //because 4 cards visible
+
+  function setDisabled() {
+    document.getElementById("scroll_left").disabled = card_index == 0;
+    document.getElementById("scroll_right").disabled = card_index == max_index;
+  }
+
+  document.getElementById("designed_by_container").addEventListener("click", function (e) {
+    if (e.target.id == "scroll_left") {
+      card_index = Math.max(0, card_index - 1);
+      cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+    }
+
+    if (e.target.id == "scroll_right") {
+      card_index = Math.min(max_index, card_index + 1);
+      cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+    }
+
+    setDisabled();
+  });
+</script>
+
 {% endif %}
-
 
 {% endblock %}

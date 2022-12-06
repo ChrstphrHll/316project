@@ -7,9 +7,10 @@
   <div class="d-flex p-2 border justify-content-end align-items-center">
     {{table_controls(mechanic, current_page, per_page, search)}}
     <form>
-      {{ form.search }}
+      {{ form.search(value = prev_search_string) }}
       <button type="submit" class="btn btn-primary mx-1">Search</button>
     </form>
+    <a href="{{ url_for('game.games') }}" class="btn btn-primary mx-1">Clear Search</a>
   </div>
 
 <table

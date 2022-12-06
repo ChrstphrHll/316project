@@ -16,13 +16,13 @@ class User(UserMixin):
     def get_id(self):   # override mixin default of reading "id" field because we call it uid
         return self.uid
     
-    def update_information(self, attrs): # attrs is a dictionary of "user_attr":value
+    def update_information(self, attrs): # attrs is a dictionary of "user_attr":value, not including image_url
         try:
             app.db.execute("""
 UPDATE Users
-SET name = :name, email = :email, about = :about, image_url = :image_url
+SET name = :name, email = :email, about = :about
 WHERE uid = :uid
-            """, name=attrs["name"], email=attrs["email"], about=attrs["about"], image_url=attrs["image_url"], uid=self.uid)
+            """, name=attrs["name"], email=attrs["email"], about=attrs["about"], uid=self.uid)
         
             if attrs["password"] and len(attrs["password"]) > 0:
                 app.db.execute("""
@@ -36,7 +36,13 @@ WHERE uid = :uid
         except Exception as e:
             print(str(e))
             return False
-
+    
+    def update_profile_pic(self, image_url):
+        app.db.execute("""
+UPDATE Users
+SET image_url = :image_url
+WHERE uid = :uid
+        """, image_url=image_url, uid=self.uid)
 
     @staticmethod
     def get_by_auth(email, password):
@@ -107,6 +113,14 @@ WHERE uid = :uid
         return User(*(rows[0])) if rows else None
     
     @staticmethod
+    def get_all():
+        rows = app.db.execute("""
+SELECT uid, name, email, about, image_url
+FROM Users
+        """)
+        return [User(*row) for row in rows]
+
+    @staticmethod
     def get_liked_games(uid):
         rows = app.db.execute("""
 SELECT Games.*
@@ -133,10 +147,34 @@ UPDATE PlayCount
 SET count = count + 1
 WHERE gid = :gid AND uid = :uid
         """, uid=uid, gid=gid)
-        print(updated)
 
         if updated == 0:
             app.db.execute("""
 INSERT INTO PlayCount (gid, uid, count)
 VALUES (:gid, :uid, 1)
 """, gid=gid, uid=uid)
+
+    def check_likes(uid, gid):
+        result = app.db.execute('''SELECT * FROM LikesGame WHERE uid = :uid AND gid = :gid''', uid=uid, gid=gid)
+        if len(result) != 0:
+            return True
+        return False
+
+    def toggle_like_game(uid, gid):
+        updated = app.db.execute("""
+DELETE FROM LikesGame WHERE uid = :uid AND gid = :gid;        
+""", uid=uid, gid=gid)
+
+        if updated == 0:
+            app.db.execute("""
+INSERT INTO LikesGame (gid, uid) VALUES (:gid, :uid)        
+""", uid=uid, gid=gid)
+
+    def get_designed_games(self):
+        rows = app.db.execute("""
+SELECT Games.*
+FROM Games, DesignedBy
+WHERE Games.gid = DesignedBy.gid
+AND DesignedBy.uid = :uid
+        """, uid = self.uid)
+        return [Game(*row) for row in rows]

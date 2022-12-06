@@ -8,7 +8,7 @@
         padding: 0.25rem;
     }
 </style>
-<div class="row">
+<div class="d-flex">
     <div class="col" style="max-width: 200px;">
         <div id="sidebar" class="p-2" style="background-color: lightblue; width: 180px; border-radius: 5px;">
             <div class="mb-2" style="text-align: center;">
@@ -34,7 +34,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="col flex-grow-1">
+    <div class="col flex-grow-1" style="overflow-x: hidden;">
         {% block user_content %}{% endblock %}
     </div>
 </div>

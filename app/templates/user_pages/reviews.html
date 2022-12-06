@@ -6,8 +6,7 @@
 <table class='table table-hover table-primary table-striped table-bordered container'>
   <thead class="thead-dark">
     <tr>
-      <th scope="col">uid</th>
-      <th scope="col">gid</th>
+      <th scope="col">Game</th>
       <th scope="col">Rating</th>
       <th scope="col">Description</th>
       <th scope="col">timestamp</th>
@@ -16,8 +15,7 @@
   <tbody>
     {% for review in review_history%}
       <tr>
-        <th scope="row">{{review.uid}}</th>
-        <td>{{review.gid}}</td>
+        <th scope="row">{{review.name}}</th>
         <td>{{review.rating}}</td>
         <td>{{review.description}}</td>
         <td>{{review.time_posted}}</td>
