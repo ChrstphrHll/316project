@@ -19,12 +19,12 @@
     width: calc(4*9rem + 3*1.25rem);
   }
 
-  .designed_by {
+  .sim_game {
     min-width: 9rem;
     font-size: 12px;
   }
 
-  .designed_by:hover {
+  .sim_game:hover {
     text-decoration: underline;
   }
 
@@ -107,19 +107,19 @@
 {% if sim_games|length > 0 %}
 <p style="font-size: 18px;"><b>Games like this:</b></p>
 
-<div id="designed_by_container" style="display: flex; align-items: center; gap: 10px;">
+<div id="similar_games_container" style="display: flex; align-items: center; gap: 10px;">
 
   {% if sim_games|length > 3 %}
   <button id="scroll_left" class="scroll_button" disabled>&lt;</button>
   {% endif %}
 
   <div id="card_container">
-    {% for game in sim_games %}
-    <a href="/games/{{ game.gid }}" class="card-link">
-      <div class="card designed_by">
-        <img class="card-img-top" src="{{ game.thumbnail_url }}" alt="Game Image">
+    {% for sim_game in sim_games %}
+    <a href="/games/{{sim_game.gid }}" class="card-link">
+      <div class="card sim_game">
+        <img class="card-img-top" src="{{ sim_game.thumbnail_url }}" alt="Game Image">
         <div class="card-body">
-          <p class="card-text" style="text-align: center;">{{ game.name }}</p>
+          <p class="card-text" style="text-align: center;">{{ sim_game.name }}</p>
         </div>
       </div>
     </a>
@@ -142,7 +142,7 @@
     document.getElementById("scroll_right").disabled = card_index == max_index;
   }
 
-  document.getElementById("designed_by_container").addEventListener("click", function (e) {
+  document.getElementById("similar_games_container").addEventListener("click", function (e) {
     if (e.target.id == "scroll_left") {
       card_index = Math.max(0, card_index - 1);
       cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
