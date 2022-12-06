@@ -121,7 +121,10 @@ class Collection:
         rows = app.db.execute("""
             SELECT * FROM HasGame
             WHERE gid=:gid AND cid=:cid
-        """)
+            """,
+            cid=cid,
+            gid=gid
+            )
 
         if not len(rows):
           app.db.execute("""
