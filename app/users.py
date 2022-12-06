@@ -129,7 +129,8 @@ def recommended(uid):
     liked = User.get_liked_games(uid)
     if len(liked) == 0:
         pop_games = Recommendation.get_pop_games()
-        return render_template('user_pages/no_recs.html', pop_games=pop_games)
+        pop_coll = Recommendation.get_pop_coll()
+        return render_template('user_pages/no_recs.html', pop_games=pop_games, pop_coll=pop_coll)
 
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech.mech_name

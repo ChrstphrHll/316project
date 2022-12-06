@@ -6,6 +6,8 @@ from .user import User
 
 class Recommendation:
 
+    #only a game that has been liked before can be recommended to the user
+
     #returns the most liked games
     @staticmethod
     def get_pop_games():
@@ -73,6 +75,18 @@ class Recommendation:
         ORDER BY COUNT(*) DESC     
         ''', cid = cid)
         return [Game(*row) for row in rows]
+
+    #returns 5 most popular collections
+    @staticmethod
+    def get_pop_coll():
+        rows = app.db.execute('''
+        SELECT C.*
+        FROM Collections as C, LikesCollection as LC
+        WHERE C.cid = LC.cid
+        GROUP BY C.cid, C.title, C.description
+        ORDER BY COUNT(*) DESC
+        ''')
+        return [Collection(*row) for row in rows]
 
     #returns games with similar mechs to those in the collection
     @staticmethod
