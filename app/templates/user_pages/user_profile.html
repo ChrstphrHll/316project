@@ -59,7 +59,7 @@
 
 {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
 
-{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", user) }}
+{{ modal_form(edit_info_form, "Edit Your Information", "open_modal", "POST", user) }}
 
 <div id="pic_select_modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
