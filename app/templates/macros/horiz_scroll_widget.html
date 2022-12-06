@@ -1,0 +1,113 @@
+{% macro horiz_scroll_widget(games, n_visible=4, id=1) %}
+
+<!--
+Widget to display games
+- games is a list of Game objects
+- n_visible is how many games to show at once
+- id is only necessary if you have multiple of these widgets on one page, they should each have a unique id
+-->
+
+<style>
+    /* stuff for horizontal scroll widget */
+
+    .horiz_scroll_widget .card_container {
+        display: flex;
+        align-items: center;
+        overflow-x: hidden;
+    }
+
+    .horiz_scroll_widget .card {
+        min-width: 9rem;
+        font-size: 12px;
+    }
+
+    .designed_by:hover {
+        text-decoration: underline;
+    }
+
+    .scroll_button {
+        height: 50px;
+        min-width: 40px;
+        display: block;
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        outline: none;
+        background-color: lightblue;
+        border: none;
+    }
+
+    .scroll_button:focus {
+        outline: none;
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: black;
+        margin: 0;
+    }
+
+    .card img {
+        height: 150px;
+        object-fit: cover;
+        object-position: top;
+    }
+</style>
+
+
+<div id="horiz_scroll_widget_{{id}}" class="horiz_scroll_widget" style="display: flex; align-items: center; gap: 10px;">
+
+    {% if games|length > n_visible %}
+    <button class="scroll_button scroll_left" disabled>&lt;</button>
+    {% endif %}
+
+    <div class="card_container">
+        {% for game in games %}
+        <a href="/games/{{ game.gid }}" class="card-link">
+            <div class="card">
+                <img class="card-img-top" src="{{ game.thumbnail_url }}" alt="Game Image">
+                <div class="card-body">
+                    <p class="card-text" style="text-align: center;">{{ game.name }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    {% if games|length > n_visible %}
+    <button class="scroll_button scroll_right">&gt;</button>
+    {% endif %}
+</div>
+
+<script>
+    (function() {
+        let widget = document.getElementById("horiz_scroll_widget_{{id}}");
+        widget.querySelector(".card_container").style.width = "calc({{n_visible}}*9rem + {{n_visible-1}}*1.25rem)";
+
+        let cards = document.querySelectorAll(".card-link");
+
+        let card_index = 0;
+        let n_visible = Number("{{n_visible}}");
+        let max_index = Math.max(0, cards.length - n_visible);
+
+        function setDisabled() {
+            widget.querySelector(".scroll_left").disabled = card_index == 0;
+            widget.querySelector(".scroll_right").disabled = card_index == max_index;
+        }
+
+        widget.addEventListener("click", function (e) {
+            if (e.target.classList.contains("scroll_left")) {
+                card_index = Math.max(0, card_index - n_visible);
+                cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+                setDisabled();
+            }
+            if (e.target.classList.contains("scroll_right")) {
+                card_index = Math.min(max_index, card_index + n_visible);
+                cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+                setDisabled();
+            }
+        });
+    })();
+</script>
+
+{% endmacro %}
