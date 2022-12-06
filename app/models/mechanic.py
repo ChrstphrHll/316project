@@ -5,8 +5,9 @@ class Mechanic:
         self.mech_name = mech_name
         self.description = description
 
+    #given a game, return all mechanics
     @staticmethod
-    def get(gid):
+    def get_mechs(gid):
         rows = app.db.execute('''
             SELECT M.*
             FROM Mechanics as M, Implements as I
@@ -16,33 +17,55 @@ class Mechanic:
 
         return [Mechanic(*row) for row in rows]
 
+    #given a set of games, return the mechanics they share with gid
+    def get_shared_mechs_all(gid, games):
+        shared_mechs = []
+        for i in range(len(games)):
+            mechs = Mechanic.get_shared_mechs(gid, games[i].gid)
+            shared_mechs.append(mechs)
+        return shared_mechs
+
+    #given two games, return all mechanics they have in common
+    def get_shared_mechs(gid1, gid2):
+        rows = app.db.execute('''
+            WITH M1 as (SELECT I.* FROM Implements as I WHERE I.gid=:gid1),
+            M2 as (SELECT I.* FROM Implements as I WHERE I.gid=:gid2)
+            SELECT M.*
+            FROM Mechanics as M, M1, M2
+            WHERE M.mech_name = M1.mech_name AND M1.mech_name=M2.mech_name
+            ''', 
+            gid1=gid1, gid2=gid2)
+
+        return [Mechanic(*row).mech_name for row in rows]
+
+    #given a set of games, return all mechanics used, sorted by popularity
+    @staticmethod
+    def get_games_mechs(games):
+        mech_counts = {}
+
+        for gid in games:            
+            rows = app.db.execute('''
+                SELECT M.*
+                FROM Mechanics as M, Implements as I
+                WHERE M.mech_name = I.mech_name AND I.gid =:gid
+                ''', 
+                gid=gid)
+
+            for row in rows:
+                mech = Mechanic(*row)
+                if mech_counts[mech.mech_name] is NULL:
+                    mech_counts[mech.mech_name] = 0
+                mech_counts[mech.mech_name] = mech_counts[mech.mech_name] + 1
+
+        return mech_counts
+
+    #returns all possible mechanics
     @staticmethod
     def get_all():
         rows = app.db.execute('''
-            SELECT *
+            SELECT M.*
             FROM Mechanics as M
             ORDER BY M.mech_name
             ''', )
-
-    #forms are part of html
-        return [Mechanic(*row) for row in rows]
-
-    @staticmethod
-    def get_desc(name):
-        rows = app.db.execute('''
-            SELECT mech_name, description
-            FROM Mechanics 
-            WHERE mech_name = :name''', 
-            name=name)
-
-        return [Mechanic(*row) for row in rows]
-    
-    @staticmethod
-    def get_games(name):
-        rows = app.db.execute('''
-            SELECT g.*
-            FROM Implements as I, Games as g
-            WHERE I.mech_name = :name and g.gid = I.gid''', 
-            name=name)
 
         return [Mechanic(*row) for row in rows]
