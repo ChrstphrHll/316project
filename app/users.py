@@ -206,5 +206,5 @@ def borrowed(uid):
 
 @bp.route('/users/<uid>/reviews', methods=['GET', 'POST'])
 def reviews(uid):
-    reviews = Review.get_top_5(int(uid))
+    reviews = Review.get_all_user(int(uid))
     return render_template('user_pages/reviews.html', user=User.get(uid), review_history=reviews)

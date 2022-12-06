@@ -1,7 +1,8 @@
 from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 
-
+import datetime
+  
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
@@ -56,7 +57,7 @@ class sumbitReview(FlaskForm):
 
     rating = StringField('Rating', validators=[DataRequired()], render_kw={"size": 32})
     description = TextAreaField('Description', render_kw={"cols": 48, "rows": 4})
-    submit = SubmitField('Save Changes')
+    submit = SubmitField('Submit')
 
 @bp.route('/<gid>', methods=['GET', 'POST'])
 def game(gid):
@@ -67,20 +68,28 @@ def game(gid):
         if "log_play" in request.form:
             if current_user.is_authenticated:
                 User.increment_play_count(current_user.uid, gid)
+        if "rating" in request.form:
+            if current_user.is_authenticated:
+                Review.create(current_user.uid, gid,request.form['rating'], 
+                request.form['description'],  datetime.datetime.now())
 
 
     game = Game.get(gid)
     mechanics = Game.get_mechanics(gid)
     gameReviews = Review.get_top_5_game(gid)
+    avgRating = Review.get_avg_rating(gid)
+    if(avgRating):
+        avgRating = round(avgRating, 2)
     if current_user.is_authenticated:
         review_form = sumbitReview(User.get(current_user.uid))
         user = User.get(current_user.uid)
         playCount = User.get_play_count(current_user.uid, gid)
         playCount = playCount if playCount else 0
-        userReview = Review.get(current_user.uid, gid)
+        userReview = Review.get(gid, current_user.uid)
         
     else:
         playCount = None
         userReview = []
         user = None
-
+    return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount, 
+    gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating)
