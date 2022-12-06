@@ -1,10 +1,13 @@
-{% macro table_controls(mechanic, current_page, per_page) %}
+{% macro table_controls(mechanic, current_page, per_page, search) %}
 
   <form method="GET" action="/games/">
     <!-- could automate this with list of tuples -->
     <input type="hidden" name="per_page" value="{{per_page}}">
     {% if mechanic %}
       <input type="hidden" name="mechanic" value="{{mechanic}}"> 
+    {% endif %}
+    {% if search %}
+      <input type="hidden" name="search" value="{{search}}"> 
     {% endif %}
     <div class="btn-group mx-auto" role="group" aria-label="Basic example">
       {% if current_page > 0 %}

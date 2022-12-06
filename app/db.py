@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 
 
 class DB:
@@ -21,6 +22,7 @@ class DB:
     def __init__(self, app):
         self.engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'],
                                     execution_options={"isolation_level": "SERIALIZABLE"})
+        self.session = sessionmaker(self.engine)
 
     def execute(self, sqlstr, **kwargs):
         """Execute a single SQL statement sqlstr.
