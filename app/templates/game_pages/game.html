@@ -23,7 +23,11 @@
             <form method="POST" action="/games/{{game.gid}}">
               <div class="btn-group mx-auto" role="group" aria-label="Basic example">
                 <input class="btn btn-primary" type="submit" value="Log Play" name="log_play">
-                <input class="btn btn-primary" type="submit" value="Like" name="like">
+                {% if likeStatus %}
+                  <input class="btn btn-primary" type="submit" value="Unlike" name="like">
+                {% else %}
+                  <input class="btn btn-primary" type="submit" value="Like" name="like">
+                {% endif %}
               </div>
             </form>
         </div>
