@@ -107,6 +107,14 @@ WHERE uid = :uid
         return User(*(rows[0])) if rows else None
     
     @staticmethod
+    def get_all():
+        rows = app.db.execute("""
+SELECT uid, name, email, about, image_url
+FROM Users
+        """)
+        return [User(*row) for row in rows]
+
+    @staticmethod
     def get_liked_games(uid):
         rows = app.db.execute("""
 SELECT Games.*

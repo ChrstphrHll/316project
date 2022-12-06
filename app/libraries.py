@@ -20,13 +20,15 @@ class Search(FlaskForm):
 @bp.route('/')
 def libraries():
     form = Search()
+    prev_search_string = ""
 
     libraries = Library.get_all()
     
     if "search" in request.args:
         libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
+        prev_search_string = request.args.get("search")
         
-    return render_template('libraries.html', libraries=libraries, form=form)
+    return render_template('libraries.html', libraries=libraries, form=form, prev_search_string = prev_search_string)
 
 class Create(FlaskForm):
     comment = StringField('Comment', validators=[DataRequired()])

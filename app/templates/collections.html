@@ -2,8 +2,11 @@
 
 <h2>Search Collections</h2>
 <div class="d-flex p-2 border justify-content-end align-items-center">
-  {{ form.search }}
-  <button type="submit" class="btn btn-primary mx-1">Search</button>
+  <form>
+    {{ form.search(value = prev_search_string) }}
+    <button type="submit" class="btn btn-primary mx-1">Search</button>
+  </form>
+  <a href="{{ url_for('collection.collections') }}" class="btn btn-primary mx-1">Clear Search</a>
 </div>
 <table
   class="table table-hover table-primary table-striped table-bordered container"

@@ -26,6 +26,7 @@ class Search(FlaskForm):
 @bp.route('/')
 def games():
     form = Search()
+    prev_search_string = ""
 
     page = int(request.args.get('page') or 0) 
     per_page = int(request.args.get('per_page') or 10)
@@ -41,13 +42,14 @@ def games():
 
     if "search" in request.args:
         games = filter(lambda x: request.args.get("search").lower() in x.name.lower(), games)
+        prev_search_string = request.args.get("search")
     
     # if "mechanic" in request.args:
     #     games = filter(lambda x: request.args.get("mechanic"))
 
     # games = games[0 + (page * per_page): per_page + (page * per_page)]
 
-    return render_template("game_pages/game_search.html", games = games, form=form, current_page = page, per_page = per_page, mechanic=mechanic)
+    return render_template("game_pages/game_search.html", games = games, form=form, prev_search_string = prev_search_string, current_page = page, per_page = per_page, mechanic=mechanic)
 
 
 class sumbitReview(FlaskForm):
