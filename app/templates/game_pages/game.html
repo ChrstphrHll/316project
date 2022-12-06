@@ -47,6 +47,8 @@
     <div class="align-items-center">
       {% if current_user.is_authenticated and (userReview|length == 0) %}
       <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
+      {% elif current_user.is_authenticated and (userReview|length != 0) %}
+      <button type="button" class="btn btn-primary" disabled>Already Reviewed</button>
       {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
       {% endif %}
     </div>
