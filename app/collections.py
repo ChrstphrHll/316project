@@ -35,7 +35,7 @@ class Create(FlaskForm):
     submit = SubmitField('Create')
 
 class Delete(FlaskForm):
-    submit = SubmitField('Delete')
+    delete = SubmitField('Delete')
 
 @bp.route('/<cid>', methods=["GET", "POST", "DELETE"])
 def collection(cid):
@@ -56,7 +56,7 @@ def collection(cid):
             if res:
                 return redirect(url_for('collection.collection', cid=cid))
     
-    if delete_form and delete_form.validate_on_submit():
+    if delete_form and delete_form.validate_on_submit() and "delete" in request.form:
         res = Collection.delete(cid)
         if res:
             return redirect(url_for('users.collections', uid=creator.uid))
