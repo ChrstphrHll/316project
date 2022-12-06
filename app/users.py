@@ -174,7 +174,7 @@ def liked(uid):
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
-    if not User.get(uid) or current_user.uid != int(uid):
+    if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
         return redirect(url_for("index.notFound"))
 
     pop_mech = Recommendation.get_pop_mech(uid)
@@ -249,7 +249,8 @@ def libraries(uid):
 
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):
-    if not User.get(uid) or current_user.uid != int(uid):
+    print("current",current_user)
+    if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
         return redirect(url_for("index.notFound"))
     
     borrowed_copies = Copy.user_borrowed_copies(uid)
@@ -265,7 +266,7 @@ def borrowed(uid):
 
 @bp.route('/users/<uid>/reviews', methods=['GET', 'POST'])
 def reviews(uid):
-    if not User.get(uid) or current_user.uid != int(uid):
+    if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
         return redirect(url_for("index.notFound"))
     
     reviews = Review.get_all_user(int(uid))
