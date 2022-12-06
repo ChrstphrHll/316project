@@ -66,7 +66,6 @@ def game(gid):
 
     
     if request.method == 'POST':
-        print(request.form)
         if "log_play" in request.form:
             if current_user.is_authenticated:
                 User.increment_play_count(current_user.uid, gid)
