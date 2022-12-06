@@ -126,10 +126,10 @@ def liked(uid):
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
-    liked = Recommendation.liked(uid)
+    liked = User.get_liked_games(uid)
     if len(liked) == 0:
-        return render_template('user_pages/no_recs.html')
-
+        pop_games = Recommendation.get_pop_games()
+        return render_template('user_pages/no_recs.html', pop_games=pop_games)
 
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech.mech_name
