@@ -93,7 +93,7 @@ class Recommendation:
         rows = app.db.execute('''
         SELECT C.*
         FROM Collections as C, HasGame as HG, Implements as I
-        WHERE C.cid = HG.cid AND HG.gid=I.gid AND I.mech_name:=mech
+        WHERE C.cid = HG.cid AND HG.gid=I.gid AND I.mech_name=:mech
         GROUP BY C.cid, C.title, C.description
         ORDER BY COUNT(*) DESC
         ''', mech=mech)
