@@ -42,9 +42,9 @@ def collection(cid):
     create_form = Create() if current_user.is_authenticated and current_user.uid == int(collection.creator.uid) else None
 
     if create_form and create_form.validate_on_submit():
-        print(create_form.gid.data)
-        copy = Collection.add_game(cid, create_form.gid.data)
-        if copy:
-            return redirect(url_for('collection.collection', cid=cid))
+        if(create_form.gid.data.isnumeric()):
+            copy = Collection.add_game(cid, create_form.gid.data)
+            if copy:
+                return redirect(url_for('collection.collection', cid=cid))
 
     return render_template("collection.html", collection=collection, games=games, create=create_form)
