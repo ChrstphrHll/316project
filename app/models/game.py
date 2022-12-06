@@ -34,7 +34,7 @@ WHERE Games.gid = :gid
         return Game(*game_raw[0]) if game_raw else null
 
     @staticmethod
-    def get_some(mechanic = None, page = 0, per_page = 10):
+    def get_some(mechanic = None, page = 0, per_page = 10, search=None):
         offset = page * per_page
         query = '''
 SELECT Games.*
@@ -48,13 +48,15 @@ LIMIT :per_page OFFSET :offset
         if mechanic and mechanic != "None":
             conditions.append(":mechanic in (SELECT mech_name FROM Implements WHERE Implements.gid = Games.gid)")
 
+        if search:
+            conditions.append(f"LOWER(Games.name) LIKE :search")
 
         if len(conditions) > 0:
             full_query = query + " WHERE " + " AND ".join(conditions) + query_back
         else:
             full_query = query + query_back
 
-        game_raw = app.db.execute(full_query, per_page=per_page, offset=offset, mechanic=mechanic)
+        game_raw = app.db.execute(full_query, per_page=per_page, offset=offset, mechanic=mechanic, search=f"%{search}%")
         return [Game(*row) for row in game_raw]
 
     @staticmethod
