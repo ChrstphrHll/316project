@@ -36,7 +36,13 @@ WHERE uid = :uid
         except Exception as e:
             print(str(e))
             return False
-
+    
+    def update_profile_pic(self, image_url):
+        app.db.execute("""
+UPDATE Users
+SET image_url = :image_url
+WHERE uid = :uid
+        """, image_url=image_url, uid=self.uid)
 
     @staticmethod
     def get_by_auth(email, password):

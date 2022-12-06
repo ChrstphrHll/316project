@@ -9,7 +9,7 @@
     cursor: pointer;
   }
   #pic_select img.selected {
-    outline: 3px solid yellow;
+    outline: 5px solid orange;
   }
 </style>
 
@@ -29,8 +29,10 @@
       <form action="" method="POST">
         {{ pic_form.hidden_tag() }}
         <div id="pic_select" class="modal-body" style="display: grid; gap: 10px; justify-items: center; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));">
-          <img class="selected" src="https://cdn.pixabay.com/photo/2012/02/28/00/49/snow-17854_1280.jpg">
-          <img src="https://cdn.pixabay.com/photo/2020/04/08/06/58/elephant-5015980__480.jpg">
+          {% for image_url in pic_form.valid_urls %}
+          <img src="{{ image_url }}" class="profile_pic_option">
+          {% endfor %}
+          {{ pic_form.image_url }}
         </div>
         <div class="modal-footer">
           {{ pic_form.submit(class="btn btn-primary") }}
@@ -77,6 +79,16 @@
   
 </div>
 
+
+<script>
+  document.getElementById("pic_select").addEventListener("click", function(e){
+    if(e.target.classList.contains("profile_pic_option")){
+      document.getElementById("image_url").value = e.target.src;
+      document.querySelectorAll(".selected").forEach(el => el.classList.remove("selected"));
+      e.target.classList.add("selected");
+    }
+  })
+</script>
 
 
 {% endblock %}

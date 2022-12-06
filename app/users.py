@@ -125,16 +125,13 @@ class ProfilePic(FlaskForm):
 def profile(uid):
     edit_info_form = EditUserInfo(User.get(uid))
     profile_pic_form = ProfilePic(User.get(uid))
-
-    print(request.form)
     
     if request.method == 'POST':
         if edit_info_form.validate_on_submit():
             User.get(uid).update_information(edit_info_form.data) # filters these to only use the relevant ones
             return redirect(url_for('users.profile', uid=uid))
         if profile_pic_form.validate_on_submit():
-            print("Image form ------------------------------")
-            print(profile_pic_form.image_url.data)
+            User.get(uid).update_profile_pic(profile_pic_form.image_url.data)
             return redirect(url_for('users.profile', uid=uid))
 
     return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form, pic_form=profile_pic_form)
