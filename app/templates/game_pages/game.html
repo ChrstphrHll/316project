@@ -43,8 +43,8 @@
     </div>
   </div>
   <div class="row d-flex mt-2 p-2 bg-light rounded">
-    <h2>Reviews  </h2>
-    <div class="justify-content-end align-items-center">
+    <h2  style="margin-right:auto">Reviews</h2>
+    <div class="align-items-center">
       {% if current_user.is_authenticated and (userReview|length == 0) %}
       <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
       {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
