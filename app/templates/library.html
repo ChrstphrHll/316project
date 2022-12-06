@@ -89,14 +89,22 @@
       </td>
       <th scope="row">{{ copy.game.name }}</th>
       <td>{{copy.comment}}</td>
-      {% if copy.borrower %}
-      <td>{{copy.borrower.name}}</td>
-      {% else %}
+      {% if not copy.borrower.name %}
       <td>
         <a
           href="{{ url_for('library.checkout', lid=library.lid, cpid=copy.cpid) }}"
           class="badge bg-primary text-light"
           >Borrow</a
+        >
+      </td>
+      {% elif copy.borrower.name != user.name %}
+      <td>{{copy.borrower.name}}</td>
+      {% elif copy.borrower.name == user.name %}
+      <td>
+        <a
+          href="{{ url_for('library.return_copy', cpid=copy.cpid) }}"
+          class="badge bg-primary text-light"
+          >Return</a
         >
       </td>
       {% endif %}

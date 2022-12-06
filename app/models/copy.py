@@ -91,7 +91,7 @@ class Copy:
     def return_copy(cpid, uid):
       try:
         app.db.execute('''
-          DELETE FROM CheckedOutBy,
+          DELETE FROM CheckedOutBy
           WHERE cpid=:cpid AND uid=:uid
           ''',
           cpid=cpid,
