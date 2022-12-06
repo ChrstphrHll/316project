@@ -11,6 +11,54 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/example.css') }}" />
   <link rel="icon" href="https://aux.iconspalace.com/uploads/board-games-icon-256.png">
+
+  <style>
+    /* stuff for horizontal scroll widget */
+
+    .horiz_scroll_widget .card_container {
+        display: flex;
+        align-items: center;
+        overflow-x: hidden;
+    }
+
+    .horiz_scroll_widget .card {
+        min-width: 9rem;
+        font-size: 12px;
+    }
+
+    .designed_by:hover {
+        text-decoration: underline;
+    }
+
+    .scroll_button {
+        height: 50px;
+        min-width: 40px;
+        display: block;
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        outline: none;
+        background-color: lightblue;
+        border: none;
+    }
+
+    .scroll_button:focus {
+        outline: none;
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: black;
+        margin: 0;
+    }
+
+    .card img {
+        height: 150px;
+        object-fit: cover;
+        object-position: top;
+    }
+</style>
+
 </head>
 
 <body style="padding-top: 100px;">
