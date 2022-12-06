@@ -108,14 +108,16 @@ class EditUserInfo(FlaskForm):
 
 @bp.route('/users/<uid>', methods=['GET','POST'])
 def profile(uid):
-    edit_info_form = EditUserInfo(User.get(uid))
+    user = User.get(uid)
+    edit_info_form = EditUserInfo(user)
+    designed_games = user.get_designed_games()
     
     if request.method == 'POST':
         if edit_info_form.validate_on_submit():
             User.get(uid).update_information(edit_info_form.data) # filters these to only use the relevant ones
             return redirect(url_for('users.profile', uid=uid))
 
-    return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form)
+    return render_template("user_pages/user_profile.html", user=User.get(uid), designed_games=designed_games, edit_info_form=edit_info_form)
 
 
 @bp.route('/users/<uid>/liked')
