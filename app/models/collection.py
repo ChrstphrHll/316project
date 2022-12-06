@@ -37,6 +37,35 @@ class Collection:
         return None
 
     @staticmethod
+    def delete(cid):
+      try:
+        app.db.execute('''
+          DELETE FROM CreatedBy
+          WHERE cid=:cid
+          ''',
+          cid=cid,
+          )
+
+        app.db.execute('''
+          DELETE FROM HasGame
+          WHERE cid=:cid
+          ''',
+          cid=cid,
+          )
+
+        app.db.execute('''
+          DELETE FROM Collections
+          WHERE cid=:cid
+          ''',
+          cid=cid,
+          )
+
+        return True 
+      except Exception as e:
+        print(str(e))
+        return None
+      
+    @staticmethod
     def get(cid):
       rows = app.db.execute('''
         SELECT *
@@ -98,6 +127,10 @@ class Collection:
           )
 
         return Collection.get(cid)
-      except:
+      except Exception as e:
         print(str(e))
         return None
+
+    # TODO
+    def remove_game(cid, gid):
+      return None

@@ -18,6 +18,18 @@
   >
     +
   </button>
+  <div style="margin-left: 10px">
+    <form
+    action=""
+    method="POST"
+    novalidate
+    >
+    {% if delete %}
+    {{delete.hidden_tag()}}
+    {{ delete.submit(class_="btn btn-danger text-light") }}
+    {% endif %}
+    </form>
+  </div>
 
   <form
     action=""
@@ -53,13 +65,16 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Close
           </button>
-          {{ create.submit(class_="btn btn-primary text-light")}}
+          <div>
+            {{ create.submit(class_="btn btn-primary text-light") }}
+          </div>
         </div>
       </div>
     </div>
   </form>
 </div>
 {% endif %}
+
 <table
   class="table table-hover table-primary table-striped table-bordered container"
 >

@@ -34,17 +34,30 @@ class Create(FlaskForm):
     gid = StringField('Game ID', validators=[DataRequired()])
     submit = SubmitField('Create')
 
-@bp.route('/<cid>', methods=["GET", "POST"])
+class Delete(FlaskForm):
+    submit = SubmitField('Delete')
+
+@bp.route('/<cid>', methods=["GET", "POST", "DELETE"])
 def collection(cid):
     collection = Collection.get(cid)
     games = Collection.get_games(cid)
 
-    create_form = Create() if current_user.is_authenticated and current_user.uid == int(collection.creator.uid) else None
+    create_form = None
+    delete_form = None
+
+    if current_user.is_authenticated and current_user.uid == int(collection.creator.uid):
+        create_form = Create()
+        delete_form = Delete()
 
     if create_form and create_form.validate_on_submit():
         if(create_form.gid.data.isnumeric()):
-            copy = Collection.add_game(cid, create_form.gid.data)
-            if copy:
+            res = Collection.add_game(cid, create_form.gid.data)
+            if res:
                 return redirect(url_for('collection.collection', cid=cid))
+    
+    if delete_form and delete_form.validate_on_submit():
+        res = Collection.delete(cid)
+        if res:
+            return redirect(url_for('collection.collections'))
 
-    return render_template("collection.html", collection=collection, games=games, create=create_form)
+    return render_template("collection.html", collection=collection, games=games, create=create_form, delete=delete_form)
