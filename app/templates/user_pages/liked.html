@@ -6,42 +6,4 @@
 
 {{ game_list(liked_games) }}
 
-<!-- <table class="table table-hover table-primary table-striped table-bordered container">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Thumbnail</th>
-      <th scope="col">Name</th>
-      <th scope="col">Complexity</th>
-      <th scope="col">Players</th>
-      <th scope="col">Length</th>
-      <th scope="col">Link</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for game in liked_games%}
-    <tr>
-      <td>
-        <img
-          src="{{game.thumbnail_url}}"
-          style="max-width: 100px"
-          alt="Cover art for {{game.name}}"
-        />
-      </td>
-      <th scope="row">{{game.name}}</th>
-      <td>{{game.complexity}}</td>
-      <td>{{game.min_players}}-{{game.max_players}}</td>
-      <td>{{game.length}} minutes</td>
-      <td>
-        <a
-          href="{{ url_for('game.game', gid=game.gid) }}"
-          class="badge bg-primary text-light"
-          role="button"
-          >GO</a
-        >
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table> -->
-
 {% endblock %}
