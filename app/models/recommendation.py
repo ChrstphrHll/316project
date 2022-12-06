@@ -5,6 +5,18 @@ from .collection import Collection
 from .user import User
 
 class Recommendation:
+
+    #returns the most liked games
+    @staticmethod
+    def get_pop_games():
+        rows = app.db.execute('''
+        SELECT G.*
+        FROM LikesGame as L, Games as G
+        WHERE L.gid = G.gid
+        GROUP BY GROUP BY G.gid, G.name, G.description, G.image_url, G.thumbnail_url, G.complexity, G.length, G.min_players, G.max_players
+        ORDER BY COUNT(*) DESC
+        ''')
+        return [Game(*row) for row in rows[:5]]
   
     #returns the most common mechanic of the games liked
     @staticmethod
