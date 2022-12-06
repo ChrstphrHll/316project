@@ -3,7 +3,10 @@
 {% block user_content %}
 
 <h2>Games Liked:</h2>
-<table class="table table-hover table-primary table-striped table-bordered container">
+
+{{ game_list(liked_games) }}
+
+<!-- <table class="table table-hover table-primary table-striped table-bordered container">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Thumbnail</th>
@@ -39,6 +42,6 @@
     </tr>
     {% endfor %}
   </tbody>
-</table>
+</table> -->
 
 {% endblock %}
