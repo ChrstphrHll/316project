@@ -4,9 +4,10 @@
 <form>
   <div class="d-flex p-2 border justify-content-end align-items-center">
     <form>
-      {{ form.search }}
+      {{ form.search(value = prev_search_string) }}
       <button type="submit" class="btn btn-primary mx-1">Search</button>
     </form>
+    <a href="{{ url_for('users.libraries', uid=user.uid) }}" class="btn btn-primary mx-1">Clear Search</a>
     {% if create %}
     <button
       class="btn btn-primary"

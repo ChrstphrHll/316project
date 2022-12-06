@@ -11,6 +11,50 @@
   #pic_select img.selected {
     outline: 5px solid orange;
   }
+
+  #card_container {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    width: calc(4*9rem + 3*1.25rem);
+  }
+
+  .designed_by {
+    min-width: 9rem;
+    font-size: 12px;
+  }
+
+  .designed_by:hover {
+    text-decoration: underline;
+  }
+
+  .scroll_button {
+    height: 50px;
+    min-width: 40px;
+    display: block;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    outline: none;
+    background-color: lightblue;
+    border: none;
+  }
+
+  .scroll_button:focus {
+    outline: none;
+  }
+
+  .card-link {
+    text-decoration: none;
+    color: black;
+    margin: 0;
+  }
+
+  .card img {
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+  }
 </style>
 
 {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
@@ -90,5 +134,59 @@
   })
 </script>
 
+{% if designed_games|length > 0 %}
+<p style="font-size: 18px;"><b>Games designed by {{ user.name }}:</b></p>
+
+<div id="designed_by_container" style="display: flex; align-items: center; gap: 10px;">
+
+  {% if designed_games|length > 3 %}
+  <button id="scroll_left" class="scroll_button" disabled>&lt;</button>
+  {% endif %}
+
+  <div id="card_container">
+    {% for game in designed_games %}
+    <a href="/games/{{ game.gid }}" class="card-link">
+      <div class="card designed_by">
+        <img class="card-img-top" src="{{ game.thumbnail_url }}" alt="Game Image">
+        <div class="card-body">
+          <p class="card-text" style="text-align: center;">{{ game.name }}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if designed_games|length > 4 %}
+  <button id="scroll_right" class="scroll_button">&gt;</button>
+  {% endif %}
+</div><br>
+
+<script>
+  let cards = document.querySelectorAll(".card-link");
+
+  let card_index = 0;
+  let max_index = Math.max(0, cards.length - 4); //because 4 cards visible
+
+  function setDisabled() {
+    document.getElementById("scroll_left").disabled = card_index == 0;
+    document.getElementById("scroll_right").disabled = card_index == max_index;
+  }
+
+  document.getElementById("designed_by_container").addEventListener("click", function (e) {
+    if (e.target.id == "scroll_left") {
+      card_index = Math.max(0, card_index - 1);
+      cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+    }
+
+    if (e.target.id == "scroll_right") {
+      card_index = Math.min(max_index, card_index + 1);
+      cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+    }
+
+    setDisabled();
+  });
+</script>
+
+{% endif %}
 
 {% endblock %}

@@ -113,6 +113,14 @@ WHERE uid = :uid
         return User(*(rows[0])) if rows else None
     
     @staticmethod
+    def get_all():
+        rows = app.db.execute("""
+SELECT uid, name, email, about, image_url
+FROM Users
+        """)
+        return [User(*row) for row in rows]
+
+    @staticmethod
     def get_liked_games(uid):
         rows = app.db.execute("""
 SELECT Games.*
@@ -146,3 +154,12 @@ WHERE gid = :gid AND uid = :uid
 INSERT INTO PlayCount (gid, uid, count)
 VALUES (:gid, :uid, 1)
 """, gid=gid, uid=uid)
+
+    def get_designed_games(self):
+        rows = app.db.execute("""
+SELECT Games.*
+FROM Games, DesignedBy
+WHERE Games.gid = DesignedBy.gid
+AND DesignedBy.uid = :uid
+        """, uid = self.uid)
+        return [Game(*row) for row in rows]

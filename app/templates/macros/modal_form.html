@@ -1,4 +1,4 @@
-{% macro modal_form(form, title, trigger_elem_id, default_vals_obj=False) %}
+{% macro modal_form(form, title, trigger_elem_id, method="GET", default_vals_obj=False) %}
 
 <!--
     Use like so (in double curly braces):
@@ -31,7 +31,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="POST">
+            <form action="" method="{{ method }}">
                 {{ form.hidden_tag() }}
                 <div class="modal-body">
                     {% for field in form %}

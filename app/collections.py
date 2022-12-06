@@ -16,13 +16,15 @@ class Search(FlaskForm):
 @bp.route('/')
 def collections():
     form = Search()
+    prev_search_string = ""
 
     collections = Collection.get_all()
     
     if "search" in request.args:
         collections = filter(lambda x : request.args.get("search").lower() in x.title.lower(), collections)
+        prev_search_string = request.args.get("search")
 
-    return render_template('collections.html', collections=collections, form=form)
+    return render_template('collections.html', collections=collections, form=form, prev_search_string = prev_search_string)
 
 @bp.route('/<cid>')
 def collection(cid):
