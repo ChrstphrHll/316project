@@ -85,3 +85,19 @@ class Collection:
         cid=cid
         )
       return [Game(*row) for row in rows]
+
+    @staticmethod
+    def add_game(cid, gid):
+      try:
+        app.db.execute("""
+            INSERT INTO HasGame(cid, gid)
+            VALUES(:cid, :gid)
+            """,
+            cid=cid,
+            gid=gid,
+          )
+
+        return Collection.get(cid)
+      except:
+        print(str(e))
+        return None
