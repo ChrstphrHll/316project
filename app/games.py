@@ -93,5 +93,6 @@ def game(gid):
         playCount = None
         userReview = []
         user = None
+        review_form = None
     return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount, 
     gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating)
