@@ -85,3 +85,11 @@ class Collection:
         cid=cid
         )
       return [Game(*row) for row in rows]
+
+    def get_liked_collections(uid):
+      rows = app.db.execute("""
+SELECT Collections.*
+FROM Collections, LikesCollection
+WHERE Collections.cid = LikesCollection.cid AND LikesCollection.uid = :uid
+""", uid=uid)
+      return [Collection(*row) for row in rows]
