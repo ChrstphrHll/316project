@@ -2,6 +2,61 @@
 
 {% block content %}
 
+<style>
+  #pic_select img {
+    max-width: 100px;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  #pic_select img.selected {
+    outline: 5px solid orange;
+  }
+
+  #card_container {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    width: calc(4*9rem + 3*1.25rem);
+  }
+
+  .designed_by {
+    min-width: 9rem;
+    font-size: 12px;
+  }
+
+  .designed_by:hover {
+    text-decoration: underline;
+  }
+
+  .scroll_button {
+    height: 50px;
+    min-width: 40px;
+    display: block;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    outline: none;
+    background-color: lightblue;
+    border: none;
+  }
+
+  .scroll_button:focus {
+    outline: none;
+  }
+
+  .card-link {
+    text-decoration: none;
+    color: black;
+    margin: 0;
+  }
+
+  .card img {
+    height: 150px;
+    object-fit: cover;
+    object-position: top;
+  }
+</style>
+
 <br><br>
 <div class="container">
   <div class="row bg-light">
@@ -35,69 +90,105 @@
     </div>
   </div>
 
-  <h3>Games like this:</h3>
-
-  <table class='table table-hover table-primary table-striped table-bordered container'>
-    <thead class="thead-dark">
-        <tr>
-            <th></th>
-            <th>Game Name</th>
-            <th>If you like</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for sim in sim_games %}
-        <tr>
-            <td><img src={{sim.thumbnail_url}} alt={{sim.name}} style="max-width: 100px;"></td>
-            <td>{{sim.name}}</td>
-            <td>
-              {{shared_mechs[loop.index0]}}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
   <div class="row d-flex mt-2 p-2 bg-light rounded">
     <div class="col-2 d-flex">
       <h3 class="bagde rounded-pill bg-primary text-light align-self-center p-2">Mechanics</h3>
     </div>
-
+  
     <div class="col-10 d-flex flex-wrap">
       {% for mechanic in mechanics%}
       <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
       {% endfor %}
     </div>
   </div>
-  <div class="row d-flex mt-2 p-2 bg-light rounded">
-    <h2  style="margin-right:auto">Reviews</h2>
-    <div class="align-items-center">
-      {% if current_user.is_authenticated and (userReview|length == 0) %}
-      <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
-      {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
-      {% elif current_user.is_authenticated and (userReview|length != 0) %}
-      <button type="button" class="btn btn-primary" disabled>Already Reviewed</button>
-      {% endif %}
-    </div>
-    <table class='table table-hover table-primary table-striped table-bordered container'>
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Username</th>
-          <th scope="col">Rating</th>
-          <th scope="col">Description</th>
-          <th scope="col">timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for review in gameReviews%}
-          <tr>
-            <th scope="row">{{review.name}}</th>
-            <td>{{review.rating}}</td>
-            <td>{{review.description}}</td>
-            <td>{{review.time_posted}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
+
+<br>
+
+{% if sim_games|length > 0 %}
+<p style="font-size: 18px;"><b>Games like this:</b></p>
+
+<div id="designed_by_container" style="display: flex; align-items: center; gap: 10px;">
+
+  {% if sim_games|length > 3 %}
+  <button id="scroll_left" class="scroll_button" disabled>&lt;</button>
+  {% endif %}
+
+  <div id="card_container">
+    {% for game in sim_games %}
+    <a href="/games/{{ game.gid }}" class="card-link">
+      <div class="card designed_by">
+        <img class="card-img-top" src="{{ game.thumbnail_url }}" alt="Game Image">
+        <div class="card-body">
+          <p class="card-text" style="text-align: center;">{{ game.name }}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
   </div>
+
+  {% if sim_games|length > 4 %}
+  <button id="scroll_right" class="scroll_button">&gt;</button>
+  {% endif %}
+</div><br>
+
+<script>
+  let cards = document.querySelectorAll(".card-link");
+
+  let card_index = 0;
+  let max_index = Math.max(0, cards.length - 4); //because 4 cards visible
+
+  function setDisabled() {
+    document.getElementById("scroll_left").disabled = card_index == 0;
+    document.getElementById("scroll_right").disabled = card_index == max_index;
+  }
+
+  document.getElementById("designed_by_container").addEventListener("click", function (e) {
+    if (e.target.id == "scroll_left") {
+      card_index = Math.max(0, card_index - 1);
+      cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+    }
+
+    if (e.target.id == "scroll_right") {
+      card_index = Math.min(max_index, card_index + 1);
+      cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+    }
+
+    setDisabled();
+  });
+</script>
+
+{% endif %}
+
+<div class="row d-flex mt-2 p-2 bg-light rounded">
+  <h2  style="margin-right:auto">Reviews</h2>
+  <div class="align-items-center">
+    {% if current_user.is_authenticated and (userReview|length == 0) %}
+    <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
+    {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
+    {% elif current_user.is_authenticated and (userReview|length != 0) %}
+    <button type="button" class="btn btn-primary" disabled>Already Reviewed</button>
+    {% endif %}
+  </div>
+  <table class='table table-hover table-primary table-striped table-bordered container'>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Description</th>
+        <th scope="col">timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for review in gameReviews%}
+        <tr>
+          <th scope="row">{{review.name}}</th>
+          <td>{{review.rating}}</td>
+          <td>{{review.description}}</td>
+          <td>{{review.time_posted}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
 </div>
+</div>
+
 {% endblock %}

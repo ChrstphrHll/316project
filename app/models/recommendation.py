@@ -40,11 +40,11 @@ class Recommendation:
         (SELECT G.*
         FROM Implements as I, Games as G
         WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity <= 2)
-        SELECT IG.*
+        (SELECT IG.*
         FROM LikesGame as L, IG
         WHERE L.uid !=:uid AND L.gid=IG.gid
         GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, IG.complexity, IG.length, IG.min_players, IG.max_players
-        ORDER BY COUNT(*) DESC    
+        ORDER BY COUNT(*) DESC)    
         ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows[:5]]
 
@@ -154,7 +154,7 @@ class Recommendation:
         GROUP BY G.gid, G.name, G.description, G.image_url, G.thumbnail_url, G.complexity, G.length, G.min_players, G.max_players
         ORDER BY COUNT(*) DESC
         ''', gid=gid)
-        return [Game(*row) for row in rows[:5]]
+        return [Game(*row) for row in rows[:10]]
 
     @staticmethod
     def get(uid, gid):
