@@ -85,7 +85,7 @@ def game(gid):
     gameReviews = Review.get_top_5_game(gid)
     avgRating = Review.get_avg_rating(gid)
     if(avgRating):
-        avgRating = round(avgRating, 2)
+        avgRating = str(round(avgRating, 2)) + "/5"
 
     sim_games = Recommendation.get_sim_games(gid)
     shared_mechs = Mechanic.get_shared_mechs_all(gid, sim_games)
