@@ -60,6 +60,15 @@ LIMIT :per_page OFFSET :offset
         return [Game(*row) for row in game_raw]
 
     @staticmethod
+    def get_by_name(name):
+        rows = app.db.execute('''
+            SELECT * FROM Games
+            WHERE Games.name = :name
+            ''',
+            name=name)
+        return Game(*rows[0])
+
+    @staticmethod
     def get_random():
         game_raw = app.db.execute('''
 SELECT * FROM Games
