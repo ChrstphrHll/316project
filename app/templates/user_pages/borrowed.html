@@ -13,8 +13,8 @@
     <tr>
       <th scope="col">Game</th>
       <th scope="col">Comment</th>
-      <th scope="col">Link</th>
-      <th scope="col">Return</th>
+      <th scope="col">Info</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -30,8 +30,12 @@
           >GO</a
         >
       </td>
-      <td>
-        <a href="#" class="badge bg-primary text-light" role="button">RETURN</a>
+      <td>     
+        <a
+          href="{{ url_for('library.return_copy', cpid=copy.cpid) }}"
+          class="badge bg-primary text-light"
+          >Return</a
+        >
       </td>
     </tr>
     {% endfor %}
@@ -52,8 +56,9 @@
     <tr>
       <th scope="col">Game</th>
       <th scope="col">Comment</th>
-      <th scope="col">Link</th>
-      <th scope="col">Returned</th>
+      <th scope="col">Borrower</th>
+      <th scope="col">Info</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -61,6 +66,21 @@
     <tr>
       <th scope="row">{{ copy.game.name }}</th>
       <td>{{copy.comment}}</td>
+      {% if not copy.borrower.name %}
+      <td>
+        Not checked out
+      </td>
+      {% elif copy.borrower.name != user.name %}
+      <td>{{copy.borrower.name}}</td>
+      {% elif copy.borrower.name == user.name %}
+      <td>
+        <a
+          href="{{ url_for('library.return_copy', cpid=copy.cpid) }}"
+          class="badge bg-primary text-light"
+          >Return</a
+        >
+      </td>
+      {% endif %}
       <td>
         <a
           href="{{ url_for('game.game', gid=copy.game.gid) }}"
@@ -70,8 +90,20 @@
         >
       </td>
       <td>
-        <a href="#" class="badge bg-primary text-light" role="button">MARK AS RETURNED</a>
-      </td>
+        {% if copy.borrower.name %}
+        <a 
+          href="{{ url_for('library.return_copy', cpid=copy.cpid) }}"
+          class="badge bg-primary text-light"
+          role="button">MARK AS RETURNED</a>
+        </td>
+        {% else %}
+        <a
+          href="#"
+          class="badge bg-danger text-light"
+        >
+        Delete
+        </a>
+        {% endif %}
     </tr>
     {% endfor %}
   </tbody>

@@ -20,13 +20,15 @@ class Search(FlaskForm):
 @bp.route('/')
 def libraries():
     form = Search()
+    prev_search_string = ""
 
     libraries = Library.get_all()
     
     if "search" in request.args:
         libraries = filter(lambda x : request.args.get("search").lower() in x.title.lower(), libraries)
+        prev_search_string = request.args.get("search")
         
-    return render_template('libraries.html', libraries=libraries, form=form)
+    return render_template('libraries.html', libraries=libraries, form=form, prev_search_string = prev_search_string)
 
 class Create(FlaskForm):
     comment = StringField('Comment', validators=[DataRequired()])
@@ -46,16 +48,20 @@ def library(lid):
         if copy:
             return redirect(url_for('library.library', lid=lid))
 
-    return render_template("library.html", library=library, copies=copies, create=create_form)
+    return render_template("library.html", library=library, copies=copies, create=create_form, user=current_user)
 
 @bp.route('/<lid>/checkout/<cpid>', methods=["GET", "POST"])
 def checkout(lid, cpid):
-    Copy.checkout_copy(cpid, current_user.uid)
+    res = Copy.checkout_copy(cpid, current_user.uid)
 
-    return redirect(url_for('library.library', lid=lid))
+    if res:
+        return redirect(url_for('library.library', lid=lid))
 
-@bp.route('/<lid>/return/<cpid>', methods=["GET", "POST"])
+@bp.route('/return/<cpid>', methods=["GET", "POST"])
 def return_copy(cpid):
-    Copy.return_copy(cpid, current_user.uid)
+    borrower = Copy.checked_out_by(cpid)
 
-    return redirect(url_for('users.borrowed'))
+    if borrower.uid == current_user.uid or str(cpid) in list(map(lambda copy: str(copy.cpid), Copy.user_owned_copies(current_user.uid))):
+        res = Copy.return_copy(cpid, borrower.uid)
+
+    return redirect(request.referrer)
