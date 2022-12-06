@@ -75,7 +75,7 @@ def game(gid):
                 Review.create(current_user.uid, gid,request.form['rating'], 
                 request.form['description'],  datetime.datetime.now())
 
-
+    review_form = None
     game = Game.get(gid)
     mechanics = Game.get_mechanics(gid)
     gameReviews = Review.get_top_5_game(gid)
