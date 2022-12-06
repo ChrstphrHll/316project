@@ -16,13 +16,13 @@ class User(UserMixin):
     def get_id(self):   # override mixin default of reading "id" field because we call it uid
         return self.uid
     
-    def update_information(self, attrs): # attrs is a dictionary of "user_attr":value
+    def update_information(self, attrs): # attrs is a dictionary of "user_attr":value, not including image_url
         try:
             app.db.execute("""
 UPDATE Users
-SET name = :name, email = :email, about = :about, image_url = :image_url
+SET name = :name, email = :email, about = :about
 WHERE uid = :uid
-            """, name=attrs["name"], email=attrs["email"], about=attrs["about"], image_url=attrs["image_url"], uid=self.uid)
+            """, name=attrs["name"], email=attrs["email"], about=attrs["about"], uid=self.uid)
         
             if attrs["password"] and len(attrs["password"]) > 0:
                 app.db.execute("""

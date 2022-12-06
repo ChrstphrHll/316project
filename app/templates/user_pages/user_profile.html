@@ -2,30 +2,81 @@
 
 {% block user_content %}
 
-<p class="m-0" style="font-size: 24px;">
-  Username: {{ user.name }}
-</p>
+<style>
+  #pic_select img {
+    max-width: 100px;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  #pic_select img.selected {
+    outline: 3px solid yellow;
+  }
+</style>
 
 {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
-(<a id="open_modal" href>Edit my information</a>)<br>
+
 {{ modal_form(edit_info_form, "Edit Your Information", "open_modal", user) }}
+
+<div id="pic_select_modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Choose Your Profile Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="POST">
+        {{ pic_form.hidden_tag() }}
+        <div id="pic_select" class="modal-body" style="display: grid; gap: 10px; justify-items: center; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));">
+          <img class="selected" src="https://cdn.pixabay.com/photo/2012/02/28/00/49/snow-17854_1280.jpg">
+          <img src="https://cdn.pixabay.com/photo/2020/04/08/06/58/elephant-5015980__480.jpg">
+        </div>
+        <div class="modal-footer">
+          {{ pic_form.submit(class="btn btn-primary") }}
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endif %}
 
-<br>
-<img src="{{ user.image_url }}" style="height: 150px; display: block; border: 1px solid black;" />
-<br>
 
-<p>
-  <b>Email</b><br>
-  {{ user.email }}
-</p>
 
-{% if user.about %}
-<p>
-  <b>About</b><br>
-  {{ user.about }}
-</p>
-{% endif %}
+<div style="display: flex; gap: 20px;">
+  <div style="flex-grow: 2;">
+    <p class="m-0" style="font-size: 24px;">
+      Username: {{ user.name }}
+    </p>
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a id="open_modal" href>Edit my information</a>)<br>
+    {% endif %}
+
+    <br>
+
+    <p>
+      <b>Email</b><br>
+      {{ user.email }}
+    </p>
+
+    {% if user.about %}
+    <p>
+      <b>About</b><br>
+      {{ user.about }}
+    </p>
+    {% endif %}
+  </div>
+  <div style="text-align: right;">
+    <img src="{{ user.image_url }}" style="width: 300px; display: block; border: 1px solid black;" />
+    {% if current_user.is_authenticated and current_user.uid == user.uid|int %}
+    (<a href data-toggle="modal" data-target="#pic_select_modal">Edit</a>)
+    {% endif %}
+  </div>
+  
+</div>
+
 
 
 {% endblock %}

@@ -91,7 +91,6 @@ class EditUserInfo(FlaskForm):
         super().__init__(*args, **kwargs)
 
     name = StringField('Username', validators=[DataRequired()], render_kw={"size": 32})
-    image_url = StringField('Profile Pic URL (leave blank to remove current pic)', render_kw={"size": 32, "type":"url"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"size": 32})
     about = TextAreaField('About', render_kw={"cols": 48, "rows": 4})
     password = PasswordField('New Password', validators=[EqualTo('repeat_password', message='Passwords must match')])
@@ -106,16 +105,24 @@ class EditUserInfo(FlaskForm):
         if email_field.data != self.user.email and User.email_exists(email_field.data):
             raise ValidationError("Another user has this email already")
 
+class ProfilePic(FlaskForm):
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+    image_url = StringField('image_url')
+    submit = SubmitField('Save')
+
 @bp.route('/users/<uid>', methods=['GET','POST'])
 def profile(uid):
     edit_info_form = EditUserInfo(User.get(uid))
+    profile_pic_form = ProfilePic(User.get(uid))
     
     if request.method == 'POST':
         if edit_info_form.validate_on_submit():
             User.get(uid).update_information(edit_info_form.data) # filters these to only use the relevant ones
             return redirect(url_for('users.profile', uid=uid))
 
-    return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form)
+    return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form, pic_form=profile_pic_form)
 
 
 @bp.route('/users/<uid>/liked')
