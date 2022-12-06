@@ -148,6 +148,12 @@ INSERT INTO PlayCount (gid, uid, count)
 VALUES (:gid, :uid, 1)
 """, gid=gid, uid=uid)
 
+    def check_likes(uid, gid):
+        result = app.db.execute('''SELECT * FROM LikesGame WHERE uid = :uid AND gid = :gid''', uid=uid, gid=gid)
+        if len(result) != 0:
+            return True
+        return False
+
     def toggle_like_game(uid, gid):
         updated = app.db.execute("""
 DELETE FROM LikesGame WHERE uid = :uid AND gid = :gid;        
