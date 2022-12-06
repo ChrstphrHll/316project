@@ -18,6 +18,7 @@ class Recommendation:
         ''', uid = uid)
         return Mechanic(*rows[0])
 
+    # returns new low-complexity games that implement mech_name
     @staticmethod
     def get_w_easy_mech(uid, mech_name):
         rows = app.db.execute('''
@@ -28,12 +29,12 @@ class Recommendation:
         SELECT IG.*
         FROM LikesGame as L, IG
         WHERE L.uid !=:uid AND L.gid=IG.gid
-        GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, 
-        IG.complexity, IG.length, IG.min_players, IG.max_players
+        GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, IG.complexity, IG.length, IG.min_players, IG.max_players
         ORDER BY COUNT(*) DESC    
         ''', uid = uid, mech_name=mech_name)
         return [Game(*row) for row in rows[:5]]
 
+    # returns new high-complexity games that implement mech_name
     @staticmethod
     def get_w_hard_mech(uid, mech_name):
         rows = app.db.execute('''
@@ -61,9 +62,6 @@ class Recommendation:
         ''', cid = cid)
         return [Game(*row) for row in rows]
 
-    #more games like this; input is one singular game
-    #games that share two mechanics in common
-
     #returns games with similar mechs to those in the collection
     @staticmethod
     def get_new_coll(cid, mech):
@@ -78,6 +76,7 @@ class Recommendation:
         ''', mech=mech, cid = cid)
         return [Game(*row) for row in rows]
 
+    # returns the designer who created the most games liked by uid
     @staticmethod
     def get_pop_designer(uid):
         rows = app.db.execute('''
@@ -89,6 +88,7 @@ class Recommendation:
         ''', uid = uid)
         return User(*(rows[0])) if rows else []
 
+    # returns additional games made by favorite designer
     @staticmethod
     def get_w_designer(uid, did):
         rows = app.db.execute('''
@@ -105,6 +105,7 @@ class Recommendation:
         ''', uid = uid, did=did)
         return [Game(*row) for row in rows[:5]]
 
+    #returns the top 5 games with the most similar mechanics to gid
     @staticmethod
     def get_sim_games(gid):
         rows = app.db.execute('''
@@ -117,15 +118,6 @@ class Recommendation:
         ORDER BY COUNT(*) DESC
         ''', gid=gid)
         return [Game(*row) for row in rows[:5]]
-
-    @staticmethod
-    def liked(uid):
-        rows = app.db.execute('''
-        SELECT G.*
-        FROM Games as G, LikesGame as L
-        WHERE G.gid=L.gid AND L.uid=:uid
-        ''', uid=uid)
-        return [Game(*row) for row in rows]
 
     @staticmethod
     def get(uid, gid):
