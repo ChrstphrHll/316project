@@ -83,7 +83,7 @@ def game(gid):
     gameReviews = Review.get_top_5_game(gid)
     avgRating = Review.get_avg_rating(gid)
     if(avgRating):
-        avgRating = round(avgRating, 2)
+        avgRating = str(round(avgRating, 2)) + "/5"
     if current_user.is_authenticated:
         review_form = sumbitReview(User.get(current_user.uid))
         user = User.get(current_user.uid)
