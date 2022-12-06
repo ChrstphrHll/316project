@@ -59,11 +59,12 @@ def game(gid):
     mechanics = Game.get_mechanics(gid)
 
     sim_games = Recommendation.get_sim_games(gid)
+    shared_mechs = Recommendation.get_shared_mechs_all(gid, sim_games)
     if current_user.is_authenticated:
         playCount = User.get_play_count(current_user.uid, gid)
         playCount = playCount if playCount else 0
     else:
-        return render_template("game_pages/game.html", game=game, mechanics=mechanics, sim_games=sim_games)
+        return render_template("game_pages/game.html", game=game, mechanics=mechanics, sim_games=sim_games, shared_mechs=shared_mechs)
 
 @bp.route('/try')
 def try_this():
