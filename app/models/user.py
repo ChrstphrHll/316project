@@ -141,13 +141,22 @@ UPDATE PlayCount
 SET count = count + 1
 WHERE gid = :gid AND uid = :uid
         """, uid=uid, gid=gid)
-        print(updated)
 
         if updated == 0:
             app.db.execute("""
 INSERT INTO PlayCount (gid, uid, count)
 VALUES (:gid, :uid, 1)
 """, gid=gid, uid=uid)
+
+    def toggle_like_game(uid, gid):
+        updated = app.db.execute("""
+DELETE FROM LikesGame WHERE uid = :uid AND gid = :gid;        
+""", uid=uid, gid=gid)
+
+        if updated == 0:
+            app.db.execute("""
+INSERT INTO LikesGame (gid, uid) VALUES (:gid, :uid)        
+""", uid=uid, gid=gid)
 
     def get_designed_games(self):
         rows = app.db.execute("""

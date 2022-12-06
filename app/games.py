@@ -70,6 +70,9 @@ def game(gid):
         if "log_play" in request.form:
             if current_user.is_authenticated:
                 User.increment_play_count(current_user.uid, gid)
+        if "like" in request.form:
+            if current_user.is_authenticated:
+                User.toggle_like_game(current_user.uid, gid)
         if "rating" in request.form:
             if current_user.is_authenticated:
                 Review.create(current_user.uid, gid,request.form['rating'], 
