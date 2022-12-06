@@ -53,7 +53,9 @@
       <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
       {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
       {% elif current_user.is_authenticated and (userReview|length != 0) %}
-      <button type="button" class="btn btn-primary" disabled>Already Reviewed</button>
+      <form method="POST" action="/games/{{game.gid}}">
+        <input type="submit" class="btn btn-primary bg-danger" name="deleteReview" value="Delete Review"></button>
+      </form>
       {% endif %}
     </div>
     <table class='table table-hover table-primary table-striped table-bordered container'>
