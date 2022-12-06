@@ -38,7 +38,6 @@ class Copy:
           cpid=cpid,
         )
 
-        print(borrower_id)
         if borrower_id:
           app.db.execute("""
             INSERT INTO CheckedOutBy(cpid, uid)
