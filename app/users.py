@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
-from app.models.copy import Copy
+from .models.copy import Copy
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
@@ -168,17 +168,19 @@ def liked(uid):
     liked_games = User.get_liked_games(uid)
     return render_template("user_pages/liked.html", user=User.get(uid), liked_games=liked_games)
 
-    #find the most liked mechanics
-    #find games that share that mechanic
-    #minus the games you've already liked
-
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
+    liked = User.get_liked_games(uid)
+    if len(liked) == 0:
+        pop_games = Recommendation.get_pop_games()
+        pop_coll = Recommendation.get_pop_coll()
+        return render_template('user_pages/no_recs.html', pop_games=pop_games, pop_coll=pop_coll)
+
     if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
         return redirect(url_for("index.notFound"))
 
     pop_mech = Recommendation.get_pop_mech(uid)
-    pop_name = pop_mech[0].mech_name
+    pop_name = pop_mech.mech_name
     pop_designer = Recommendation.get_pop_designer(uid)
     designer = pop_designer.name
     did = pop_designer.uid
@@ -186,14 +188,10 @@ def recommended(uid):
     easy_recs = Recommendation.get_w_easy_mech(uid, pop_name)
     hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)
     design_recs = Recommendation.get_w_designer(uid, did)
-    if len(easy_recs) > 5:
-        easy_recs = easy_recs[:5]
-    if len(hard_recs) > 5:
-        hard_recs = hard_recs[:5]
-    if len(design_recs) > 5:
-        design_recs = design_recs[:5]
+    sim_coll = Recommendation.get_sim_coll(pop_name)
  
-    return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, pop_name=pop_name, designer=designer, design_recs=design_recs)
+    return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs,
+     pop_name=pop_name, designer=designer, design_recs=design_recs, sim_coll=sim_coll)
 
 class Search(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])

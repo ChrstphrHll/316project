@@ -1,0 +1,56 @@
+{% extends "user_pages/base_user.html" %}
+
+
+{% block user_content %}
+
+<h1> Your Recommended</h1>
+
+<br>
+
+<h2> Check out these popular games! </h2>
+
+<table class='table table-hover table-primary table-striped table-bordered container'>
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>Game Name</th>
+            <th>Complexity</th>
+            <th>Players</th>
+            <th>Length</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rec in pop_games %}
+        <tr>
+            <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+            <td>{{rec.name}}</td>
+            <td>{{rec.complexity}}</td>
+            <td>{{rec.min_players}} - {{rec.max_players}}</td>
+            <td>{{rec.length}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<h2> Check out these popular collections! </h2>
+
+<table class='table table-hover table-primary table-striped table-bordered container'>
+    <thead class="thead-dark">
+        <tr>
+            <th>Collection</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for coll in pop_coll %}
+        <tr>
+            <td>{{coll.title}}</td>
+            <td>{{coll.description}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

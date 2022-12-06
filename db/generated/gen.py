@@ -9,10 +9,8 @@ num_purchases = 2500
 Faker.seed(0)
 fake = Faker()
 
-
 def get_csv_writer(f):
     return csv.writer(f, dialect='unix')
-
 
 def gen_users(num_users):
     with open('Users.csv', 'w') as f:
