@@ -13,7 +13,6 @@
                         the names of the fields.
     
     NOTES:
-    - Can only have one of these on a webpage at a time b/c of the modal id.
     - It is assumed that your form has a SubmitField called "submit"
     - Make sure to call redirect(url_for(...)) upon successful form submission, to make a new GET
         request (best practice according to WTForms), so that the modal doesn't reopen by accident
@@ -47,6 +46,7 @@
                     </div>
                     {% endif %}
                     {% endfor %}
+                    <input type="hidden" name="modal_form_id" value="{{ trigger_elem_id }}"> <!-- because this is guaranteed to be unique -->
                 </div>
                 <div class="modal-footer">
                     {{ form.submit(class="btn btn-primary") }}
@@ -76,7 +76,7 @@
 
 <!-- if we submitted invalid data (page will refresh), show the modal immediately  and
     scroll to the errors so we can see them -->
-{% if request.method == 'POST' and not form.validate() %}
+{% if request.method == 'POST' and not form.validate() and (trigger_elem_id == request.form.getlist("modal_form_id")[0] if "modal_form_id" in request.form else False) %}
 <script>
     window.addEventListener("load", function () {
         $('#modal_id').on('shown.bs.modal', function () {

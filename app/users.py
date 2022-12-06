@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, flash, request
 from werkzeug.urls import url_parse
 from flask_login import login_user, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from app.models.copy import Copy
@@ -109,17 +109,32 @@ class ProfilePic(FlaskForm):
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super().__init__(*args, **kwargs)
-    image_url = StringField('image_url')
+    image_url = HiddenField('image_url')
     submit = SubmitField('Save')
+    valid_urls = ["https://cdn.pixabay.com/photo/2012/02/28/00/49/snow-17854_1280.jpg",
+                    "https://cdn.pixabay.com/photo/2020/04/08/06/58/elephant-5015980__480.jpg",
+                    "https://cdn.pixabay.com/photo/2018/07/22/21/12/panda-3555554_1280.jpg",
+                    "https://cdn.pixabay.com/photo/2016/02/15/00/04/penguin-1200535__480.jpg",
+                    "https://cdn.pixabay.com/photo/2014/08/24/19/10/clownfish-426567__480.jpg"]
+    def validate_image_url(self, image_url_field):
+        if not image_url_field.data in ProfilePic.valid_urls:
+            raise ValidationError("Invalid profile pic URL")
+
 
 @bp.route('/users/<uid>', methods=['GET','POST'])
 def profile(uid):
     edit_info_form = EditUserInfo(User.get(uid))
     profile_pic_form = ProfilePic(User.get(uid))
+
+    print(request.form)
     
     if request.method == 'POST':
         if edit_info_form.validate_on_submit():
             User.get(uid).update_information(edit_info_form.data) # filters these to only use the relevant ones
+            return redirect(url_for('users.profile', uid=uid))
+        if profile_pic_form.validate_on_submit():
+            print("Image form ------------------------------")
+            print(profile_pic_form.image_url.data)
             return redirect(url_for('users.profile', uid=uid))
 
     return render_template("user_pages/user_profile.html", user=User.get(uid), edit_info_form=edit_info_form, pic_form=profile_pic_form)
