@@ -5,7 +5,7 @@
 
 <h2>Search Games:</h2>
   <div class="d-flex p-2 border justify-content-end align-items-center">
-    {{table_controls(mechanic, current_page, per_page)}}
+    {{table_controls(mechanic, current_page, per_page, search)}}
     <form>
       {{ form.search }}
       <button type="submit" class="btn btn-primary mx-1">Search</button>
@@ -53,7 +53,7 @@
 </table>
 
 <div class="d-flex mb-5 p-2 border justify-content-center align-items-center">
-  {{table_controls(mechanic, current_page, per_page)}}
+  {{table_controls(mechanic, current_page, per_page, search)}}
 </div>
 
 
