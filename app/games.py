@@ -5,7 +5,7 @@ import datetime
   
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.fields import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.fields import StringField, PasswordField, SelectField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 
@@ -55,7 +55,7 @@ class sumbitReview(FlaskForm):
         self.user = user
         super().__init__(*args, **kwargs)
 
-    rating = StringField('Rating', validators=[DataRequired()], render_kw={"size": 32})
+    rating = SelectField('Rating', validators=[DataRequired()], choices=[1,2,3,4,5])
     description = TextAreaField('Description', render_kw={"cols": 48, "rows": 4})
     submit = SubmitField('Submit')
 
