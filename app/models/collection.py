@@ -37,6 +37,35 @@ class Collection:
         return None
 
     @staticmethod
+    def delete(cid):
+      try:
+        app.db.execute('''
+          DELETE FROM CreatedBy
+          WHERE cid=:cid
+          ''',
+          cid=cid,
+          )
+
+        app.db.execute('''
+          DELETE FROM HasGame
+          WHERE cid=:cid
+          ''',
+          cid=cid,
+          )
+
+        app.db.execute('''
+          DELETE FROM Collections
+          WHERE cid=:cid
+          ''',
+          cid=cid,
+          )
+
+        return True 
+      except Exception as e:
+        print(str(e))
+        return None
+      
+    @staticmethod
     def get(cid):
       rows = app.db.execute('''
         SELECT *
@@ -93,3 +122,30 @@ FROM Collections, LikesCollection
 WHERE Collections.cid = LikesCollection.cid AND LikesCollection.uid = :uid
 """, uid=uid)
       return [Collection(*row) for row in rows]
+    @staticmethod
+    def add_game(cid, gid):
+      try:
+        rows = app.db.execute("""
+            SELECT * FROM HasGame
+            WHERE gid=:gid AND cid=:cid
+            """,
+            cid=cid,
+            gid=gid
+            )
+
+        if not len(rows):
+          app.db.execute("""
+              INSERT INTO HasGame(cid, gid)
+              VALUES(:cid, :gid)
+              """,
+              cid=cid,
+              gid=gid,
+            )
+          return Collection.get(cid)
+      except Exception as e:
+        print(str(e))
+        return None
+
+    # TODO
+    def remove_game(cid, gid):
+      return None

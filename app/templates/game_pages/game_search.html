@@ -5,12 +5,12 @@
 
 <h2>Search Games:</h2>
   <div class="d-flex p-2 border justify-content-end align-items-center">
-    {{table_controls(mechanic, current_page, per_page)}}
+    {{table_controls(mechanic, current_page, per_page, search)}}
     <form>
       {{ form.search(value = prev_search_string) }}
       <button type="submit" class="btn btn-primary mx-1">Search</button>
     </form>
-    <a href="{{ url_for('game.games') }}" class="btn btn-primary mx-1">Clear Search</a>
+    <a href="{{ url_for('game.games') }}" class="btn btn-secondary mx-1">Clear Search</a>
   </div>
 
 <table
@@ -54,7 +54,7 @@
 </table>
 
 <div class="d-flex mb-5 p-2 border justify-content-center align-items-center">
-  {{table_controls(mechanic, current_page, per_page)}}
+  {{table_controls(mechanic, current_page, per_page, search)}}
 </div>
 
 

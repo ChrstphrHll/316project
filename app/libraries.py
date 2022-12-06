@@ -44,9 +44,10 @@ def library(lid):
     create_form = Create() if current_user.is_authenticated and current_user.uid == int(library.owner.uid) else None
 
     if create_form and create_form.validate_on_submit():
-        copy = Copy.create(create_form.gid.data, create_form.comment.data, lid, create_form.borrower.data)
-        if copy:
-            return redirect(url_for('library.library', lid=lid))
+        if(create_form.gid.data.isnumeric() and create_form.borrower.data.isnumeric()):
+            copy = Copy.create(create_form.gid.data, create_form.comment.data, lid, create_form.borrower.data)
+            if copy:
+                return redirect(url_for('library.library', lid=lid))
 
     return render_template("library.html", library=library, copies=copies, create=create_form, user=current_user)
 
