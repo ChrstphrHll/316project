@@ -41,6 +41,7 @@ class Delete(FlaskForm):
 def collection(cid):
     collection = Collection.get(cid)
     games = Collection.get_games(cid)
+    creator = Collection.get_creator(cid)
 
     create_form = None
     delete_form = None
@@ -58,6 +59,6 @@ def collection(cid):
     if delete_form and delete_form.validate_on_submit():
         res = Collection.delete(cid)
         if res:
-            return redirect(url_for('collection.collections'))
+            return redirect(url_for('users.collections', uid=creator.uid))
 
     return render_template("collection.html", collection=collection, games=games, create=create_form, delete=delete_form)
