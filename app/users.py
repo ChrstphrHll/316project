@@ -200,7 +200,7 @@ class Search(FlaskForm):
 
 class Create(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    description = TextAreaField('Description', validators=[DataRequired()])
+    description = TextAreaField('Description')
     submit = SubmitField('Create')
 
 @bp.route('/users/<uid>/collections', methods=['GET', 'POST'])

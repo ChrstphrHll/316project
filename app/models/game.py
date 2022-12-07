@@ -61,12 +61,16 @@ LIMIT :per_page OFFSET :offset
 
     @staticmethod
     def get_by_name(name):
-        rows = app.db.execute('''
-            SELECT * FROM Games
-            WHERE Games.name = :name
-            ''',
-            name=name)
-        return Game(*rows[0])
+        try:
+            rows = app.db.execute('''
+                SELECT * FROM Games
+                WHERE Games.name = :name
+                ''',
+                name=name)
+            return Game(*rows[0])
+        except Exception as e:
+            print(str(e))
+            return None
 
     @staticmethod
     def get_random():

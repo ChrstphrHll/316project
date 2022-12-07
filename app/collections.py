@@ -58,8 +58,9 @@ def collection(cid):
 
         if(name):
             game = Game.get_by_name(name)
-            if Collection.add_game(cid, game.gid):
-                return redirect(url_for('collection.collection', cid=cid))
+            if game:
+                if Collection.add_game(cid, game.gid):
+                    return redirect(url_for('collection.collection', cid=cid))
     
     if delete_form and delete_form.validate_on_submit() and "delete" in request.form:
         res = Collection.delete(cid)

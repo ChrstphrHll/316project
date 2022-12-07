@@ -33,9 +33,9 @@ def libraries():
     return render_template('libraries.html', libraries=libraries, form=form, prev_search_string = prev_search_string)
 
 class Create(FlaskForm):
-    comment = StringField('Comment', validators=[DataRequired()])
+    comment = StringField('Comment')
     gamename = StringField('Game Name', validators=[DataRequired()], render_kw={"list": "game_list"})
-    borrower  = StringField('Borrower Name', validators=[DataRequired()], render_kw={"list": "user_list"})
+    borrower  = StringField('Borrower Name', render_kw={"list": "user_list"})
     submit = SubmitField('Create')
 
 @bp.route('/<lid>', methods=["GET", "POST"])
@@ -49,12 +49,15 @@ def library(lid):
 
     if create_form and create_form.validate_on_submit():
         name = create_form.gamename.data
-        borrowername = create_form.borrower.data
+        borrowername = create_form.borrower.data if create_form.borrower.data else ""
+        comment = create_form.comment.data if create_form.comment.data else ""
 
-        if(name and borrowername):
+        if(name):
             game = Game.get_by_name(name)
             borrower = User.get_by_name(borrowername)
-            if Copy.create(game.gid, create_form.comment.data, lid, borrower.uid):
+            borrower_id = borrower.uid if borrower else None 
+
+            if Copy.create(game.gid, comment, lid, borrower_id):
                 return redirect(url_for('library.library', lid=lid))
 
     return render_template("library.html", library=library, copies=copies, create=create_form, user=current_user, all_games=all_games, all_users=all_users)

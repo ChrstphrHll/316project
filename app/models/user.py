@@ -17,12 +17,16 @@ class User(UserMixin):
         return self.uid
     
     def get_by_name(name):
-        rows = app.db.execute('''
-            SELECT uid, name, email, about, image_url FROM Users
-            WHERE name = :name
-            ''',
-            name=name)
-        return User(*rows[0])
+        try:
+            rows = app.db.execute('''
+                SELECT uid, name, email, about, image_url FROM Users
+                WHERE name = :name
+                ''',
+                name=name)
+            return User(*rows[0])
+        except Exception as e:
+            print(str(e))
+            return None
 
     def update_information(self, attrs): # attrs is a dictionary of "user_attr":value, not including image_url
         try:
