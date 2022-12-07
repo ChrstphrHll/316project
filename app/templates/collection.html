@@ -14,11 +14,23 @@
     data-toggle="modal"
     data-target="#createForm"
     aria-expanded="false"
-    aria-controls="collapseExample"
   >
     +
   </button>
   <div style="margin-left: 10px">
+    <!---
+      {% if remove.to_remove.label %}
+      <div class="form-group">
+        {{ remove.to_remove(class_="form-control") }}
+        <datalist id="game_list">
+          {% for game in collection_games %}
+          <option value="{{game.name}}">
+          </option>
+          {% endfor %}
+        </datalist>
+      </div>
+      {% endif %}
+    -->
     <form
     action=""
     method="POST"

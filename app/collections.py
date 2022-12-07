@@ -33,20 +33,20 @@ def collections():
 
 class Create(FlaskForm):
     gamename = StringField('Game Name', validators=[DataRequired()], render_kw={"list": "game_list"})
-
     submit = SubmitField('Create')
 
 class Delete(FlaskForm):
     delete = SubmitField('Delete Collection')
 
 class Remove(FlaskForm):
-    remove = SubmitField('Remove Game')
+    to_remove = SubmitField('Remove Game', validators=[DataRequired()], render_kw={"list": "collection_games"})
 
 @bp.route('/<cid>', methods=["GET", "POST", "DELETE"])
 def collection(cid):
     collection = Collection.get(cid)
     games = Collection.get_games(cid)
     all_games = Game.get_all()
+    collection_games = Collection.get_games(cid)
     creator = Collection.get_creator(cid)
 
     create_form = None
@@ -67,9 +67,17 @@ def collection(cid):
                 if Collection.add_game(cid, game.gid):
                     return redirect(url_for('collection.collection', cid=cid))
     
+    if remove_form and remove_form.validate_on_submit():
+        to_remove = remove_form.to_remove
+
+        if to_remove:
+            res = Collection.remove_game(cid, to_remove.gid)
+            if res:
+                return redirect(url_for('collection.collection', cid=cid))
+
     if delete_form and delete_form.validate_on_submit() and "delete" in request.form:
         res = Collection.delete(cid)
         if res:
             return redirect(url_for('users.collections', uid=creator.uid))
 
-    return render_template("collection.html", collection=collection, games=games, all_games=all_games, create=create_form, delete=delete_form)
+    return render_template("collection.html", collection=collection, collection_games=collection_games, games=games, all_games=all_games, create=create_form, delete=delete_form, remove=remove_form)

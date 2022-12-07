@@ -52,6 +52,41 @@ class Copy:
         print(str(e))
         return None
 
+    def delete(cpid):
+      try:
+        app.db.execute("""
+          DELETE FROM CopyOf
+          WHERE cpid=:cpid
+          """,
+          cpid=cpid,
+        )
+
+        app.db.execute("""
+          DELETE FROM HasCopy
+          WHERE cpid=:cpid
+          """,
+          cpid=cpid,
+        )
+
+        app.db.execute("""
+          DELETE FROM CheckedOutBy
+          WHERE cpid=:cpid
+          """,
+          cpid=cpid,
+        )
+
+        app.db.execute("""
+          DELETE FROM Copies
+          WHERE cpid=:cpid
+          """,
+          cpid=cpid,
+        )
+        
+        return True
+      except Exception as e:
+        print(str(e))
+        return None
+
     @staticmethod
     def get(cpid):
       rows = app.db.execute('''
