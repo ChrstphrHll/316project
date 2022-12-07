@@ -35,9 +35,6 @@ def games():
     mechanic = request.args.get('mechanic') or None
     search = request.args.get('search') or None
 
-    print("games")
-    print(search)
-
     # try:
     games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search)
     # except:

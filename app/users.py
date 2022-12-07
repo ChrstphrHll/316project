@@ -247,14 +247,11 @@ def libraries(uid):
 
 @bp.route('/users/<uid>/borrowed')
 def borrowed(uid):
-    print("current",current_user)
     if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
         return redirect(url_for("index.notFound"))
     
     borrowed_copies = Copy.user_borrowed_copies(uid)
     owned_copies = Copy.user_owned_copies(uid)
-    for copy in owned_copies:
-        print(copy.cpid)
     form = Search()
 
     if "search" in request.args:
