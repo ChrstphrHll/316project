@@ -185,12 +185,14 @@ def recommended(uid):
     designer = pop_designer.name
     did = pop_designer.uid
 
+    new_games = Recommendation.get_new_games(pop_name)
+
     easy_recs = Recommendation.get_w_easy_mech(uid, pop_name)
     hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)
     design_recs = Recommendation.get_w_designer(uid, did)
     sim_coll = Recommendation.get_sim_coll(pop_name)
  
-    return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs,
+    return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, new_games=new_games,
      pop_name=pop_name, designer=designer, design_recs=design_recs, sim_coll=sim_coll)
 
 class Search(FlaskForm):
