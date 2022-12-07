@@ -42,8 +42,13 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>{{ create.gid.label }}</label>
-            {{ create.gid(class_="form-control") }}
+            <label>{{ create.gamename.label }}</label>
+            {{ create.gamename(class_="form-control") }}
+            <datalist id="game_list">
+            {% for game in all_games %}
+              <option value="{{game.name}}">
+              </option>
+            {% endfor %}
           </div>
           <div class="form-group">
             <label>{{ create.comment.label }}</label>
@@ -52,6 +57,11 @@
           <div class="form-group">
             <label>{{ create.borrower.label }}</label>
             {{ create.borrower(class_="form-control") }}
+            <datalist id="user_list">
+            {% for user in all_users %}
+              <option value="{{user.name}}">
+              </option>
+            {% endfor %}
           </div>
         </div>
         <div class="modal-footer">
