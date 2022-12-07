@@ -54,11 +54,12 @@ def library(lid):
 
         if(name):
             game = Game.get_by_name(name)
-            borrower = User.get_by_name(borrowername)
-            borrower_id = borrower.uid if borrower else None 
+            if(game):
+                borrower = User.get_by_name(borrowername)
+                borrower_id = borrower.uid if borrower else None 
 
-            if Copy.create(game.gid, comment, lid, borrower_id):
-                return redirect(url_for('library.library', lid=lid))
+                if Copy.create(game.gid, comment, lid, borrower_id):
+                    return redirect(url_for('library.library', lid=lid))
 
     return render_template("library.html", library=library, copies=copies, create=create_form, user=current_user, all_games=all_games, all_users=all_users)
 
