@@ -182,14 +182,19 @@ def recommended(uid):
     pop_mech = Recommendation.get_pop_mech(uid)
     pop_name = pop_mech.mech_name
     pop_designer = Recommendation.get_pop_designer(uid)
-    designer = pop_designer.name
-    did = pop_designer.uid
+
+    if pop_designer != None:
+        designer = pop_designer.name
+        did = pop_designer.uid
+        design_recs = Recommendation.get_w_designer(uid, did)
+    else:
+        designer = 's'
+        design_recs = None
 
     new_games = Recommendation.get_new_games(pop_name)
 
     easy_recs = Recommendation.get_w_easy_mech(uid, pop_name)
-    hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)
-    design_recs = Recommendation.get_w_designer(uid, did)
+    hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)    
     sim_coll = Recommendation.get_sim_coll(pop_name)
  
     return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, new_games=new_games,

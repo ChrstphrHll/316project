@@ -40,7 +40,7 @@ class Recommendation:
         liked as (SELECT G.* FROM Games as G, LikesGame as L WHERE L.gid=G.gid)
         (SELECT * FROM SM) EXCEPT (SELECT * FROM liked)
         ''', mech_name=mech_name)
-        return [Game(*row) for row in rows[:5]]
+        return [Game(*row) for row in rows[:5]] if rows else None
 
     # returns low-complexity games that implement mech_name
     @staticmethod
@@ -56,7 +56,7 @@ class Recommendation:
         GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, IG.complexity, IG.length, IG.min_players, IG.max_players
         ORDER BY COUNT(*) DESC)    
         ''', uid = uid, mech_name=mech_name)
-        return [Game(*row) for row in rows[:5]]
+        return [Game(*row) for row in rows[:5]] if rows else None
 
     # returns high-complexity games that implement mech_name
     @staticmethod
@@ -73,7 +73,7 @@ class Recommendation:
         IG.complexity, IG.length, IG.min_players, IG.max_players
         ORDER BY COUNT(*) DESC            
         ''', uid = uid, mech_name=mech_name)
-        return [Game(*row) for row in rows[:5]]
+        return [Game(*row) for row in rows[:5]] if rows else None
 
     @staticmethod
     def get_common_mech(cid):
@@ -107,7 +107,7 @@ class Recommendation:
         GROUP BY C.cid, C.title, C.description
         ORDER BY COUNT(*) DESC
         ''', mech=mech)
-        return [Collection(*row) for row in rows[:5]]
+        return [Collection(*row) for row in rows[:5]] if rows else None
 
     #returns games with similar mechs to those in the collection
     @staticmethod
@@ -133,7 +133,7 @@ class Recommendation:
         GROUP BY U.uid, U.name, U.email, U.about, U.image_url
         ORDER BY COUNT(*) DESC
         ''', uid = uid)
-        return User(*(rows[0])) if rows else []
+        return User(*(rows[0])) if rows else None
 
     # returns additional games made by favorite designer
     @staticmethod

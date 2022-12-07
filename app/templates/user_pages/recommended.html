@@ -13,177 +13,195 @@
         
         <br>
 
+        {% if easy_recs != None%}
+
         <h3> Here are some low-complexity games to check out:</h3>
 
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in easy_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                    <td>
-                        <a
-                          href="{{ url_for('game.game', gid=rec.gid) }}"
-                          class="badge bg-primary text-light"
-                          role="button"
-                          >GO</a>
-                      </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <br>
+                    
+            <table class='table table-hover table-primary table-striped table-bordered container'>
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Complexity</th>
+                        <th>Players</th>
+                        <th>Length</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in easy_recs %}
+                    <tr>
+                        <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                        <td>{{rec.name}}</td>
+                        <td>{{rec.complexity}}</td>
+                        <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                        <td>{{rec.length}}</td>
+                        <td>
+                            <a
+                            href="{{ url_for('game.game', gid=rec.gid) }}"
+                            class="badge bg-primary text-light"
+                            role="button"
+                            >GO</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
 
-        <br>
-        
-        <h3>Looking for a challenge? Here are some more complex games to try:</h3>
+        {% if hard_recs != None%}
 
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in hard_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                    <td>
-                        <a
-                          href="{{ url_for('game.game', gid=rec.gid) }}"
-                          class="badge bg-primary text-light"
-                          role="button"
-                          >GO</a>
-                      </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <br>
+            
+            <h3>Looking for a challenge? Here are some more complex games to try:</h3>
 
-        <h3>Be the first to play these new games!</h3>
+            <br>
+                    
+            <table class='table table-hover table-primary table-striped table-bordered container'>
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Complexity</th>
+                        <th>Players</th>
+                        <th>Length</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in hard_recs %}
+                    <tr>
+                        <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                        <td>{{rec.name}}</td>
+                        <td>{{rec.complexity}}</td>
+                        <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                        <td>{{rec.length}}</td>
+                        <td>
+                            <a
+                            href="{{ url_for('game.game', gid=rec.gid) }}"
+                            class="badge bg-primary text-light"
+                            role="button"
+                            >GO</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in new_games %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                    <td>
-                        <a
-                          href="{{ url_for('game.game', gid=rec.gid) }}"
-                          class="badge bg-primary text-light"
-                          role="button"
-                          >GO</a>
-                      </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% endif%}
 
-        <br>
-        <h2>Your current favorite designer seems to be: {{designer}}</h2>        
-        <br>
+        {% if new_games != None%}
 
-        <h3> Check out these other games by {{designer}}:</h3>
+            <h3>Be the first to play these new games!</h3>
 
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in design_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                    <td>
-                        <a
-                          href="{{ url_for('game.game', gid=rec.gid) }}"
-                          class="badge bg-primary text-light"
-                          role="button"
-                          >GO</a>
-                      </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <br>
+                    
+            <table class='table table-hover table-primary table-striped table-bordered container'>
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Complexity</th>
+                        <th>Players</th>
+                        <th>Length</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in new_games %}
+                    <tr>
+                        <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                        <td>{{rec.name}}</td>
+                        <td>{{rec.complexity}}</td>
+                        <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                        <td>{{rec.length}}</td>
+                        <td>
+                            <a
+                            href="{{ url_for('game.game', gid=rec.gid) }}"
+                            class="badge bg-primary text-light"
+                            role="button"
+                            >GO</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        {%endif%}
 
-        <h2>Check out these cool collections!</h2>
+        {% if design_recs != None%}
 
-<table class='table table-hover table-primary table-striped table-bordered container'>
-    <thead class="thead-dark">
-        <tr>
-            <th>Collection</th>
-            <th>Description</th>
-                    <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for coll in sim_coll %}
-        <tr>
-            <td>{{coll.title}}</td>
-            <td>{{coll.description}}</td>
-                    <td>
-                        <a
-                          href="{{ url_for('collection.collection', cid=coll.cid) }}"
-                          class="badge bg-primary text-light"
-                          role="button"
-                          >GO</a
-                        >
-                      </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            <br>
+            <h2>Your current favorite designer seems to be: {{designer}}</h2>        
+            <br>
+
+            <h3> Check out these other games by {{designer}}:</h3>
+
+            <br>
+                    
+            <table class='table table-hover table-primary table-striped table-bordered container'>
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>Game Name</th>
+                        <th>Complexity</th>
+                        <th>Players</th>
+                        <th>Length</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in design_recs %}
+                    <tr>
+                        <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                        <td>{{rec.name}}</td>
+                        <td>{{rec.complexity}}</td>
+                        <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                        <td>{{rec.length}}</td>
+                        <td>
+                            <a
+                            href="{{ url_for('game.game', gid=rec.gid) }}"
+                            class="badge bg-primary text-light"
+                            role="button"
+                            >GO</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% endif%}
+
+        {% if sim_coll != None%}
+
+            <h2>Check out these cool collections!</h2>
+
+            <table class='table table-hover table-primary table-striped table-bordered container'>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Collection</th>
+                        <th>Description</th>
+                                <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for coll in sim_coll %}
+                    <tr>
+                        <td>{{coll.title}}</td>
+                        <td>{{coll.description}}</td>
+                                <td>
+                                    <a
+                                    href="{{ url_for('collection.collection', cid=coll.cid) }}"
+                                    class="badge bg-primary text-light"
+                                    role="button"
+                                    >GO</a
+                                    >
+                                </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {%endif%}
 {% endblock %}
