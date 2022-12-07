@@ -11,6 +11,8 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 from .models.game import Game
 from .models.user import User
+from .models.recommendation import Recommendation
+from .models.mechanic import Mechanic
 from .models.review import Review
 from flask import current_app as app
 from flask_login import current_user
@@ -29,12 +31,9 @@ def games():
     prev_search_string = ""
 
     page = int(request.args.get('page') or 0) 
-    per_page = int(request.args.get('per_page') or 10)
+    per_page = int(request.args.get('per_page') or 12)
     mechanic = request.args.get('mechanic') or None
     search = request.args.get('search') or None
-
-    print("games")
-    print(search)
 
     # try:
     games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search)
@@ -82,6 +81,10 @@ def game(gid):
     avgRating = Review.get_avg_rating(gid)
     if(avgRating):
         avgRating = str(round(avgRating, 2)) + "/5"
+
+    sim_games = Recommendation.get_sim_games(gid)
+    shared_mechs = Mechanic.get_shared_mechs_all(gid, sim_games)
+
     if current_user.is_authenticated:
         review_form = sumbitReview(User.get(current_user.uid))
         user = User.get(current_user.uid)
@@ -91,11 +94,10 @@ def game(gid):
         userReview = Review.get(gid, current_user.uid)
         
     else:
-        playCount = None
         userReview = []
         user = None
         review_form = None
         likeStatus = None
 
-    return render_template("game_pages/game.html", game=game, mechanics=mechanics, playCount=playCount, 
+    return render_template("game_pages/game.html", game=game, mechanics=mechanics, sim_games=sim_games, shared_mechs=shared_mechs, 
     gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating, likeStatus=likeStatus)

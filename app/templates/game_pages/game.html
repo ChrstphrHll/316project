@@ -39,49 +39,51 @@
     <div class="col-2 d-flex">
       <h3 class="bagde rounded-pill bg-primary text-light align-self-center p-2">Mechanics</h3>
     </div>
-
+  
     <div class="col-10 d-flex flex-wrap">
       {% for mechanic in mechanics%}
-        <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
+      <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
       {% endfor %}
     </div>
   </div>
-  <div class="row d-flex mt-2 p-2 bg-light rounded">
-    <h2  style="margin-right:auto">Reviews</h2>
-    <div class="align-items-center">
-      {% if current_user.is_authenticated and (userReview|length == 0) %}
-      <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
-      {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
-      {% elif current_user.is_authenticated and (userReview|length != 0) %}
-      <form method="POST" action="/games/{{game.gid}}">
-        <input type="submit" class="btn btn-primary bg-danger" name="deleteReview" value="Delete Review"></button>
-      </form>
-      {% endif %}
-    </div>
-    <table class='table table-hover table-primary table-striped table-bordered container'>
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Username</th>
-          <th scope="col">Rating</th>
-          <th scope="col">Description</th>
-          <th scope="col">timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for review in gameReviews%}
-          <tr>
-            <th scope="row">{{review.name}}</th>
-            <td>{{review.rating}}</td>
-            <td>{{review.description}}</td>
-            <td>{{review.time_posted}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
+
+<br>
+
+{% if sim_games|length > 0 %}
+<p style="font-size: 18px;"><b>Games like this:</b></p>
+<div style="display: flex; justify-content: center;">{{ horiz_scroll_widget(sim_games, 5) }}</div>
+{% endif %}
+
+<div class="row d-flex mt-2 p-2 bg-light rounded">
+  <h2  style="margin-right:auto">Reviews</h2>
+  <div class="align-items-center">
+    {% if current_user.is_authenticated and (userReview|length == 0) %}
+    <button type="button" class="btn btn-primary" id="reviewModal">Add Review</button>
+    {{ modal_form(review_form, "Enter your Review", "reviewModal") }}
+    {% elif current_user.is_authenticated and (userReview|length != 0) %}
+    <button type="button" class="btn btn-primary" disabled>Already Reviewed</button>
+    {% endif %}
   </div>
+  <table class='table table-hover table-primary table-striped table-bordered container'>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Description</th>
+        <th scope="col">timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for review in gameReviews%}
+        <tr>
+          <th scope="row">{{review.name}}</th>
+          <td>{{review.rating}}</td>
+          <td>{{review.description}}</td>
+          <td>{{review.time_posted}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
 </div>
-
-
-
-
+</div>
 
 {% endblock %}

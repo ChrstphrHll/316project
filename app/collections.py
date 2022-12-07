@@ -9,9 +9,10 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 from .models.collection import Collection
+from .models.game import Game
 from flask import current_app as app
-
 from flask import Blueprint
+
 bp = Blueprint('collection', __name__, url_prefix='/collections')
 
 class Search(FlaskForm):
@@ -31,7 +32,8 @@ def collections():
     return render_template('collections.html', collections=collections, form=form, prev_search_string = prev_search_string)
 
 class Create(FlaskForm):
-    gid = StringField('Game ID', validators=[DataRequired()])
+    gamename = StringField('Game Name', validators=[DataRequired()], render_kw={"list": "game_list"})
+
     submit = SubmitField('Create')
 
 class Delete(FlaskForm):
@@ -41,6 +43,7 @@ class Delete(FlaskForm):
 def collection(cid):
     collection = Collection.get(cid)
     games = Collection.get_games(cid)
+    all_games = Game.get_all()
     creator = Collection.get_creator(cid)
     likeStatus = False
 
@@ -59,14 +62,18 @@ def collection(cid):
         delete_form = Delete()
 
     if create_form and create_form.validate_on_submit():
-        if(create_form.gid.data.isnumeric()):
-            res = Collection.add_game(cid, create_form.gid.data)
-            if res:
-                return redirect(url_for('collection.collection', cid=cid))
+        name = create_form.gamename.data
+
+        if(name):
+            game = Game.get_by_name(name)
+            if game:
+                if Collection.add_game(cid, game.gid):
+                    return redirect(url_for('collection.collection', cid=cid))
     
     if delete_form and delete_form.validate_on_submit() and "delete" in request.form:
         res = Collection.delete(cid)
         if res:
             return redirect(url_for('users.collections', uid=creator.uid))
 
-    return render_template("collection.html", collection=collection, games=games, create=create_form, delete=delete_form, likeStatus=likeStatus)
+
+    return render_template("collection.html", collection=collection, games=games, all_games=all_games, create=create_form, delete=delete_form, likeStatus=likeStatus)

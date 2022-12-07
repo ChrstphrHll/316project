@@ -1,7 +1,7 @@
 from flask import current_app as app
 from sqlalchemy import null
+from .mechanic import Mechanic
 import html
-from app.models.mechanic import Mechanic
 
 class Game:
     def __init__(self, gid, name, description, image_url, thumbnail_url, complexity, length, min_players, max_players):
@@ -60,6 +60,19 @@ LIMIT :per_page OFFSET :offset
         return [Game(*row) for row in game_raw]
 
     @staticmethod
+    def get_by_name(name):
+        try:
+            rows = app.db.execute('''
+                SELECT * FROM Games
+                WHERE Games.name = :name
+                ''',
+                name=name)
+            return Game(*rows[0])
+        except Exception as e:
+            print(str(e))
+            return None
+
+    @staticmethod
     def get_random():
         game_raw = app.db.execute('''
 SELECT * FROM Games
@@ -68,6 +81,7 @@ LIMIT 1
 ''')
         return Game(*game_raw[0]) if game_raw else null
 
+    @staticmethod
     def get_mechanics(gid):
         rows = app.db.execute('''
 SELECT m.*
