@@ -25,6 +25,7 @@
                     <th>Complexity</th>
                     <th>Players</th>
                     <th>Length</th>
+                    <th>Link</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +36,14 @@
                     <td>{{rec.complexity}}</td>
                     <td>{{rec.min_players}} - {{rec.max_players}}</td>
                     <td>{{rec.length}}</td>
+                    <td>
+                        <a
+                          href="{{ url_for('game.game', gid=rec.gid) }}"
+                          class="badge bg-primary text-light"
+                          role="button"
+                          >GO</a
+                        >
+                      </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -54,10 +63,39 @@
                     <th>Complexity</th>
                     <th>Players</th>
                     <th>Length</th>
+                    <th>Link</th>
                 </tr>
             </thead>
             <tbody>
                 {% for rec in hard_recs %}
+                <tr>
+                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
+                    <td>{{rec.name}}</td>
+                    <td>{{rec.complexity}}</td>
+                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
+                    <td>{{rec.length}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Be the first to play these new games!</h3>
+
+        <br>
+                
+        <table class='table table-hover table-primary table-striped table-bordered container'>
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Game Name</th>
+                    <th>Complexity</th>
+                    <th>Players</th>
+                    <th>Length</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rec in new_games %}
                 <tr>
                     <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
                     <td>{{rec.name}}</td>

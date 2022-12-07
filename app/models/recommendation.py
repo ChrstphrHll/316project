@@ -36,16 +36,10 @@ class Recommendation:
     @staticmethod
     def get_new_games(mech_name):
         rows = app.db.execute('''
-        WITH IG as 
-        (SELECT G.*
-        FROM Implements as I, Games as G
-        WHERE I.mech_name =:mech_name AND I.gid = G.gid AND G.complexity <= 2)
-        (SELECT IG.*
-        FROM LikesGame as L, IG
-        WHERE L.uid !=:uid AND L.gid=IG.gid
-        GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, IG.complexity, IG.length, IG.min_players, IG.max_players
-        ORDER BY COUNT(*) DESC)    
-        ''', uid = uid, mech_name=mech_name)
+        WITH SM as (SELECT G.* FROM Games as G, Implements as I WHERE I.gid=G.gid AND I.mech_name=:mech_name),
+        liked as (SELECT G.* FROM Games as G, LikesGame as L WHERE L.gid=G.gid)
+        (SELECT * FROM SM) EXCEPT (SELECT * FROM liked)
+        ''', mech_name=mech_name)
         return [Game(*row) for row in rows[:5]]
 
     # returns low-complexity games that implement mech_name
