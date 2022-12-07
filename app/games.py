@@ -31,7 +31,7 @@ def games():
     prev_search_string = ""
 
     page = int(request.args.get('page') or 0) 
-    per_page = int(request.args.get('per_page') or 10)
+    per_page = int(request.args.get('per_page') or 12)
     mechanic = request.args.get('mechanic') or None
     search = request.args.get('search') or None
 
