@@ -142,22 +142,13 @@ class Collection:
     # TODO
     def remove_game(cid, gid):
       try:
-        rows = app.db.execute("""
-            SELECT * FROM HasGame
-            WHERE gid=:gid AND cid=:cid
+        app.db.execute("""
+            DELETE FROM HasGame
+            WHERE(:cid, :gid)
             """,
             cid=cid,
-            gid=gid
+            gid=gid,
           )
-
-        if len(rows):
-          app.db.execute("""
-              DELETE FROM HasGame
-              WHERE(:cid, :gid)
-              """,
-              cid=cid,
-              gid=gid,
-            )
             
         return True
       except Exception as e:

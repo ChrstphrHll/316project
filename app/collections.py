@@ -37,7 +37,10 @@ class Create(FlaskForm):
     submit = SubmitField('Create')
 
 class Delete(FlaskForm):
-    delete = SubmitField('Delete')
+    delete = SubmitField('Delete Collection')
+
+class Remove(FlaskForm):
+    remove = SubmitField('Remove Game')
 
 @bp.route('/<cid>', methods=["GET", "POST", "DELETE"])
 def collection(cid):
@@ -48,10 +51,12 @@ def collection(cid):
 
     create_form = None
     delete_form = None
+    remove_form = None
 
     if current_user.is_authenticated and current_user.uid == int(collection.creator.uid):
         create_form = Create()
         delete_form = Delete()
+        remove_form = Remove()
 
     if create_form and create_form.validate_on_submit():
         name = create_form.gamename.data
