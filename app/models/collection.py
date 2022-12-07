@@ -115,6 +115,24 @@ class Collection:
         )
       return [Game(*row) for row in rows]
 
+    def get_liked_status(uid, cid):
+      rows = app.db.execute("""
+SELECT * FROM LikesCollection WHERE LikesCollection.uid = :uid AND LikesCollection.cid = :cid
+""", uid=uid, cid=cid)
+      if len(rows) != 0:
+            return True
+      return False
+
+    def toggle_like_collection(uid, cid):
+        updated = app.db.execute("""
+DELETE FROM LikesCollection WHERE uid = :uid AND cid = :cid;        
+""", uid=uid, cid=cid)
+
+        if updated == 0:
+            app.db.execute("""
+INSERT INTO LikesCollection (cid, uid) VALUES (:cid, :uid)        
+""", uid=uid, cid=cid)
+
     def get_liked_collections(uid):
       rows = app.db.execute("""
 SELECT Collections.*
