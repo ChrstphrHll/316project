@@ -1,0 +1,21 @@
+{% macro game_list(games) %}
+
+<!-- stling in base.html -->
+
+<div class="game_grid">
+    {% for game in games %}
+    <a class="game" href="{{ url_for('game.game', gid=game.gid) }}">
+        <img src="{{game.thumbnail_url}}">
+        <div>
+            <p>
+                <b>{{game.name}}</b><br>
+                Complexity: {{game.complexity}}<br>
+                {{game.min_players}}-{{game.max_players}} Players<br>
+                {{game.length}} minutes<br>
+            </p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endmacro %}

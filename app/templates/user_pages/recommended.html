@@ -161,19 +161,19 @@
 
         <h2>Check out these cool collections!</h2>
 
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th>Collection</th>
-                    <th>Description</th>
+<table class='table table-hover table-primary table-striped table-bordered container'>
+    <thead class="thead-dark">
+        <tr>
+            <th>Collection</th>
+            <th>Description</th>
                     <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for coll in sim_coll %}
-                <tr>
-                    <td>{{coll.title}}</td>
-                    <td>{{coll.description}}</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for coll in sim_coll %}
+        <tr>
+            <td>{{coll.title}}</td>
+            <td>{{coll.description}}</td>
                     <td>
                         <a
                           href="{{ url_for('collection.collection', cid=coll.cid) }}"
@@ -182,10 +182,8 @@
                           >GO</a
                         >
                       </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-</body>
-
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

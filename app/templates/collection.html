@@ -6,46 +6,83 @@
 <h1>{{collection.title}}</h1>
 <h4> Created by: {{collection.creator.name}}</h4>
 <p>{{collection.description}}</p>
+{% if create %}
+<div class="d-flex p-2 border justify-content-end align-items-center">
+  <button
+    class="btn btn-primary"
+    type="button"
+    data-toggle="modal"
+    data-target="#createForm"
+    aria-expanded="false"
+    aria-controls="collapseExample"
+  >
+    +
+  </button>
+  <div style="margin-left: 10px">
+    <form
+    action=""
+    method="POST"
+    novalidate
+    >
+    {% if delete %}
+    {{delete.hidden_tag()}}
+    {{ delete.delete(class_="btn btn-danger text-light") }}
+    {% endif %}
+    </form>
+  </div>
 
-<table
-  class="table table-hover table-primary table-striped table-bordered container"
->
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Thumbnail</th>
-      <th scope="col">Name</th>
-      <th scope="col">Complexity</th>
-      <th scope="col">Players</th>
-      <th scope="col">Length</th>
-      <th scope="col">Link</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for game in games%}
-    <tr>
-      <td>
-        <img
-          src="{{game.thumbnail_url}}"
-          style="max-width: 100px"
-          alt="Cover art for {{game.name}}"
-        />
-      </td>
-      <th scope="row">{{game.name}}</th>
-      <td>{{game.complexity}}</td>
-      <td>{{game.min_players}}-{{game.max_players}}</td>
-      <td>{{game.length}} minutes</td>
-      <td>
-        <a
-          href="{{ url_for('game.game', gid=game.gid) }}"
-          class="badge bg-primary text-light"
-          role="button"
-          >GO</a
-        >
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <form
+    action=""
+    method="POST"
+    novalidate
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+    id="createForm"
+  >
+    {{ create.hidden_tag() }}
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">New Copy</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>{{ create.gamename.label }}</label>
+            {{ create.gamename(class_="form-control") }}
+            <datalist id="game_list">
+            {% for game in all_games %}
+              <option value="{{game.name}}">
+              </option>
+            {% endfor %}
+          </datalist>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <div>
+            {{ create.submit(class_="btn btn-primary text-light") }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endif %}
+
+{{ game_list(games) }}
+<br>
 
 <a
   role="button"
