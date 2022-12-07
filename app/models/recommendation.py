@@ -15,7 +15,7 @@ class Recommendation:
         SELECT G.*
         FROM LikesGame as L, Games as G
         WHERE L.gid = G.gid
-        GROUP BY GROUP BY G.gid, G.name, G.description, G.image_url, G.thumbnail_url, G.complexity, G.length, G.min_players, G.max_players
+        GROUP BY G.gid, G.name, G.description, G.image_url, G.thumbnail_url, G.complexity, G.length, G.min_players, G.max_players
         ORDER BY COUNT(*) DESC
         ''')
         return [Game(*row) for row in rows[:5]]
@@ -96,7 +96,7 @@ class Recommendation:
         GROUP BY C.cid, C.title, C.description
         ORDER BY COUNT(*) DESC
         ''')
-        return [Collection(*row) for row in rows]
+        return [Collection(*row) for row in rows[:5]]
 
     #returns collections that implements the user's favorite mechanic the most
     def get_sim_coll(mech):

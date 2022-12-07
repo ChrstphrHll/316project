@@ -174,7 +174,7 @@ def recommended(uid):
     if len(liked) == 0:
         pop_games = Recommendation.get_pop_games()
         pop_coll = Recommendation.get_pop_coll()
-        return render_template('user_pages/no_recs.html', pop_games=pop_games, pop_coll=pop_coll)
+        return render_template('user_pages/no_recs.html', user=User.get(uid), pop_games=pop_games, pop_coll=pop_coll)
 
     if not User.get(uid) or not current_user.is_authenticated or current_user.uid != int(uid):
         return redirect(url_for("index.notFound"))
