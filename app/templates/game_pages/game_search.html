@@ -6,6 +6,16 @@
 <h2>Search Games:</h2>
   <div class="d-flex my-2 p-2 border justify-content-start align-items-center">
     <form class="ml-auto">
+      <div class="form-group">
+        <label>{{ form.mechname.label }}</label>
+        <input list="mech_list" name="mech_list" id="mech_list">
+        <datalist id="mech_list">
+          {% for mech in mechanics %}
+            <option value="{{mech.mech_name}}">
+            </option>
+          {% endfor %}
+        </datalist>
+      </div>
       {{ form.search(value = prev_search_string) }}
       <button type="submit" class="btn btn-primary mx-1">Search</button>
     </form>
