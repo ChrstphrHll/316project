@@ -4,120 +4,40 @@
 {% block user_content %}
 
 <h1> Your Recommended</h1>
-
+<p>
+    <b style="font-size: 24px;">Your favorite mechanic seems to be: {{pop_name}}</b><br>
+    Here are some low-complexity games to check out:
+</p>
+{{ game_list(easy_recs) }}
 <br>
 
-<body>
+<p>Looking for a challenge? Here are some more complex games to try:</p>
+{{ game_list(hard_recs) }}
 
-        <h2>Your favorite mechanic seems to be: {{pop_name}}</h2>
-        
-        <br>
+<br>
+<p>
+    <b style="font-size: 24px;">Your current favorite designer seems to be: {{designer}}</b><br>
+    Check out these other games by {{designer}}:
+</p>
+{{ game_list(design_recs) }}
+<br>
 
-        <h3> Here are some low-complexity games to check out:</h3>
+<h2>Check out these cool collections!</h2>
 
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in easy_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <br>
-        
-        <h3>Looking for a challenge? Here are some more complex games to try:</h3>
-
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in hard_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <br>
-        <h2>Your current favorite designer seems to be: {{designer}}</h2>        
-        <br>
-
-        <h3> Check out these other games by {{designer}}:</h3>
-
-        <br>
-                
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Game Name</th>
-                    <th>Complexity</th>
-                    <th>Players</th>
-                    <th>Length</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rec in design_recs %}
-                <tr>
-                    <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-                    <td>{{rec.name}}</td>
-                    <td>{{rec.complexity}}</td>
-                    <td>{{rec.min_players}} - {{rec.max_players}}</td>
-                    <td>{{rec.length}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <h2>Check out these cool collections!</h2>
-
-        <table class='table table-hover table-primary table-striped table-bordered container'>
-            <thead class="thead-dark">
-                <tr>
-                    <th>Collection</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for coll in sim_coll %}
-                <tr>
-                    <td>{{coll.title}}</td>
-                    <td>{{coll.description}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-</body>
-
+<table class='table table-hover table-primary table-striped table-bordered container'>
+    <thead class="thead-dark">
+        <tr>
+            <th>Collection</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for coll in sim_coll %}
+        <tr>
+            <td>{{coll.title}}</td>
+            <td>{{coll.description}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% from "macros/modal_form.html" import modal_form %}
+{% from "macros/game_list.html" import game_list %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,39 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/example.css') }}" />
   <link rel="icon" href="https://aux.iconspalace.com/uploads/board-games-icon-256.png">
+
+  <style>
+    .game_grid {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      grid-template-columns: repeat(auto-fill, 265px);
+    }
+
+    .game_grid .game {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid black;
+      width: 265px;
+      padding: 5px;
+      background-color: aliceblue;
+      border-radius: 10px;
+      color: black;
+      text-decoration: none;
+    }
+
+    .game_grid .game:hover {
+      background-color: lightblue;
+      cursor: pointer;
+    }
+
+    .game_grid img {
+      height: 100px;
+      width: 100px;
+      object-fit: contain;
+    }
+  </style>
 </head>
 
 <body style="padding-top: 100px;">
@@ -48,44 +82,45 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0 text-secondary">
-      {% if current_user.is_authenticated %}
-      <!-- Logged in as user {{ current_user.name }}.-->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/users/" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <div style="display: inline-block;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                {{ current_user.name }}
-                <div style="height: 30px;
+        {% if current_user.is_authenticated %}
+        <!-- Logged in as user {{ current_user.name }}.-->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/users/" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <div style="display: inline-block;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  {{ current_user.name }}
+                  <div style="height: 30px;
                             width: 30px;
                             border-radius: 50px;
                             background-image: url('{{ current_user.image_url }}');
                             background-size: cover;
                             background-position: center;
                             background-color: white;">
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="{{ url_for('users.profile', uid=current_user.get_id())}}"> Your Profile</a></li>
-            <a class="dropdown-item" href="{{ url_for('users.liked', uid=current_user.get_id())}}"> Your Likes</a>
-            <a class="dropdown-item" href="{{ url_for('users.recommended', uid=current_user.get_id())}}"> Your
-              Recommended</a>
-            <a class="dropdown-item" href="{{ url_for('users.collections', uid=current_user.get_id())}}"> Your
-              Collections </a>
-            <a class="dropdown-item" href="{{ url_for('users.libraries', uid=current_user.get_id())}}"> Your
-              Libraries</a>
-            <a class="dropdown-item" href="{{ url_for('users.borrowed', uid=current_user.get_id())}}"> Your Borrowed
-              Games</a>
-            <a class="dropdown-item" href="{{ url_for('users.reviews', uid=current_user.get_id())}}"> Your Reviews</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ url_for('users.logout') }}"> Log Out</a>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a class="dropdown-item" href="{{ url_for('users.profile', uid=current_user.get_id())}}"> Your
+                  Profile</a></li>
+              <a class="dropdown-item" href="{{ url_for('users.liked', uid=current_user.get_id())}}"> Your Likes</a>
+              <a class="dropdown-item" href="{{ url_for('users.recommended', uid=current_user.get_id())}}"> Your
+                Recommended</a>
+              <a class="dropdown-item" href="{{ url_for('users.collections', uid=current_user.get_id())}}"> Your
+                Collections </a>
+              <a class="dropdown-item" href="{{ url_for('users.libraries', uid=current_user.get_id())}}"> Your
+                Libraries</a>
+              <a class="dropdown-item" href="{{ url_for('users.borrowed', uid=current_user.get_id())}}"> Your Borrowed
+                Games</a>
+              <a class="dropdown-item" href="{{ url_for('users.reviews', uid=current_user.get_id())}}"> Your Reviews</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('users.logout') }}"> Log Out</a>
             </ul>
-        </li>
-      </ul>
-      {% else %}
+          </li>
+        </ul>
+        {% else %}
         <a href="{{ url_for('users.login') }}" type="button" class="btn btn-outline-light my-2 my-sm-0">Sign In</a>
         {% endif %}
       </form>
