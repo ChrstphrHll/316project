@@ -1,4 +1,5 @@
 {% from "macros/modal_form.html" import modal_form %}
+{% from "macros/horiz_scroll_widget.html" import horiz_scroll_widget %}
 {% from "macros/game_list.html" import game_list %}
 
 <!DOCTYPE html>
@@ -13,7 +14,53 @@
   <link rel="icon" href="https://aux.iconspalace.com/uploads/board-games-icon-256.png">
 
   <style>
-    .game_grid {
+    /* stuff for horizontal scroll widget */
+
+    .horiz_scroll_widget .card_container {
+        display: flex;
+        align-items: center;
+        overflow-x: hidden;
+    }
+
+    .horiz_scroll_widget .card {
+        min-width: 9rem;
+        font-size: 12px;
+    }
+
+    .designed_by:hover {
+        text-decoration: underline;
+    }
+
+    .scroll_button {
+        height: 50px;
+        min-width: 40px;
+        display: block;
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        outline: none;
+        background-color: lightblue;
+        border: none;
+    }
+
+    .scroll_button:focus {
+        outline: none;
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: black;
+        margin: 0;
+    }
+
+    .card img {
+        height: 150px;
+        object-fit: cover;
+        object-position: top;
+    }
+
+  /* Stuff for game list widget */  
+  .game_grid {
       display: grid;
       gap: 10px;
       justify-items: center;
