@@ -100,4 +100,4 @@ def game(gid):
         likeStatus = None
 
     return render_template("game_pages/game.html", game=game, mechanics=mechanics, sim_games=sim_games, shared_mechs=shared_mechs, 
-    gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating, likeStatus=likeStatus)
+    gameReviews=gameReviews, userReview=userReview, review_form=review_form, avgRating=avgRating, likeStatus=likeStatus, playCount=playCount)
