@@ -10,6 +10,7 @@ class Review:
 
     @staticmethod
     def get(gid, uid):
+      try:
         rows = app.db.execute('''
 SELECT gid, rating, description, time_posted
 FROM ReviewOf
@@ -17,9 +18,13 @@ WHERE gid = :gid AND uid = :uid
 ''',
                               gid=gid, uid=uid)
         return [Review(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_top_5(uid):
+      try:
         rows = app.db.execute('''
 SELECT gid, rating, description, time_posted
 FROM ReviewOf
@@ -29,9 +34,13 @@ DESC LIMIT 5
 ''',
                               uid=uid)
         return [Review(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_top_5_game(gid):
+      try:
         rows = app.db.execute('''
 SELECT u.name, r.rating, r.description, r.time_posted
 FROM ReviewOf as r, Users as u
@@ -41,6 +50,9 @@ DESC LIMIT 5
 ''',
                               gid=gid)
         return [Review(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
     
     @staticmethod
     def create(uid, gid, rating, description, time_posted):
@@ -68,6 +80,7 @@ DESC LIMIT 5
     
     @staticmethod
     def get_all_user(uid):
+      try:
         rows = app.db.execute('''
 SELECT g.name, r.rating, r.description, r.time_posted
 FROM ReviewOf as r, Games as g
@@ -77,9 +90,13 @@ DESC
 ''',
                               uid=uid)
         return [Review(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_avg_rating(gid):
+      try:
         rows = app.db.execute('''
 SELECT AVG(rating)
 FROM ReviewOf
@@ -87,3 +104,6 @@ WHERE gid=:gid
 ''',
                               gid=gid)
         return rows[0][0]
+      except Exception as e:
+        print(str(e))
+        return False

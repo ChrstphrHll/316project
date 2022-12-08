@@ -50,47 +50,63 @@ WHERE uid = :uid
             return False
     
     def update_profile_pic(self, image_url):
-        app.db.execute("""
-UPDATE Users
-SET image_url = :image_url
-WHERE uid = :uid
-        """, image_url=image_url, uid=self.uid)
+        try:
+            app.db.execute("""
+    UPDATE Users
+    SET image_url = :image_url
+    WHERE uid = :uid
+            """, image_url=image_url, uid=self.uid)
+        except Exception as e:
+            print(str(e))
+            return False
 
     @staticmethod
     def get_by_auth(email, password):
-        rows = app.db.execute("""
-SELECT password, uid, name, email, about, image_url
-FROM Users
-WHERE email = :email
-""",
-                              email=email)
-        if not rows:  # email not found
-            return None
-        elif not check_password_hash(rows[0][0], password):
-            # incorrect password
-            return None
-        else:
-            return User(*(rows[0][1:]))
+        try:
+            rows = app.db.execute("""
+    SELECT password, uid, name, email, about, image_url
+    FROM Users
+    WHERE email = :email
+    """,
+                                email=email)
+            if not rows:  # email not found
+                return None
+            elif not check_password_hash(rows[0][0], password):
+                # incorrect password
+                return None
+            else:
+                return User(*(rows[0][1:]))
+        except Exception as e:
+            print(str(e))
+            return False
 
     @staticmethod
     def username_exists(name):
-        rows = app.db.execute("""
-SELECT name
-FROM Users
-WHERE name = :name
-""",
-                              name=name)
-        return len(rows) > 0
+        try:
+            rows = app.db.execute("""
+    SELECT name
+    FROM Users
+    WHERE name = :name
+    """,
+                                name=name)
+            return len(rows) > 0
+        except Exception as e:
+            print(str(e))
+            return False
 
     @staticmethod
     def email_exists(email):
-        rows = app.db.execute("""
-SELECT email
-FROM Users
-WHERE email = :email
-""",
-                              email=email)
-        return len(rows) > 0
+        try:
+            rows = app.db.execute("""
+    SELECT email
+    FROM Users
+    WHERE email = :email
+    """,
+                                email=email)
+            return len(rows) > 0
+        except Exception as e:
+            print(str(e))
+            return False
 
     @staticmethod
     def register(name, email, password):
@@ -116,77 +132,109 @@ RETURNING uid
     @staticmethod
     @login.user_loader
     def get(uid):
-        rows = app.db.execute("""
-SELECT uid, name, email, about, image_url
-FROM Users
-WHERE uid = :uid
-""",
-                              uid=uid)
-        return User(*(rows[0])) if rows else None
+        try:
+            rows = app.db.execute("""
+    SELECT uid, name, email, about, image_url
+    FROM Users
+    WHERE uid = :uid
+    """,
+                                uid=uid)
+            return User(*(rows[0])) if rows else None
+        except Exception as e:
+            print(str(e))
+            return False
     
     @staticmethod
     def get_all():
-        rows = app.db.execute("""
-SELECT uid, name, email, about, image_url
-FROM Users
-        """)
-        return [User(*row) for row in rows]
+        try:
+            rows = app.db.execute("""
+    SELECT uid, name, email, about, image_url
+    FROM Users
+            """)
+            return [User(*row) for row in rows]
+        except Exception as e:
+            print(str(e))
+            return False
 
     @staticmethod
     def get_liked_games(uid):
-        rows = app.db.execute("""
-SELECT Games.*
-FROM Games, LikesGame
-WHERE uid = :uid AND LikesGame.gid = Games.gid
-""",
-                            uid=uid)
-        return [Game(*row) for row in rows]
+        try:
+            rows = app.db.execute("""
+    SELECT Games.*
+    FROM Games, LikesGame
+    WHERE uid = :uid AND LikesGame.gid = Games.gid
+    """,
+                                uid=uid)
+            return [Game(*row) for row in rows]
+        except Exception as e:
+            print(str(e))
+            return False
 
     @staticmethod
     def get_play_count(uid, gid):
-        rows = app.db.execute("""
-SELECT PlayCount.count
-FROM PlayCount
-Where uid = :uid AND gid = :gid
-        """, uid=uid, gid=gid)
-        if len(rows) != 1:
-            return None
-        return rows[0][0]
+        try:
+            rows = app.db.execute("""
+    SELECT PlayCount.count
+    FROM PlayCount
+    Where uid = :uid AND gid = :gid
+            """, uid=uid, gid=gid)
+            if len(rows) != 1:
+                return None
+            return rows[0][0]
+        except Exception as e:
+            print(str(e))
+            return False
 
     def increment_play_count(uid, gid):
-        updated = app.db.execute("""
-UPDATE PlayCount
-SET count = count + 1
-WHERE gid = :gid AND uid = :uid
-        """, uid=uid, gid=gid)
+        try:
+            updated = app.db.execute("""
+    UPDATE PlayCount
+    SET count = count + 1
+    WHERE gid = :gid AND uid = :uid
+            """, uid=uid, gid=gid)
 
-        if updated == 0:
-            app.db.execute("""
-INSERT INTO PlayCount (gid, uid, count)
-VALUES (:gid, :uid, 1)
-""", gid=gid, uid=uid)
+            if updated == 0:
+                app.db.execute("""
+    INSERT INTO PlayCount (gid, uid, count)
+    VALUES (:gid, :uid, 1)
+    """, gid=gid, uid=uid)
+        except Exception as e:
+            print(str(e))
+            return False
 
     def check_likes(uid, gid):
-        result = app.db.execute('''SELECT * FROM LikesGame WHERE uid = :uid AND gid = :gid''', uid=uid, gid=gid)
-        if len(result) != 0:
-            return True
-        return False
+        try:
+            result = app.db.execute('''SELECT * FROM LikesGame WHERE uid = :uid AND gid = :gid''', uid=uid, gid=gid)
+            if len(result) != 0:
+                return True
+            return False
+        except Exception as e:
+            print(str(e))
+            return False
 
     def toggle_like_game(uid, gid):
-        updated = app.db.execute("""
-DELETE FROM LikesGame WHERE uid = :uid AND gid = :gid;        
-""", uid=uid, gid=gid)
+        try:
+            updated = app.db.execute("""
+    DELETE FROM LikesGame WHERE uid = :uid AND gid = :gid;        
+    """, uid=uid, gid=gid)
 
-        if updated == 0:
-            app.db.execute("""
-INSERT INTO LikesGame (gid, uid) VALUES (:gid, :uid)        
-""", uid=uid, gid=gid)
+            if updated == 0:
+                app.db.execute("""
+    INSERT INTO LikesGame (gid, uid) VALUES (:gid, :uid)        
+    """, uid=uid, gid=gid)
+        except Exception as e:
+            print(str(e))
+            return False
 
     def get_designed_games(self):
-        rows = app.db.execute("""
-SELECT Games.*
-FROM Games, DesignedBy
-WHERE Games.gid = DesignedBy.gid
-AND DesignedBy.uid = :uid
-        """, uid = self.uid)
-        return [Game(*row) for row in rows]
+        try:
+            rows = app.db.execute("""
+    SELECT Games.*
+    FROM Games, DesignedBy
+    WHERE Games.gid = DesignedBy.gid
+    AND DesignedBy.uid = :uid
+            """, uid = self.uid)
+            return [Game(*row) for row in rows]
+        except Exception as e:
+            print(str(e))
+            return False

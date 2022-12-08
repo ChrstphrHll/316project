@@ -67,53 +67,73 @@ class Collection:
       
     @staticmethod
     def get(cid):
-      rows = app.db.execute('''
-        SELECT *
-        FROM Collections
-        WHERE cid = :cid
-        ''',
-        cid=cid)
-      return Collection(*(rows[0])) if rows else None
+      try:
+        rows = app.db.execute('''
+          SELECT *
+          FROM Collections
+          WHERE cid = :cid
+          ''',
+          cid=cid)
+        return Collection(*(rows[0])) if rows else None
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_all():
-      rows = app.db.execute('''
-        SELECT *
-        FROM Collections
-        ''',
-        )
-      return [Collection(*row) for row in rows]
+      try:
+        rows = app.db.execute('''
+          SELECT *
+          FROM Collections
+          ''',
+          )
+        return [Collection(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_user_collections(uid):
-      rows = app.db.execute('''
-        SELECT Collections.*
-        FROM CreatedBy, Collections
-        WHERE uid=:uid AND CreatedBy.cid=Collections.cid
-        ''',
-        uid=uid)
-      return [Collection(*row) for row in rows]
+      try:
+        rows = app.db.execute('''
+          SELECT Collections.*
+          FROM CreatedBy, Collections
+          WHERE uid=:uid AND CreatedBy.cid=Collections.cid
+          ''',
+          uid=uid)
+        return [Collection(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_creator(cid):
-      rows = app.db.execute('''
-        SELECT Users.uid, name, email, about, image_url
-        FROM Users, CreatedBy
-        WHERE cid=:cid AND CreatedBy.uid=Users.uid
-        ''',
-        cid=cid)
-      return User(*(rows[0])) if rows else None
+      try:
+        rows = app.db.execute('''
+          SELECT Users.uid, name, email, about, image_url
+          FROM Users, CreatedBy
+          WHERE cid=:cid AND CreatedBy.uid=Users.uid
+          ''',
+          cid=cid)
+        return User(*(rows[0])) if rows else None
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def get_games(cid):
-      rows = app.db.execute('''
-        SELECT Games.*
-        FROM HasGame, Games
-        WHERE cid=:cid AND HasGame.gid=Games.gid
-        ''',
-        cid=cid
-        )
-      return [Game(*row) for row in rows]
+      try:
+        rows = app.db.execute('''
+          SELECT Games.*
+          FROM HasGame, Games
+          WHERE cid=:cid AND HasGame.gid=Games.gid
+          ''',
+          cid=cid
+          )
+        return [Game(*row) for row in rows]
+      except Exception as e:
+        print(str(e))
+        return False
 
     @staticmethod
     def add_game(cid, gid):
