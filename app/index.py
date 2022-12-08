@@ -18,7 +18,7 @@ def index():
     rec_collections = None
 
     if current_user.is_authenticated:
-        rec_collections = Recommendation.get_sim_coll(Recommendation.get_pop_mech(current_user.uid).mech_name)
+        rec_collections = Recommendation.get_sim_coll(Recommendation.get_fav_mech(current_user.uid).mech_name)
     return render_template('index.html', rand_game=rand_game, sim_games=sim_games, rec_collections=rec_collections)
 
 @bp.route('/404')
