@@ -20,6 +20,7 @@
           {% if playCount != None %}
             <p>Play Count: {{playCount}}</p>
           {% endif %}
+          {% if current_user.is_authenticated %}
             <form method="POST" action="/games/{{game.gid}}">
               <div class="btn-group mx-auto" role="group" aria-label="Basic example">
                 <input class="btn btn-primary" type="submit" value="Log Play" name="log_play">
@@ -30,6 +31,7 @@
                 {% endif %}
               </div>
             </form>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -42,7 +44,7 @@
   
     <div class="col-10 d-flex flex-wrap">
       {% for mechanic in mechanics%}
-      <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
+      <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}" class="hvr-grow"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
       {% endfor %}
     </div>
   </div>

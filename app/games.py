@@ -10,6 +10,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 
 from .models.game import Game
+from .models.mechanic import Mechanic
 from .models.user import User
 from .models.recommendation import Recommendation
 from .models.mechanic import Mechanic
@@ -17,37 +18,33 @@ from .models.review import Review
 from flask import current_app as app
 from flask_login import current_user
 
-from math import ceil
 
 from flask import Blueprint
 bp = Blueprint('game', __name__, url_prefix="/games")
 
 class Search(FlaskForm):
-    search = StringField('search', validators=[DataRequired()])
+    search = StringField('Name:', validators=[])
+    mechname = StringField('Mechanic:', validators=[], render_kw={"list": "mech_list"})
+    submit = SubmitField('Create')
 
 @bp.route('/')
 def games():
     form = Search()
-    prev_search_string = ""
+
 
     page = int(request.args.get('page') or 0) 
     per_page = int(request.args.get('per_page') or 12)
     mechanic = request.args.get('mechanic') or None
     search = request.args.get('search') or None
+    rating = request.args.get('rating') or None
 
     # try:
-    games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search)
+    games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search, rating=rating)
+    mechanics = Mechanic.get_all()
     # except:
     #     return redirect(url_for('index.notFound'))
-
-    max_page = ceil(len(games)/per_page)
-
-
-    if "search" in request.args:
-        search = search.lower()
-
-
-    return render_template("game_pages/game_search.html", games = games, form=form, current_page = page, per_page = per_page, mechanic=mechanic, search=search)
+    
+    return render_template("game_pages/game_search.html", games=games, mechanics=mechanics, form=form, current_page = page, per_page = per_page, mechanic=mechanic if mechanic else "", search=search if search else "")
 
 
 class sumbitReview(FlaskForm):
@@ -62,7 +59,7 @@ class sumbitReview(FlaskForm):
 @bp.route('/<gid>', methods=['GET', 'POST'])
 def game(gid):
 
-    
+    playCount = None
     if request.method == 'POST' and current_user.is_authenticated:
         if "log_play" in request.form:
                 User.increment_play_count(current_user.uid, gid)

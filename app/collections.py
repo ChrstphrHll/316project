@@ -33,22 +33,24 @@ def collections():
 
 class Create(FlaskForm):
     gamename = StringField('Game Name', validators=[DataRequired()], render_kw={"list": "game_list"})
-
     submit = SubmitField('Create')
 
 class Delete(FlaskForm):
-    delete = SubmitField('Delete')
+    delete = SubmitField('Delete Collection')
 
 @bp.route('/<cid>', methods=["GET", "POST", "DELETE"])
 def collection(cid):
     collection = Collection.get(cid)
     games = Collection.get_games(cid)
     all_games = Game.get_all()
+    collection_games = Collection.get_games(cid)
     creator = Collection.get_creator(cid)
+    edit_permissions = current_user.is_authenticated and current_user.uid == int(collection.creator.uid)
     likeStatus = False
 
     create_form = None
     delete_form = None
+    remove_form = None
 
     if request.method == 'POST' and current_user.is_authenticated:
         if "like" in request.form:
@@ -70,10 +72,17 @@ def collection(cid):
                 if Collection.add_game(cid, game.gid):
                     return redirect(url_for('collection.collection', cid=cid))
     
+    if request.method == "POST" and "delete_id" in request.form and current_user.uid == int(collection.creator.uid):
+        remove_id = Game.get(request.form['delete_id'])
+
+        if remove_id:
+            res = Collection.remove_game(cid, remove_id.gid)
+            if res:
+                return redirect(url_for('collection.collection', cid=cid))
+
     if delete_form and delete_form.validate_on_submit() and "delete" in request.form:
         res = Collection.delete(cid)
         if res:
             return redirect(url_for('users.collections', uid=creator.uid))
 
-
-    return render_template("collection.html", collection=collection, games=games, all_games=all_games, create=create_form, delete=delete_form, likeStatus=likeStatus)
+    return render_template("collection.html", edit_permissions=edit_permissions, collection=collection, collection_games=collection_games, games=games, all_games=all_games, create=create_form, delete=delete_form, remove=remove_form, likeStatus=likeStatus)

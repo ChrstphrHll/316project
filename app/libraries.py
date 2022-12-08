@@ -65,6 +65,9 @@ def library(lid):
 
 @bp.route('/<lid>/checkout/<cpid>', methods=["GET", "POST"])
 def checkout(lid, cpid):
+    if not current_user.is_authenticated:
+        return redirect(url_for('library.library', lid=lid))
+
     res = Copy.checkout_copy(cpid, current_user.uid)
 
     if res:
@@ -72,6 +75,9 @@ def checkout(lid, cpid):
 
 @bp.route('/return/<cpid>', methods=["GET", "POST"])
 def return_copy(cpid):
+    if not current_user.is_authenticated:
+        return redirect(request.referrer)
+
     borrower = Copy.checked_out_by(cpid)
 
     if borrower.uid == current_user.uid or str(cpid) in list(map(lambda copy: str(copy.cpid), Copy.user_owned_copies(current_user.uid))):

@@ -4,21 +4,13 @@
   <h1>Board Game Website</h1>
   <div class="row">
     <div class="col-8">
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit
-        voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-        dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-        qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-        dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-        non numquam eius modi tempora incidunt ut labore et dolore magnam
-        aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-        commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
-        voluptate velit esse quam nihil molestiae consequatur, vel illum qui
-        dolorem eum fugiat quo voluptas nulla pariatur?
+      <p>Welcome to Board Game Website! We are a site that aims to give back to the board game community though high quality, accessible recommendations, as well as a suite of organizational tools for anyone with a physical library they want to lend out. 
       </p>
+      <p>New and old board gamers alike will find value in our site’s recommendation algorithm. These recommendations can either be tailor made based on the games you’ve liked on our site, or games similar to a certain game can be easily accessed from that game’s detailed page. Users also create custom collections, groups of games curated as recommendations or any type of ‘playlist’ if you will.
+      </p>
+      <p>Those with an established physical collection that they wish to lend out will also get a lot of use out of our library feature. You can register copies of each of your games, and then when you lend them out whoever you lend them out to can check that copy out from your library, so you know where your copies are at all times!
+      </p>
+      <p>Thanks so much to the 316 staff for assisting us along the way and for the wonderful semester!</p>
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem">
@@ -40,5 +32,29 @@
       </div>
     </div>
   </div>
+  <div class="row mt-3">
+    <h2>Or view other games similar to {{rand_game.name}}:</h2>
+  </div>
+  <div class="row">
+    <div style="justify-content: center;">
+      {{ horiz_scroll_widget(sim_games, 6) }}
+    </div>
+  </div>
+  {% if rec_collections %}
+  <div>
+    <h2 class="mt-3">Check out these collections picked just for you:</h2>
+  </div>
+  <div class="row mb-5">
+    {% for collection in rec_collections %}
+    <div class="card mx-1" style="width: 13rem;">
+      <div class="card-body flex-column d-flex text-center">
+        <h5 class="card-title">{{ collection.title }}</h5>
+        <p class="card-text">{{ collection.description }}</p>
+        <a href="{{ url_for('collection.collection', cid=collection.cid) }}" class="btn btn-primary mt-auto">Visit Collection</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 {% endblock %}
