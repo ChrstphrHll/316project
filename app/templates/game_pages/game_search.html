@@ -14,11 +14,11 @@
           </option>
           {% endfor %}
         </datalist>
-        <input list="mech_list" name="mechanic" id="mech_list" type="text">
+        <input list="mech_list" name="mechanic" id="mech_list" type="text" value="{{mechanic}}">
       </div>
       <div class="ml-2 mt-1">
         {{ form.search.label }}
-        {{ form.search(value = prev_search_string) }}
+        {{ form.search(value = search) }}
       </div>
       <div class="ml-2">
         <button type="submit" class="btn btn-primary mx-1">Search</button>
