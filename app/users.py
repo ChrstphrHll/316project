@@ -166,7 +166,8 @@ def liked(uid):
     
     # return all games this user likes
     liked_games = User.get_liked_games(uid)
-    return render_template("user_pages/liked.html", user=User.get(uid), liked_games=liked_games)
+    liked_collections = Collection.get_liked_collections(uid)
+    return render_template("user_pages/liked.html", user=User.get(uid), liked_games=liked_games, liked_collections=liked_collections)
 
 @bp.route('/users/<uid>/recommended')
 def recommended(uid):
