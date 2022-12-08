@@ -17,11 +17,10 @@ def index():
     sim_games = Recommendation.get_sim_games(rand_game.gid)
     rec_collections = None
 
-    liked = User.get_liked_games(current_user.uid)
-    rec_collections = None
-
-    if current_user.is_authenticated & len(liked) != 0:
-        rec_collections = Recommendation.get_sim_coll(Recommendation.get_fav_mech(current_user.uid).mech_name)
+    if current_user.is_authenticated:
+        liked = User.get_liked_games(current_user.uid)
+        if len(liked) != 0:
+            rec_collections = Recommendation.get_sim_coll(Recommendation.get_fav_mech(current_user.uid).mech_name)
     return render_template('index.html', rand_game=rand_game, sim_games=sim_games, rec_collections=rec_collections)
 
 @bp.route('/404')
