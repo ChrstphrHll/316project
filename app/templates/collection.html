@@ -6,8 +6,17 @@
 <h1>{{collection.title}}</h1>
 <h4> Created by: {{collection.creator.name}}</h4>
 <p>{{collection.description}}</p>
-{% if create %}
-<div class="d-flex p-2 border justify-content-end align-items-center">
+<div class="d-flex p-2 mb-2 border justify-content-end align-items-center">
+  <form method="POST" action="/collections/{{collection.cid}}">
+    <div class="btn-group mx-auto" role="group" aria-label="collection actions">
+      {% if likeStatus %}
+        <input class="mr-2 btn btn-primary" type="submit" value="Unlike" name="like">
+      {% else %}
+        <input class="mr-2 btn btn-primary" type="submit" value="Like" name="like">
+      {% endif %}
+    </div>
+  </form>
+  {% if create %}
   <button
     class="btn btn-primary"
     type="button"
@@ -17,7 +26,7 @@
   >
     +
   </button>
-  <div style="margin-left: 10px">
+  <div class="ml-2">
     <form
     action=""
     method="POST"
@@ -77,8 +86,8 @@
       </div>
     </div>
   </form>
+  {% endif %}
 </div>
-{% endif %}
 {% if edit_permissions %}
 {{ game_list(games, "gid") }}
 {% else %}
