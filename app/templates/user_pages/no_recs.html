@@ -7,42 +7,13 @@
 
 <br>
 
-<h2> Check out these popular games! </h2>
+<p style="font-size: 24px;"><b>Check out these popular games!</b></p>
 
-<table class='table table-hover table-primary table-striped table-bordered container'>
-    <thead class="thead-dark">
-        <tr>
-            <th></th>
-            <th>Game Name</th>
-            <th>Complexity</th>
-            <th>Players</th>
-            <th>Length</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for rec in pop_games %}
-        <tr>
-            <td><img src={{rec.thumbnail_url}} alt={{rec.name}} style="max-width: 100px;"></td>
-            <td>{{rec.name}}</td>
-            <td>{{rec.complexity}}</td>
-            <td>{{rec.min_players}} - {{rec.max_players}}</td>
-            <td>{{rec.length}}</td>
-            <td>
-                <a
-                  href="{{ url_for('game.game', gid=rec.gid) }}"
-                  class="badge bg-primary text-light"
-                  role="button"
-                  >GO</a>
-              </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{{ game_list(pop_games) }}
 
 <br>
 
-<h2> Check out these popular collections! </h2>
+<p style="font-size: 24px;"><b>Check out these popular collections!</b></p>
 
 <table class='table table-hover table-primary table-striped table-bordered container'>
     <thead class="thead-dark">
