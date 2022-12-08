@@ -17,6 +17,7 @@
             <th>Complexity</th>
             <th>Players</th>
             <th>Length</th>
+            <th>Link</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,13 @@
             <td>{{rec.complexity}}</td>
             <td>{{rec.min_players}} - {{rec.max_players}}</td>
             <td>{{rec.length}}</td>
+            <td>
+                <a
+                  href="{{ url_for('game.game', gid=rec.gid) }}"
+                  class="badge bg-primary text-light"
+                  role="button"
+                  >GO</a>
+              </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -41,6 +49,7 @@
         <tr>
             <th>Collection</th>
             <th>Description</th>
+            <th>Link</th>
         </tr>
     </thead>
     <tbody>
@@ -48,6 +57,15 @@
         <tr>
             <td>{{coll.title}}</td>
             <td>{{coll.description}}</td>
+            <td>
+                <a
+                  href="{{ url_for('collection.collection', cid=coll.cid) }}"
+                  class="badge bg-primary text-light"
+                  role="button"
+                  >GO</a
+                >
+              </td>
+</tr>
         </tr>
         {% endfor %}
     </tbody>

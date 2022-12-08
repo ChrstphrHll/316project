@@ -45,6 +45,8 @@ SELECT pg_catalog.setval('public.libraries_lid_seq',
 
 \COPY HasCopy FROM 'HasCopy.csv' WITH DELIMITER ',' NULL '' CSV;
 
+\COPY LikesCollection FROM 'LikesCollection.csv' WITH DELIMITER ',' NULL '' CSV;
+
 \COPY CheckedOutBy FROM 'CheckedOutBy.csv' WITH DELIMITER ',' NULL '' CSV;
 
 \COPY DesignedBy FROM 'DesignedBy.csv' WITH DELIMITER ',' NULL '' CSV;
