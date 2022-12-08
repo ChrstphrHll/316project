@@ -45,9 +45,17 @@ def collection(cid):
     games = Collection.get_games(cid)
     all_games = Game.get_all()
     creator = Collection.get_creator(cid)
+    likeStatus = False
 
     create_form = None
     delete_form = None
+
+    if request.method == 'POST' and current_user.is_authenticated:
+        if "like" in request.form:
+            Collection.toggle_like_collection(current_user.uid, cid)
+
+    if current_user.is_authenticated:
+        likeStatus = Collection.get_liked_status(current_user.uid, cid)
 
     if current_user.is_authenticated and current_user.uid == int(collection.creator.uid):
         create_form = Create()
@@ -67,4 +75,5 @@ def collection(cid):
         if res:
             return redirect(url_for('users.collections', uid=creator.uid))
 
-    return render_template("collection.html", collection=collection, games=games, all_games=all_games, create=create_form, delete=delete_form)
+
+    return render_template("collection.html", collection=collection, games=games, all_games=all_games, create=create_form, delete=delete_form, likeStatus=likeStatus)
