@@ -87,7 +87,7 @@ class Recommendation:
         GROUP BY IG.gid, IG.name, IG.description, IG.image_url, IG.thumbnail_url, IG.complexity, IG.length, IG.min_players, IG.max_players
         ORDER BY COUNT(*) DESC)    
         ''', uid = uid, mech_name=mech_name)
-        return [Game(*row) for row in rows[:5]] if rows else None
+        return [Game(*row) for row in rows[:5]] if rows else []
 
     # returns high-complexity games that implement mech_name
     @staticmethod
@@ -104,7 +104,7 @@ class Recommendation:
         IG.complexity, IG.length, IG.min_players, IG.max_players
         ORDER BY COUNT(*) DESC            
         ''', uid = uid, mech_name=mech_name)
-        return [Game(*row) for row in rows[:5]] if rows else None
+        return [Game(*row) for row in rows[:5]] if rows else []
 
     # returns new (never-liked) games that implement mech_name
     @staticmethod
@@ -114,7 +114,7 @@ class Recommendation:
         liked as (SELECT G.* FROM Games as G, LikesGame as L WHERE L.gid=G.gid)
         (SELECT * FROM SM) EXCEPT (SELECT * FROM liked)
         ''', mech_name=mech_name)
-        return [Game(*row) for row in rows[:5]] if rows else None
+        return [Game(*row) for row in rows[:5]] if rows else []
 
     # returns collections that implements the user's favorite mechanic the most
     def get_sim_coll(mech):
@@ -125,7 +125,7 @@ class Recommendation:
         GROUP BY C.cid, C.title, C.description
         ORDER BY COUNT(*) DESC
         ''', mech=mech)
-        return [Collection(*row) for row in rows[:5]] if rows else None
+        return [Collection(*row) for row in rows[:5]] if rows else []
 
     #returns the top 5 games with the most similar mechanics to gid
     @staticmethod
