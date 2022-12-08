@@ -48,6 +48,7 @@
       {{ horiz_scroll_widget(sim_games, 6) }}
     </div>
   </div>
+  {% if rec_collections %}
   <div>
     <h2 class="mt-3">Check out these collections picked just for you:</h2>
   </div>
@@ -62,5 +63,6 @@
     </div>
     {% endfor %}
   </div>
+  {% endif %}
 </div>
 {% endblock %}
