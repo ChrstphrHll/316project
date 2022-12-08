@@ -196,7 +196,7 @@ def recommended(uid):
 
     easy_recs = Recommendation.get_w_easy_mech(uid, pop_name)
     hard_recs = Recommendation.get_w_hard_mech(uid, pop_name)    
-    sim_coll = Recommendation.get_sim_coll(pop_name)
+    sim_coll = Recommendation.get_sim_coll(uid, pop_name)
  
     return render_template('user_pages/recommended.html', user=User.get(uid), easy_recs=easy_recs, hard_recs=hard_recs, new_games=new_games,
      pop_name=pop_name, designer=designer, design_recs=design_recs, sim_coll=sim_coll)
