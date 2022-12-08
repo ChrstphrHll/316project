@@ -6,18 +6,23 @@
 <h2>Search Games:</h2>
   <div class="d-flex my-2 p-2 border justify-content-start align-items-center">
     <form class="ml-auto">
-      <div class="form-group">
-        <label>{{ form.mechname.label }}</label>
-        <input list="mech_list" name="mech_list" id="mech_list">
-        <datalist id="mech_list">
-          {% for mech in mechanics %}
-            <option value="{{mech.mech_name}}">
-            </option>
-          {% endfor %}
-        </datalist>
+      <div class="d-flex justify-content-start align-v">
+        <div class="form-group align-v">
+          <label>{{ form.mechname.label }}</label>
+          <datalist id="mech_list">
+            {% for mech in mechanics %}
+              <option value="{{mech.mech_name}}">
+              </option>
+            {% endfor %}
+          </datalist>
+          <input list="mech_list" name="mechanic" id="mech_list" type="text">
+        </div>
+        <div class="form-group align-v h-100">
+          {{ form.search.label }}
+          {{ form.search(value = prev_search_string) }}
+        </div>
+        <button type="submit" class="btn btn-primary mx-1">Search</button>
       </div>
-      {{ form.search(value = prev_search_string) }}
-      <button type="submit" class="btn btn-primary mx-1">Search</button>
     </form>
     <a href="{{ url_for('game.games') }}" class="btn btn-secondary mx-1">Clear Search</a>
   </div>

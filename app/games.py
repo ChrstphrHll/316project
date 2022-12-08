@@ -23,8 +23,8 @@ from flask import Blueprint
 bp = Blueprint('game', __name__, url_prefix="/games")
 
 class Search(FlaskForm):
-    search = StringField('search', validators=[DataRequired()])
-    mechname = StringField('Mechanic', validators=[DataRequired()], render_kw={"list": "mech_list"})
+    search = StringField('Name:', validators=[])
+    mechname = StringField('Mechanic:', validators=[], render_kw={"list": "mech_list"})
     submit = SubmitField('Create')
 
 @bp.route('/')
@@ -44,11 +44,9 @@ def games():
         return redirect(url_for('index.notFound'))
 
 
-
-    if "search" in request.args:
+    if search:
         search = search.lower()
-
-
+    
     return render_template("game_pages/game_search.html", games=games, mechanics=mechanics, form=form, current_page = page, per_page = per_page, mechanic=mechanic, search=search)
 
 
