@@ -36,12 +36,13 @@ def games():
     per_page = int(request.args.get('per_page') or 12)
     mechanic = request.args.get('mechanic') or None
     search = request.args.get('search') or None
+    rating = request.args.get('rating') or None
 
-    try:
-        games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search)
-        mechanics = Mechanic.get_all()
-    except:
-        return redirect(url_for('index.notFound'))
+    # try:
+    games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search, rating=rating)
+    mechanics = Mechanic.get_all()
+    # except:
+    #     return redirect(url_for('index.notFound'))
     
     return render_template("game_pages/game_search.html", games=games, mechanics=mechanics, form=form, current_page = page, per_page = per_page, mechanic=mechanic if mechanic else "", search=search if search else "")
 
