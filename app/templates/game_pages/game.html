@@ -20,6 +20,7 @@
           {% if playCount != None %}
             <p>Play Count: {{playCount}}</p>
           {% endif %}
+          {% if current_user.is_authenticated %}
             <form method="POST" action="/games/{{game.gid}}">
               <div class="btn-group mx-auto" role="group" aria-label="Basic example">
                 <input class="btn btn-primary" type="submit" value="Log Play" name="log_play">
@@ -30,6 +31,7 @@
                 {% endif %}
               </div>
             </form>
+          {% endif %}
         </div>
       </div>
     </div>
