@@ -1,4 +1,4 @@
-# 316project
+# Board Game Website
 Open project for CS316: Database Systems
 
 Github link: https://github.com/ChrstphrHll/316project
