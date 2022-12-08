@@ -99,14 +99,14 @@ class Recommendation:
         return [Collection(*row) for row in rows[:5]]
 
     #returns collections that implements the user's favorite mechanic the most
-    def get_sim_coll(uid, mech):
+    def get_sim_coll(mech):
         rows = app.db.execute('''
         SELECT C.*
         FROM Collections as C, HasGame as HG, Implements as I
         WHERE C.cid = HG.cid AND HG.gid=I.gid AND I.mech_name=:mech
         GROUP BY C.cid, C.title, C.description
         ORDER BY COUNT(*) DESC
-        ''', uid=uid, mech=mech)
+        ''', mech=mech)
         return [Collection(*row) for row in rows[:5]] if rows else None
 
     #returns games with similar mechs to those in the collection
