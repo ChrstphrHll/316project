@@ -44,7 +44,7 @@
   
     <div class="col-10 d-flex flex-wrap">
       {% for mechanic in mechanics%}
-      <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
+      <a href="{{url_for('game.games')}}/?mechanic={{mechanic.mech_name}}" class="hvr-grow"><h4><span class="badge rounded-pill bg-secondary text-light m-1">{{mechanic.mech_name}}</span></h4></a>
       {% endfor %}
     </div>
   </div>
