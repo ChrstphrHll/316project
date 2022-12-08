@@ -62,7 +62,7 @@ class sumbitReview(FlaskForm):
 @bp.route('/<gid>', methods=['GET', 'POST'])
 def game(gid):
 
-    
+    playCount = None
     if request.method == 'POST' and current_user.is_authenticated:
         if "log_play" in request.form:
                 User.increment_play_count(current_user.uid, gid)
