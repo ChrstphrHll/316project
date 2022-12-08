@@ -2,7 +2,7 @@
 
 <h1>Your Recommended</h1>
 <p>
-  <b style="font-size: 24px">Your favorite mechanic seems to be: {{pop_name}}</b
+  <b style="font-size: 24px">Your favorite mechanic seems to be: {{fav_mech}}</b
   ><br />
   Here are some low-complexity games to check out:
 </p>
@@ -14,9 +14,8 @@
 
 <br />
 <p>
-  <b style="font-size: 24px"
-    >Your current favorite designer seems to be: {{designer}}</b
-  ><br />
+  <b style="font-size: 24px">Your current favorite designer seems to be: {{designer}}</b>
+    <br />
   Check out these other games by {{designer}}:
 </p>
 {{ game_list(design_recs) }}
@@ -24,53 +23,13 @@
 
 {% if new_games != None%}
 
-<h3>Be the first to play these new games!</h3>
-
-<br />
-
-<table
-  class="table table-hover table-primary table-striped table-bordered container"
->
-  <thead class="thead-dark">
-    <tr>
-      <th></th>
-      <th>Game Name</th>
-      <th>Complexity</th>
-      <th>Players</th>
-      <th>Length</th>
-      <th>Link</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for rec in new_games %}
-    <tr>
-      <td>
-        <img
-          src="{{rec.thumbnail_url}}"
-          alt="{{rec.name}}"
-          style="max-width: 100px"
-        />
-      </td>
-      <td>{{rec.name}}</td>
-      <td>{{rec.complexity}}</td>
-      <td>{{rec.min_players}} - {{rec.max_players}}</td>
-      <td>{{rec.length}}</td>
-      <td>
-        <a
-          href="{{ url_for('game.game', gid=rec.gid) }}"
-          class="badge bg-primary text-light"
-          role="button"
-          >GO</a
-        >
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<p style="font-size: 24px;"><b>Be the first to play these new games!</b></p>
+{{ game_list(new_games) }}
+<br>
 
 {%endif%}
 
-<h2>Check out these cool collections!</h2>
+<p style="font-size: 24px;"><b>Check out these cool collections!</b></p>
 
 <table
   class="table table-hover table-primary table-striped table-bordered container"
