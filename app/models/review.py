@@ -4,8 +4,8 @@ from flask import current_app as app
 class Review:
     def __init__(self, name, rating, description, time_posted):
         self.name = name
-        self.description = description
         self.rating = rating
+        self.description = description
         self.time_posted = time_posted
 
     @staticmethod
