@@ -66,7 +66,7 @@ class Mechanic:
 
                 for row in rows:
                     mech = Mechanic(*row)
-                    if mech_counts[mech.mech_name] is NULL:
+                    if mech_counts[mech.mech_name] is None:
                         mech_counts[mech.mech_name] = 0
                     mech_counts[mech.mech_name] = mech_counts[mech.mech_name] + 1
 
