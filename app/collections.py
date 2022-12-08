@@ -38,9 +38,6 @@ class Create(FlaskForm):
 class Delete(FlaskForm):
     delete = SubmitField('Delete Collection')
 
-class Remove(FlaskForm):
-    to_remove = SubmitField('Remove Game', validators=[DataRequired()], render_kw={"list": "collection_games"})
-
 @bp.route('/<cid>', methods=["GET", "POST", "DELETE"])
 def collection(cid):
     collection = Collection.get(cid)
@@ -48,6 +45,7 @@ def collection(cid):
     all_games = Game.get_all()
     collection_games = Collection.get_games(cid)
     creator = Collection.get_creator(cid)
+    edit_permissions = current_user.is_authenticated and current_user.uid == int(collection.creator.uid)
 
     create_form = None
     delete_form = None
@@ -56,7 +54,6 @@ def collection(cid):
     if current_user.is_authenticated and current_user.uid == int(collection.creator.uid):
         create_form = Create()
         delete_form = Delete()
-        remove_form = Remove()
 
     if create_form and create_form.validate_on_submit():
         name = create_form.gamename.data
@@ -67,11 +64,11 @@ def collection(cid):
                 if Collection.add_game(cid, game.gid):
                     return redirect(url_for('collection.collection', cid=cid))
     
-    if remove_form and remove_form.validate_on_submit():
-        to_remove = remove_form.to_remove
+    if request.method == "POST" and "delete_id" in request.form and current_user.uid == int(collection.creator.uid):
+        remove_id = Game.get(request.form['delete_id'])
 
-        if to_remove:
-            res = Collection.remove_game(cid, to_remove.gid)
+        if remove_id:
+            res = Collection.remove_game(cid, remove_id.gid)
             if res:
                 return redirect(url_for('collection.collection', cid=cid))
 
@@ -80,4 +77,4 @@ def collection(cid):
         if res:
             return redirect(url_for('users.collections', uid=creator.uid))
 
-    return render_template("collection.html", collection=collection, collection_games=collection_games, games=games, all_games=all_games, create=create_form, delete=delete_form, remove=remove_form)
+    return render_template("collection.html", edit_permissions=edit_permissions, collection=collection, collection_games=collection_games, games=games, all_games=all_games, create=create_form, delete=delete_form, remove=remove_form)

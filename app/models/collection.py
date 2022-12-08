@@ -144,7 +144,7 @@ class Collection:
       try:
         app.db.execute("""
             DELETE FROM HasGame
-            WHERE(:cid, :gid)
+            WHERE :cid=cid AND gid=:gid
             """,
             cid=cid,
             gid=gid,
