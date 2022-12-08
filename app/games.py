@@ -35,13 +35,10 @@ def games():
     mechanic = request.args.get('mechanic') or None
     search = request.args.get('search') or None
 
-    # try:
-    games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search)
-    # except:
-    #     return redirect(url_for('index.notFound'))
-
-    max_page = ceil(len(games)/per_page)
-
+    try:
+        games = Game.get_some(page=page, per_page=per_page, mechanic=mechanic, search=search)
+    except:
+        return redirect(url_for('index.notFound'))
 
     if "search" in request.args:
         search = search.lower()
