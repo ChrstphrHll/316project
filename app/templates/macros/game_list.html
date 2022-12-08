@@ -1,4 +1,4 @@
-{% macro game_list(games) %}
+{% macro game_list(games, delete_id_name=False) %}
 
 <!-- stling in base.html -->
 
@@ -12,10 +12,25 @@
                 Complexity: {{game.complexity}}<br>
                 {{game.min_players}}-{{game.max_players}} Players<br>
                 {{game.length}} minutes<br>
+                {% if delete_id_name %}
+                <form method="POST">
+                    <input class="btn btn-danger btn-sm mt-auto" type="submit" value="Delete">
+                    <input type="hidden" name="delete_id" value="{{ game[delete_id_name] }}">
+                </form>
+                {% endif %}
             </p>
         </div>
     </a>
     {% endfor %}
 </div>
+
+<script>
+    document.addEventListener("click", function(e){
+        if(e.target.classList.contains("delete_button")){
+            e.preventDefault();
+            e.target.parentElement.submit();
+        }
+    })
+</script>
 
 {% endmacro %}

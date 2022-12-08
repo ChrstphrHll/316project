@@ -166,4 +166,16 @@ WHERE Collections.cid = LikesCollection.cid AND LikesCollection.uid = :uid
 
     # TODO
     def remove_game(cid, gid):
-      return None
+      try:
+        app.db.execute("""
+            DELETE FROM HasGame
+            WHERE :cid=cid AND gid=:gid
+            """,
+            cid=cid,
+            gid=gid,
+          )
+            
+        return True
+      except Exception as e:
+        print(str(e))
+        return None

@@ -23,7 +23,6 @@
     data-toggle="modal"
     data-target="#createForm"
     aria-expanded="false"
-    aria-controls="collapseExample"
   >
     +
   </button>
@@ -89,8 +88,11 @@
   </form>
   {% endif %}
 </div>
-
+{% if edit_permissions %}
+{{ game_list(games, "gid") }}
+{% else %}
 {{ game_list(games) }}
+{% endif %}
 <br>
 
 <a
