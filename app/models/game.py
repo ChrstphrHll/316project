@@ -56,7 +56,7 @@ LIMIT :per_page OFFSET :offset
         else:
             full_query = query + query_back
 
-        game_raw = app.db.execute(full_query, per_page=per_page, offset=offset, mechanic=mechanic, search=f"%{search}%")
+        game_raw = app.db.execute(full_query, per_page=per_page, offset=offset, mechanic=mechanic, search=f"%{search.lower()}%")
         return [Game(*row) for row in game_raw]
 
     @staticmethod

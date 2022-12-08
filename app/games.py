@@ -42,12 +42,8 @@ def games():
         mechanics = Mechanic.get_all()
     except:
         return redirect(url_for('index.notFound'))
-
-
-    if search:
-        search = search.lower()
     
-    return render_template("game_pages/game_search.html", games=games, mechanics=mechanics, form=form, current_page = page, per_page = per_page, mechanic=mechanic, search=search)
+    return render_template("game_pages/game_search.html", games=games, mechanics=mechanics, form=form, current_page = page, per_page = per_page, mechanic=mechanic if mechanic else "", search=search if search else "")
 
 
 class sumbitReview(FlaskForm):
