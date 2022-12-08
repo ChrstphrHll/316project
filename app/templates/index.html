@@ -22,8 +22,7 @@
         <div class="card-body">
           <h5 class="card-title">Check out {{rand_game.name}}</h5>
           <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {{ rand_game.description[0:100] }} ...
           </p>
           <a href="/games/{{rand_game.gid}}" class="btn btn-primary"
             >Read More</a
