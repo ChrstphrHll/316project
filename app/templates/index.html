@@ -40,5 +40,27 @@
       </div>
     </div>
   </div>
+  <div class="row mt-3">
+    <h2>Or view other games similar to {{rand_game.name}}:</h2>
+  </div>
+  <div class="row">
+    <div style="justify-content: center;">
+      {{ horiz_scroll_widget(sim_games, 6) }}
+    </div>
+  </div>
+  <div>
+    <h2 class="mt-3">Check out these collections picked just for you:</h2>
+  </div>
+  <div class="row mb-5">
+    {% for collection in rec_collections %}
+    <div class="card mx-1" style="width: 13rem;">
+      <div class="card-body flex-column d-flex text-center">
+        <h5 class="card-title">{{ collection.title }}</h5>
+        <p class="card-text">{{ collection.description }}</p>
+        <a href="{{ url_for('collection.collection', cid=collection.cid) }}" class="btn btn-primary mt-auto">Visit Collection</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
