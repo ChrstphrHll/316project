@@ -101,15 +101,11 @@ class Recommendation:
     #returns collections that implements the user's favorite mechanic the most
     def get_sim_coll(uid, mech):
         rows = app.db.execute('''
-        (SELECT C.*
+        SELECT C.*
         FROM Collections as C, HasGame as HG, Implements as I
         WHERE C.cid = HG.cid AND HG.gid=I.gid AND I.mech_name=:mech
         GROUP BY C.cid, C.title, C.description
-        ORDER BY COUNT(*) DESC)
-        EXCEPT 
-        (SELECT C.*
-        FROM Collections as C, LikesCollection as LC
-        WHERE C.cid=LC.cid AND LC.uid=:uid)
+        ORDER BY COUNT(*) DESC
         ''', uid=uid, mech=mech)
         return [Collection(*row) for row in rows[:5]] if rows else None
 
