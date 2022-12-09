@@ -87,7 +87,7 @@
         </td>
         {% else %}
         <a
-          href="#"
+          href="{{ url_for('users.delete_copy', cpid=copy.cpid) }}"
           class="badge bg-danger text-light"
         >
         Delete

@@ -272,3 +272,10 @@ def reviews(uid):
     
     reviews = Review.get_all_user(int(uid))
     return render_template('user_pages/reviews.html', user=User.get(uid), review_history=reviews)
+
+@bp.route('/users/delete/<cpid>')
+def delete_copy(cpid):
+    if str(cpid) in list(map(lambda copy: str(copy.cpid), Copy.user_owned_copies(current_user.uid))):
+        res = Copy.delete(cpid)
+    
+    return redirect(request.referrer)
