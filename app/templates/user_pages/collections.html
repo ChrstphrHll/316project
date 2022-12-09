@@ -70,35 +70,19 @@
     {% endif %}
   </div>
 </form>
-
-<table
-  class="table table-hover table-primary table-striped table-bordered container"
->
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Creator</th>
-      <th scope="col">Link</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="mx-3 mt-2">
+  <div class="row">
     {% for collection in collections%}
-    <tr>
-      <th scope="row">{{collection.title}}</th>
-      <td>{{collection.description}}</td>
-      <td>{{collection.creator.name}}</td>
-      <td>
-        <a
-          href="{{ url_for('collection.collection', cid=collection.cid) }}"
-          class="badge bg-primary text-light"
-          role="button"
-          >GO</a
-        >
-      </td>
-    </tr>
+    <div class="card mx-1 mb-2" style="width: 13rem;">
+      <div class="card-body flex-column d-flex text-center">
+        <h5 class="card-title">{{ collection.title }}</h5>
+        <p class="card-text">{{ collection.description }}</p>
+        <a href="{{ url_for('collection.collection', cid=collection.cid) }}" class="btn btn-primary mt-auto">Visit Collection</a>
+      </div>
+    </div>
     {% endfor %}
-  </tbody>
-</table>
+  </div>
+</div>
+
 
 {% endblock %}
