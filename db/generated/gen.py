@@ -98,7 +98,7 @@ def gen_collection(id):
 
 def gen_library(id):
     title = fake.first_name() + "'s Library"
-    desc = f"Games for my {fake.word} club"
+    desc = f"Games for my {fake.word()} club"
     return [id, title, desc]
 
 def gen_copyOf(cpid):
