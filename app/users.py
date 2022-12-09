@@ -259,12 +259,11 @@ def borrowed(uid):
     
     borrowed_copies = Copy.user_borrowed_copies(uid)
     owned_copies = Copy.user_owned_copies(uid)
-    form = Search()
 
     if "search" in request.args:
         borrowed_copies = filter(lambda x : request.args.get("search").lower() in x.game.name.lower(), borrowed_copies)
 
-    return render_template('user_pages/borrowed.html', user=User.get(uid), borrowed_copies=borrowed_copies, owned_copies=owned_copies, form=form)
+    return render_template('user_pages/borrowed.html', user=User.get(uid), borrowed_copies=borrowed_copies, owned_copies=owned_copies)
 
 @bp.route('/users/<uid>/reviews', methods=['GET', 'POST'])
 def reviews(uid):

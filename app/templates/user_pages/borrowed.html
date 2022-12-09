@@ -1,11 +1,5 @@
 {% extends "user_pages/base_user.html" %} {% block user_content %}
-<h2>Search Your Borrowed Games</h2>
-<div class="d-flex p-2 border justify-content-end align-items-center">
-  <form>
-    {{ form.search }}
-    <button type="submit" class="btn btn-primary mx-1">Search</button>
-  </form>
-</div>
+<h2>Your Borrowed Games</h2>
 <table
   class="table table-hover table-primary table-striped table-bordered container"
 >
@@ -42,13 +36,8 @@
   </tbody>
 </table>
 
-<h2>Search Your Copies</h2>
-<div class="d-flex p-2 border justify-content-end align-items-center">
-  <form>
-    {{ form.search }}
-    <button type="submit" class="btn btn-primary mx-1">Search</button>
-  </form>
-</div>
+<h2>Your Copies</h2>
+
 <table
   class="table table-hover table-primary table-striped table-bordered container"
 >
