@@ -39,7 +39,7 @@ Widget to display games
         let widget = document.getElementById("horiz_scroll_widget_{{id}}");
         widget.querySelector(".card_container").style.width = "calc({{n_visible}}*9rem + {{n_visible-1}}*1.25rem)";
 
-        let cards = document.querySelectorAll(".card-link");
+        let cards = widget.querySelectorAll(".card-link");
 
         let card_index = 0;
         let n_visible = Number("{{n_visible}}");
@@ -53,12 +53,12 @@ Widget to display games
         widget.addEventListener("click", function (e) {
             if (e.target.classList.contains("scroll_left")) {
                 card_index = Math.max(0, card_index - n_visible);
-                cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+                cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth", block: "nearest" });
                 setDisabled();
             }
-            if (e.target.classList.contains("scroll_right")) {
+            else if (e.target.classList.contains("scroll_right")) {
                 card_index = Math.min(max_index, card_index + n_visible);
-                cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth" });
+                cards[card_index].scrollIntoView({ inline: "start", behavior: "smooth", block: "nearest" });
                 setDisabled();
             }
         });
